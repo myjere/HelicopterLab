@@ -19,7 +19,7 @@ joystick_gain_x = 1;
 joystick_gain_y = 1;
 
 %%%%%%%%%%% Physical constants
-%%wights
+%%weights
 m_w = 1.795;                        % Mass of the counterweight
 m_h = 1.420;                         % Mass of helicopter
 m_g = 0.012;                        % Effective mass of the helicopter
@@ -38,8 +38,8 @@ V_s_eq=V_f_eq+V_b_eq;               % Voltage sum, The minimum voltage to keep t
 K_p = m_g*9.81;                     % Force to lift the helicopter from the ground
 K_f = K_p/V_s_eq;                   % Force constant motor
 %%%%%%%%%%% Controller
-K_ep = 7;
-K_ed = 10;
+K_ep = 15;%7;
+K_ed = 13;%10;
 K_ei = 2.3;
 K_1 = l_h*K_f/J_p;
 K_2 = K_p*l_a/J_t;
