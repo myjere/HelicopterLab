@@ -1,4 +1,6 @@
 helikopter02_quarc_windows/
 slprj/
+*.autosave
+*.asv
 actxlicense.m
 *.rt-windows

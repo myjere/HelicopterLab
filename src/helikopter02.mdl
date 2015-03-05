@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.57"
+    ComputedModelVersion    "1.73"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -27,9 +27,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "eirikwor"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Mar 05 12:51:54 2015"
-  RTWModifiedTimeStamp	  347460708
-  ModelVersionFormat	  "1.%<AutoIncrement:57>"
+  LastModifiedDate	  "Thu Mar 05 15:32:58 2015"
+  RTWModifiedTimeStamp	  347470376
+  ModelVersionFormat	  "1.%<AutoIncrement:73>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -118,7 +118,7 @@ Model {
 	    PropName		    "DisabledProps"
 	  }
 	  StartTime		  "0.0"
-	  StopTime		  "inf"
+	  StopTime		  "18"
 	  AbsTol		  "auto"
 	  FixedStep		  "0.001"
 	  InitialStep		  "auto"
@@ -881,6 +881,15 @@ Model {
       SampleTime	      "-1"
     }
     Block {
+      BlockType		      Step
+      Time		      "1"
+      Before		      "0"
+      After		      "1"
+      SampleTime	      "-1"
+      VectorParams1D	      on
+      ZeroCross		      on
+    }
+    Block {
       BlockType		      SubSystem
       ShowPortLabels	      "FromPortIcon"
       Permissions	      "ReadWrite"
@@ -940,7 +949,7 @@ Model {
   }
   System {
     Name		    "helikopter02"
-    Location		    [-28, 310, 1065, 925]
+    Location		    [189, 173, 1282, 788]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -954,7 +963,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    90
+    SIDHighWatermark	    96
     Block {
       BlockType		      Sum
       Name		      "Add"
@@ -1004,7 +1013,7 @@ Model {
       System {
 	Name			"Elevasjonskontroller"
 	Location		[69, 383, 604, 739]
-	Open			off
+	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -1191,23 +1200,6 @@ Model {
       SaveName		      "ScopeData1"
       DataFormat	      "StructureWithTime"
       SampleTime	      "0"
-    }
-    Block {
-      BlockType		      Gain
-      Name		      "Gain"
-      SID		      16
-      Position		      [880, 220, 910, 250]
-      Gain		      "eye(6)*pi/180"
-      Multiplication	      "Matrix(K*u)"
-      ParameterDataTypeMode   "Inherit via internal rule"
-      ParameterDataType	      "sfix(16)"
-      ParameterScaling	      "2^0"
-      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
-      OutDataTypeMode	      "Inherit via internal rule"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^0"
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-      SaturateOnIntegerOverflow	off
     }
     Block {
       BlockType		      Reference
@@ -1781,7 +1773,7 @@ Model {
       Name		      "Pitch"
       SID		      68
       Ports		      [1]
-      Position		      [975, 169, 1005, 201]
+      Position		      [975, 174, 1005, 206]
       Floating		      off
       Location		      [442, 634, 766, 873]
       Open		      off
@@ -1949,6 +1941,15 @@ Model {
       }
     }
     Block {
+      BlockType		      Step
+      Name		      "Step"
+      SID		      91
+      Position		      [265, 75, 295, 105]
+      Time		      "10"
+      After		      "20*pi/180"
+      SampleTime	      "0"
+    }
+    Block {
       BlockType		      Terminator
       Name		      "Terminator"
       SID		      54
@@ -1966,7 +1967,8 @@ Model {
       SID		      70
       Ports		      [1]
       Position		      [895, 415, 955, 445]
-      VariableName	      "elevasjon"
+      NamePlacement	      "alternate"
+      VariableName	      "travelRateStep20deg"
       MaxDataPoints	      "inf"
       SampleTime	      "-1"
       SaveFormat	      "Structure With Time"
@@ -2147,10 +2149,27 @@ Model {
       }
     }
     Block {
+      BlockType		      Gain
+      Name		      "deg2rad"
+      SID		      16
+      Position		      [885, 215, 915, 245]
+      Gain		      "eye(6)*pi/180"
+      Multiplication	      "Matrix(K*u)"
+      ParameterDataTypeMode   "Inherit via internal rule"
+      ParameterDataType	      "sfix(16)"
+      ParameterScaling	      "2^0"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeMode	      "Inherit via internal rule"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
       BlockType		      Constant
       Name		      "elevation"
       SID		      66
-      Position		      [285, 485, 315, 515]
+      Position		      [265, 335, 295, 365]
       Value		      "0*pi/180"
       OutDataType	      "sfix(16)"
       OutScaling	      "2^0"
@@ -2159,7 +2178,7 @@ Model {
       BlockType		      Constant
       Name		      "pitch"
       SID		      67
-      Position		      [230, 75, 260, 105]
+      Position		      [265, 140, 295, 170]
       Value		      "0*pi/180"
       OutDataType	      "sfix(16)"
       OutScaling	      "2^0"
@@ -2219,8 +2238,7 @@ Model {
     Line {
       SrcBlock		      "Mux"
       SrcPort		      1
-      Points		      [0, 5]
-      DstBlock		      "Gain"
+      DstBlock		      "deg2rad"
       DstPort		      1
     }
     Line {
@@ -2238,9 +2256,9 @@ Model {
       DstPort		      1
     }
     Line {
-      SrcBlock		      "Gain"
+      SrcBlock		      "deg2rad"
       SrcPort		      1
-      Points		      [0, -165; -865, 0; 0, 150]
+      Points		      [0, -160; -870, 0; 0, 150]
       DstBlock		      "Demux"
       DstPort		      1
     }
@@ -2278,6 +2296,38 @@ Model {
       DstPort		      2
     }
     Line {
+      SrcBlock		      "Heli 3D"
+      SrcPort		      2
+      Points		      [50, 0]
+      Branch {
+	DstBlock		"Mux"
+	DstPort			2
+      }
+      Branch {
+	Points			[0, 245]
+	DstBlock		"To Workspace"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "V_d/V_s --> V_f/V_b"
+      SrcPort		      1
+      DstBlock		      "Heli 3D"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "V_d/V_s --> V_f/V_b"
+      SrcPort		      2
+      DstBlock		      "Heli 3D"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "elevation"
+      SrcPort		      1
+      DstBlock		      "Elevasjonskontroller"
+      DstPort		      3
+    }
+    Line {
       SrcBlock		      "Add"
       SrcPort		      1
       Points		      [10, 0]
@@ -2290,57 +2340,27 @@ Model {
 	DstBlock		"Mux"
 	DstPort			5
       }
-      Branch {
-	Points			[0, 75]
-	DstBlock		"To Workspace"
-	DstPort			1
-      }
     }
     Line {
       SrcBlock		      "Heli 3D"
       SrcPort		      3
-      Points		      [80, 0]
+      Points		      [75, 0]
       Branch {
 	DstBlock		"Mux"
 	DstPort			3
       }
       Branch {
-	Points			[0, -30]
+	Points			[0, -25]
 	DstBlock		"Pitch"
 	DstPort			1
       }
     }
     Line {
-      SrcBlock		      "Heli 3D"
-      SrcPort		      2
-      DstBlock		      "Mux"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "V_d/V_s --> V_f/V_b"
+      SrcBlock		      "Step"
       SrcPort		      1
-      DstBlock		      "Heli 3D"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "V_d/V_s --> V_f/V_b"
-      SrcPort		      2
-      DstBlock		      "Heli 3D"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "pitch"
-      SrcPort		      1
-      Points		      [35, 0; 0, 65]
+      Points		      [30, 0; 0, 65]
       DstBlock		      "Pitch-kontroller"
       DstPort		      1
-    }
-    Line {
-      SrcBlock		      "elevation"
-      SrcPort		      1
-      Points		      [5, 0; 0, -150]
-      DstBlock		      "Elevasjonskontroller"
-      DstPort		      3
     }
   }
 }
