@@ -46,5 +46,5 @@ K_2 = K_p*l_a/J_t;
 K_3 = K_f*l_a/J_e;
 K_4 = K_p*l_a/J_e;
 w_c  = 5;
-K_pd = w_c/K_1;
-K_pp = (sqrt(2)*w_c^2)/K_1;
+K_pd = 2.5;%w_c/K_1;
+K_pp = 14;%(sqrt(2)*w_c^2)/K_1;
