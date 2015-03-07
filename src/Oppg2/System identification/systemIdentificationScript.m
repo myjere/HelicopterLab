@@ -12,7 +12,7 @@ measuredElevStep = elevStep30deg.signals.values(1:4001);
 measuredElevStep = measuredElevStep + 17*pi/180;
 elevTime = 0:0.001:4;
 
-%load travelRateStep20deg
+load travelRateStep20deg
 measuredTravelRateStep = travelRateStep20deg.signals.values(1:8001);
 travelRateTime = 0:0.001:8;
 
@@ -32,24 +32,23 @@ travelRate_K = -0.08;
 travelRateModel = tf([travelRate_K], [1 0]);
 
 % Visual comparison with measured data
-subplot(311);
+subplot(131);
 plot(pitchTime,measuredPitchStep,'r');
 hold on
 step(pitchModel)
 title('Pitch');
 
-subplot(312);
+subplot(132);
 plot(elevTime,measuredElevStep,'r');
 hold on
 step(elevModel)
 title('Elevation');
 
-subplot(313);
+subplot(133);
 plot(travelRateTime, measuredTravelRateStep,'r');
 hold on
 step(travelRateModel);
 xlim([0,6]);
-
 title('Travel rate');
 
 
