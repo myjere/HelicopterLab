@@ -29,7 +29,7 @@ title('Pitch');
 load elevStep30deg
 u_elev = 30*pi/180 * ones(4000,1);
 u_elev(1) = 0;
-y_elev = elevStep30deg.signals.values(1:4000) + 17*pi/180; % unbias the step
+y_elev = elevStep30deg.signals.values(1:4000) + 16.8*pi/180; % unbias the step
 elev_data = iddata(y_elev, u_elev, 0.001);
 elev_time = 0.001:0.001:4;
 
@@ -51,16 +51,15 @@ title('Elevation');
 load travelRateStep20deg
 travelRate_time = 0.001:0.001:8;
 u_travelRate = 20*pi/180 * step(pitch_sys,travelRate_time);
-y_travelRate = travelRateStep20deg.signals.values(1:8000);
+y_travelRate = travelRateStep20deg.signals.values(1:8000) - 0.02; % unbias
 travelRate_data = iddata(y_travelRate, u_travelRate, 0.001);
 
 opt = tfestOptions('InitMethod','iv','InitialCondition', 'zero');
-travelRate_sys = tfest(travelRate_data, 2, 1, opt); % poles, zeroes
+travelRate_sys = tfest(travelRate_data, 1, 0, opt); % poles, zeroes
 
 subplot(133);
 plot(travelRate_time, y_travelRate/(20*pi/180), 'r'); % scale for easy comparison with step()
 hold on
 step(travelRate_sys*pitch_sys, travelRate_time);
 hold off
-xlim([0,8])
 title('Travel rate');
