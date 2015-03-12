@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.88"
+    ComputedModelVersion    "1.95"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -27,9 +27,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "chrimath"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Mar 12 16:43:00 2015"
-  RTWModifiedTimeStamp	  348079364
-  ModelVersionFormat	  "1.%<AutoIncrement:88>"
+  LastModifiedDate	  "Thu Mar 12 17:50:20 2015"
+  RTWModifiedTimeStamp	  348083419
+  ModelVersionFormat	  "1.%<AutoIncrement:95>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -736,6 +736,11 @@ Model {
   }
   BlockParameterDefaults {
     Block {
+      BlockType		      Bias
+      Bias		      "0"
+      SaturateOnIntegerOverflow	on
+    }
+    Block {
       BlockType		      Constant
       Value		      "1"
       VectorParams1D	      on
@@ -956,7 +961,7 @@ Model {
   }
   System {
     Name		    "helikopter_openloop"
-    Location		    [508, 198, 1834, 813]
+    Location		    [401, 335, 1727, 902]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -970,28 +975,22 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    105
+    SIDHighWatermark	    108
     Block {
-      BlockType		      Sum
-      Name		      "Add"
-      SID		      1
-      Ports		      [2, 1]
-      Position		      [785, 337, 815, 368]
-      InputSameDT	      off
-      OutDataTypeMode	      "Inherit via internal rule"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^-10"
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+      BlockType		      Bias
+      Name		      "Bias"
+      SID		      107
+      Position		      [780, 260, 820, 290]
+      Bias		      "-30"
       SaturateOnIntegerOverflow	off
     }
     Block {
-      BlockType		      Constant
-      Name		      "Constant"
-      SID		      2
-      Position		      [715, 345, 745, 375]
-      Value		      "-30"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^0"
+      BlockType		      Bias
+      Name		      "Bias1"
+      SID		      108
+      Position		      [760, 200, 800, 230]
+      Bias		      "-4"
+      SaturateOnIntegerOverflow	off
     }
     Block {
       BlockType		      Reference
@@ -1229,7 +1228,7 @@ Model {
       Name		      "Elevation"
       SID		      65
       Ports		      [1]
-      Position		      [855, 339, 885, 371]
+      Position		      [1095, 254, 1125, 286]
       Floating		      off
       Location		      [92, 664, 416, 903]
       Open		      off
@@ -1248,7 +1247,7 @@ Model {
       BlockType		      FromWorkspace
       Name		      "From\nWorkspace"
       SID		      97
-      Position		      [245, 133, 310, 157]
+      Position		      [230, 83, 295, 107]
       VariableName	      "heli_input"
       ZeroCross		      on
       OutputAfterFinalValue   "Holding final value"
@@ -1835,17 +1834,17 @@ Model {
       Name		      "Pitch"
       SID		      68
       Ports		      [1]
-      Position		      [975, 174, 1005, 206]
+      Position		      [1095, 184, 1125, 216]
       Floating		      off
-      Location		      [442, 634, 766, 873]
+      Location		      [442, 56, 1175, 1031]
       Open		      off
       NumInputPorts	      "1"
       List {
 	ListType		AxesTitles
 	axes1			"%<SignalLabel>"
       }
-      YMin		      "29.425"
-      YMax		      "29.725"
+      YMin		      "-0.55"
+      YMax		      "0.1"
       SaveName		      "ScopeData2"
       DataFormat	      "StructureWithTime"
       SampleTime	      "0"
@@ -2027,7 +2026,7 @@ Model {
       Name		      "To Workspace"
       SID		      70
       Ports		      [1]
-      Position		      [895, 415, 955, 445]
+      Position		      [1000, 160, 1060, 190]
       NamePlacement	      "alternate"
       VariableName	      "travelRateStep20deg"
       MaxDataPoints	      "inf"
@@ -2039,7 +2038,7 @@ Model {
       Name		      "Travel"
       SID		      100
       Ports		      [1]
-      Position		      [975, 124, 1005, 156]
+      Position		      [1095, 124, 1125, 156]
       Floating		      off
       Location		      [442, 634, 766, 873]
       Open		      off
@@ -2199,6 +2198,15 @@ Model {
       }
     }
     Block {
+      BlockType		      Constant
+      Name		      "Zero1"
+      SID		      66
+      Position		      [265, 335, 295, 365]
+      Value		      "0*pi/180"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+    }
+    Block {
       BlockType		      Gain
       Name		      "deg2rad"
       SID		      16
@@ -2214,24 +2222,6 @@ Model {
       OutScaling	      "2^0"
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "elevation"
-      SID		      66
-      Position		      [265, 335, 295, 365]
-      Value		      "0*pi/180"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^0"
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "elevation1"
-      SID		      98
-      Position		      [180, 90, 210, 120]
-      Value		      "0"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^0"
     }
     Line {
       SrcBlock		      "Pitch-kontroller"
@@ -2275,13 +2265,6 @@ Model {
     }
     Line {
       SrcBlock		      "Heli 3D"
-      SrcPort		      5
-      Points		      [15, 0; 0, 70]
-      DstBlock		      "Add"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Heli 3D"
       SrcPort		      6
       DstBlock		      "Mux"
       DstPort		      6
@@ -2309,7 +2292,7 @@ Model {
     Line {
       SrcBlock		      "deg2rad"
       SrcPort		      1
-      Points		      [0, -225; -870, 0; 0, 215]
+      Points		      [360, 0; 0, -225; -1230, 0; 0, 215]
       DstBlock		      "Demux"
       DstPort		      1
     }
@@ -2341,21 +2324,15 @@ Model {
       DstPort		      2
     }
     Line {
-      SrcBlock		      "Constant"
-      SrcPort		      1
-      DstBlock		      "Add"
-      DstPort		      2
-    }
-    Line {
       SrcBlock		      "Heli 3D"
       SrcPort		      2
-      Points		      [50, 0]
+      Points		      [40, 0]
       Branch {
 	DstBlock		"Mux"
 	DstPort			2
       }
       Branch {
-	Points			[0, 245]
+	Points			[0, -10]
 	DstBlock		"To Workspace"
 	DstPort			1
       }
@@ -2373,60 +2350,29 @@ Model {
       DstPort		      2
     }
     Line {
-      SrcBlock		      "elevation"
+      SrcBlock		      "Zero1"
       SrcPort		      1
       DstBlock		      "Elevasjonskontroller"
       DstPort		      3
     }
     Line {
-      SrcBlock		      "Add"
-      SrcPort		      1
-      Points		      [10, 0]
-      Branch {
-	DstBlock		"Elevation"
-	DstPort			1
-      }
-      Branch {
-	Points			[0, -80]
-	DstBlock		"Mux"
-	DstPort			5
-      }
-    }
-    Line {
       SrcBlock		      "Heli 3D"
       SrcPort		      3
-      Points		      [60, 0]
-      Branch {
-	Points			[15, 0]
-	Branch {
-	  DstBlock		  "Mux"
-	  DstPort		  3
-	}
-	Branch {
-	  Points		  [0, -25]
-	  DstBlock		  "Pitch"
-	  DstPort		  1
-	}
-      }
-      Branch {
-	Points			[0, -150]
-	DstBlock		"Degrees to\nRadians"
-	DstPort			1
-      }
+      DstBlock		      "Bias1"
+      DstPort		      1
     }
     Line {
       SrcBlock		      "From\nWorkspace"
       SrcPort		      1
-      Points		      [10, 0]
+      Points		      [15, 0]
       Branch {
-	Points			[0, 10]
-	DstBlock		"Pitch-kontroller"
+	Points			[10, 0; 0, -60]
+	DstBlock		"Mux1"
 	DstPort			1
       }
       Branch {
-	Labels			[2, 0]
-	Points			[0, -110]
-	DstBlock		"Mux1"
+	Points			[0, 60]
+	DstBlock		"Pitch-kontroller"
 	DstPort			1
       }
     }
@@ -2447,6 +2393,50 @@ Model {
       SrcPort		      1
       DstBlock		      "Mux1"
       DstPort		      3
+    }
+    Line {
+      SrcBlock		      "Heli 3D"
+      SrcPort		      5
+      DstBlock		      "Bias"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Bias"
+      SrcPort		      1
+      Points		      [5, 0]
+      Branch {
+	DstBlock		"Mux"
+	DstPort			5
+      }
+      Branch {
+	Points			[0, -5]
+	DstBlock		"Elevation"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Bias1"
+      SrcPort		      1
+      Points		      [5, 0]
+      Branch {
+	Points			[10, 0]
+	Branch {
+	  DstBlock		  "Mux"
+	  DstPort		  3
+	}
+	Branch {
+	  Points		  [0, -15]
+	  DstBlock		  "Pitch"
+	  DstPort		  1
+	}
+      }
+      Branch {
+	DstBlock		"Degrees to\nRadians"
+	DstPort			1
+      }
+    }
+    Annotation {
+      Position		      [780, 263]
     }
   }
 }

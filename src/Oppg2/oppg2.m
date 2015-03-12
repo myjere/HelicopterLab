@@ -1,14 +1,14 @@
 clear all
-%close all
+close all
 init02
 clc
 
 %% Continous model
 Ac = [0    1    0    0;
-      0    -0.06 -0.3   0;
+      0    -0.03 -0.39   0;
       0    0    0    1;
-      0    0  -16  -7.2];
-Bc = [ 0 0 0 15.6]';
+      0    0  -7.13  -3.6];
+Bc = [ 0 0 0 6.74]';
 
 %% Discrete model
 dt = 0.1;
