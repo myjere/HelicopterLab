@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.74"
+    ComputedModelVersion    "1.88"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -27,9 +27,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "chrimath"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Mar 12 15:14:36 2015"
-  RTWModifiedTimeStamp	  348074040
-  ModelVersionFormat	  "1.%<AutoIncrement:74>"
+  LastModifiedDate	  "Thu Mar 12 16:43:00 2015"
+  RTWModifiedTimeStamp	  348079364
+  ModelVersionFormat	  "1.%<AutoIncrement:88>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -118,7 +118,7 @@ Model {
 	    PropName		    "DisabledProps"
 	  }
 	  StartTime		  "0.0"
-	  StopTime		  "18"
+	  StopTime		  "inf"
 	  AbsTol		  "auto"
 	  FixedStep		  "0.001"
 	  InitialStep		  "auto"
@@ -930,6 +930,14 @@ Model {
       BlockType		      Terminator
     }
     Block {
+      BlockType		      ToFile
+      Filename		      "untitled.mat"
+      MatrixName	      "ans"
+      SaveFormat	      "Array"
+      Decimation	      "1"
+      SampleTime	      "-1"
+    }
+    Block {
       BlockType		      ToWorkspace
       VariableName	      "simulink_output"
       MaxDataPoints	      "1000"
@@ -948,7 +956,7 @@ Model {
   }
   System {
     Name		    "helikopter_openloop"
-    Location		    [583, 278, 1676, 893]
+    Location		    [508, 198, 1834, 813]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -962,7 +970,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    97
+    SIDHighWatermark	    105
     Block {
       BlockType		      Sum
       Name		      "Add"
@@ -984,6 +992,42 @@ Model {
       Value		      "-30"
       OutDataType	      "sfix(16)"
       OutScaling	      "2^0"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Degrees to\nRadians"
+      SID		      103
+      Ports		      [1, 1]
+      Position		      [825, 50, 855, 80]
+      LibraryVersion	      "1.41"
+      SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
+      SourceType	      "DegreesToRadians"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Degrees to\nRadians1"
+      SID		      105
+      Ports		      [1, 1]
+      Position		      [870, 80, 900, 110]
+      LibraryVersion	      "1.41"
+      SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
+      SourceType	      "DegreesToRadians"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
     }
     Block {
       BlockType		      Demux
@@ -1204,9 +1248,8 @@ Model {
       BlockType		      FromWorkspace
       Name		      "From\nWorkspace"
       SID		      97
-      Position		      [245, 143, 310, 167]
+      Position		      [245, 133, 310, 157]
       VariableName	      "heli_input"
-      SampleTime	      "dt"
       ZeroCross		      on
       OutputAfterFinalValue   "Holding final value"
     }
@@ -1314,7 +1357,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"Heli 3D"
-	Location		[6, 84, 861, 854]
+	Location		[580, 165, 1435, 935]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1778,6 +1821,16 @@ Model {
       DisplayOption	      "bar"
     }
     Block {
+      BlockType		      Mux
+      Name		      "Mux1"
+      SID		      102
+      Ports		      [3, 1]
+      Position		      [970, 16, 980, 114]
+      ShowName		      off
+      Inputs		      "3"
+      DisplayOption	      "bar"
+    }
+    Block {
       BlockType		      Scope
       Name		      "Pitch"
       SID		      68
@@ -1962,6 +2015,14 @@ Model {
       Position		      [215, 150, 235, 170]
     }
     Block {
+      BlockType		      ToFile
+      Name		      "To File"
+      SID		      99
+      Position		      [1025, 50, 1085, 80]
+      Filename		      "data.mat"
+      MatrixName	      "data"
+    }
+    Block {
       BlockType		      ToWorkspace
       Name		      "To Workspace"
       SID		      70
@@ -1974,32 +2035,21 @@ Model {
       SaveFormat	      "Structure With Time"
     }
     Block {
-      BlockType		      ToWorkspace
-      Name		      "To Workspace1"
-      SID		      71
-      Ports		      [1]
-      Position		      [985, 55, 1045, 85]
-      VariableName	      "travel"
-      MaxDataPoints	      "inf"
-      SampleTime	      "-1"
-      SaveFormat	      "Structure With Time"
-    }
-    Block {
       BlockType		      Scope
       Name		      "Travel"
-      SID		      69
+      SID		      100
       Ports		      [1]
-      Position		      [975, 114, 1005, 146]
+      Position		      [975, 124, 1005, 156]
       Floating		      off
-      Location		      [187, 390, 511, 629]
+      Location		      [442, 634, 766, 873]
       Open		      off
       NumInputPorts	      "1"
       List {
 	ListType		AxesTitles
 	axes1			"%<SignalLabel>"
       }
-      YMin		      "-1"
-      YMax		      "1"
+      YMin		      "29.425"
+      YMax		      "29.725"
       SaveName		      "ScopeData3"
       DataFormat	      "StructureWithTime"
       SampleTime	      "0"
@@ -2174,6 +2224,15 @@ Model {
       OutDataType	      "sfix(16)"
       OutScaling	      "2^0"
     }
+    Block {
+      BlockType		      Constant
+      Name		      "elevation1"
+      SID		      98
+      Position		      [180, 90, 210, 120]
+      Value		      "0"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+    }
     Line {
       SrcBlock		      "Pitch-kontroller"
       SrcPort		      1
@@ -2189,22 +2248,23 @@ Model {
     Line {
       SrcBlock		      "Heli 3D"
       SrcPort		      1
-      Points		      [80, 0]
+      Points		      [35, 0]
       Branch {
-	DstBlock		"Mux"
-	DstPort			1
-      }
-      Branch {
-	Points			[0, -25; 110, 0]
+	Points			[35, 0]
 	Branch {
+	  DstBlock		  "Mux"
+	  DstPort		  1
+	}
+	Branch {
+	  Points		  [0, -15]
 	  DstBlock		  "Travel"
 	  DstPort		  1
 	}
-	Branch {
-	  Points		  [0, -60]
-	  DstBlock		  "To Workspace1"
-	  DstPort		  1
-	}
+      }
+      Branch {
+	Points			[0, -60]
+	DstBlock		"Degrees to\nRadians1"
+	DstPort			1
       }
     }
     Line {
@@ -2335,22 +2395,58 @@ Model {
     Line {
       SrcBlock		      "Heli 3D"
       SrcPort		      3
-      Points		      [75, 0]
+      Points		      [60, 0]
       Branch {
-	DstBlock		"Mux"
-	DstPort			3
+	Points			[15, 0]
+	Branch {
+	  DstBlock		  "Mux"
+	  DstPort		  3
+	}
+	Branch {
+	  Points		  [0, -25]
+	  DstBlock		  "Pitch"
+	  DstPort		  1
+	}
       }
       Branch {
-	Points			[0, -25]
-	DstBlock		"Pitch"
+	Points			[0, -150]
+	DstBlock		"Degrees to\nRadians"
 	DstPort			1
       }
     }
     Line {
       SrcBlock		      "From\nWorkspace"
       SrcPort		      1
-      DstBlock		      "Pitch-kontroller"
+      Points		      [10, 0]
+      Branch {
+	Points			[0, 10]
+	DstBlock		"Pitch-kontroller"
+	DstPort			1
+      }
+      Branch {
+	Labels			[2, 0]
+	Points			[0, -110]
+	DstBlock		"Mux1"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Mux1"
+      SrcPort		      1
+      DstBlock		      "To File"
       DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Degrees to\nRadians"
+      SrcPort		      1
+      DstBlock		      "Mux1"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Degrees to\nRadians1"
+      SrcPort		      1
+      DstBlock		      "Mux1"
+      DstPort		      3
     }
   }
 }

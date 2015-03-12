@@ -32,7 +32,7 @@ J_p = 2 * ( m_h/2 * l_h * l_h);     % Moment of interia for pitch
 J_t = 2 * m_h * l_a *l_a;           % Moment of interia for travel
 %Voltage
 V_f_eq=.635;                         % Voltage motor in front, Change the value so that it matches the current helicopter
-V_b_eq=.6;                          % 0.85;%1.2; Voltage motor in back, Change the value so that it matches the current helicopter
+V_b_eq=.5;                          % 0.85;%1.2; Voltage motor in back, Change the value so that it matches the current helicopter
 V_s_eq=V_f_eq+V_b_eq;               % Voltage sum, The minimum voltage to keep the helicopter in equilibrium
 %Force
 K_p = m_g*9.81;                     % Force to lift the helicopter from the ground

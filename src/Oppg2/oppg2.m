@@ -5,13 +5,13 @@ clc
 
 %% Continous model
 Ac = [0    1    0    0;
-      0    0 -0.23   0;
+      0    -0.06 -0.3   0;
       0    0    0    1;
       0    0  -16  -7.2];
 Bc = [ 0 0 0 15.6]';
 
 %% Discrete model
-dt = 0.25;
+dt = 0.1;
 A = eye(4) + Ac*dt;
 B = Bc*dt;
 
@@ -24,8 +24,8 @@ n_u = size(B,2);
 %%
 duration = 25;
 N = floor(duration/dt);
-q = 1;
-pitch_lim = 30; % deg
+q = .1;
+pitch_lim = 45; % deg
 
 %% Equality constraints
 
@@ -75,5 +75,10 @@ plot(time, u, 'r');
 
 
 %% Prep for actual use
-heli_input = [zeros(1,floor(10/dt)) , u , zeros(1,floor(10/dt))];
+pre_padding_time = 10;
+data = [zeros(1,floor(pre_padding_time/dt)) , u]';
+time = [(0:length(data) - 1)*dt]';
+heli_input = [time data];
+
+
 
