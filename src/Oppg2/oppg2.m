@@ -11,7 +11,7 @@ Ac = [0    1    0    0;
 Bc = [ 0 0 0 6.74]';
 
 %% Discrete model
-dt = 0.1;
+dt = 0.25;
 A = eye(4) + Ac*dt;
 B = Bc*dt;
 
@@ -75,10 +75,10 @@ plot(time, u, 'r');
 
 
 %% Prep for actual use
-pre_padding_time = 10;
-data = [zeros(1,floor(pre_padding_time/dt)) , u]';
-time = [(0:length(data) - 1)*dt]';
-heli_input = [time data];
+padding_time = 10;
+padded_input = [zeros(1,floor(padding_time/dt)) , u]';
+time = [(0:length(padded_input) - 1)*dt]';
+heli_input = [time padded_input];
 
 
 
