@@ -4,3 +4,9 @@ slprj/
 *.asv
 actxlicense.m
 *.rt-windows
+
+*.aux
+*.log
+*.bbl
+*.toc
+*.out
