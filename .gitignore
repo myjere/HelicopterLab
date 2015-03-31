@@ -5,8 +5,12 @@ slprj/
 actxlicense.m
 *.rt-windows
 
+*.sty
+*.pdf
 *.aux
 *.log
 *.bbl
+*.blg
 *.toc
 *.out
+*.fdb_latexmk
