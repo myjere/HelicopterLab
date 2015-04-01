@@ -70,7 +70,7 @@ However, in an effort to achieve a more accurate model, alternative state space 
 
 Discuss: 2 pole vs 3 pole, include transfer functions...Not exactly sure exactly what decided on, and how the model got these parameters...
 
-\begin{equation*}
+\begin{equation}
 	\begin{bmatrix}
 		\dot{\lambda}\\
 		\dot{r}\\
@@ -96,11 +96,21 @@ Discuss: 2 pole vs 3 pole, include transfer functions...Not exactly sure exactly
 		6.74 \\
 	\end{bmatrix}
 	p_c
-\end{equation*}
+	\label{eq:sys}
+\end{equation}
 
 Discuss differences with textbook model
 
 \subsection{Discretization}
+Let $x = \begin{bmatrix}\lambda&r&p&\dot{p}\end{bmatrix}^T$, and $A_c$, $B_c$ denote the state transition matrix and the **(Whatever B is called)** from \eqref{eq:sys} respectively. Then, discretizing \eqref{eq:sys} using forward Euler with a time step $\Delta t$ we get the discrete time state space model
+
+\begin{align}
+	x_{k+1} &= x_k + \Delta t \dot{x_k} \\
+			&= x_k + \Delta t (A_c x_k + B_c p_c)\\
+			&= (I + \Delta t A_c) x_k + (\Delta t B_c) p_c
+\end{align}
+
+where $x_k = x(k\Delta t)$.
 
 \subsection{Optimal trajectory}
 
