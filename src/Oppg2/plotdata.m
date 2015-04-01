@@ -12,9 +12,10 @@ time = (0:length(p_c)-1)*dt;
 
 
 hold on
-plot(time, p, ':b');
 plot(time, p_c, ':r');
+plot(time, p, ':b');
 plot(time, travel, ':g');
-
+legend('Opt. input', 'Opt. pitch', 'Opt. travel', 'Input', 'Pitch', 'Travel', 'Location', 'SouthEast');
+xlim([0 12.8]);
 
 hold off

@@ -69,10 +69,12 @@ u = [reshape(z(N*n_x+1:end), [n_u, N]) , zeros(n_u, 1)];
 time = (0:N)*dt;
 figure(1)
 hold on
-plot(time, travel, 'g');
-plot(time, pitch, 'b');
 plot(time, u, 'r');
-
+plot(time, pitch, 'b');
+plot(time, travel, 'g');
+xlabel('Time [s]'); ylabel('Angle [rad]');
+legend('Opt. input', 'Opt. pitch', 'Opt. travel', 'Location', 'SouthEast');
+xlim([0 12.8])
 
 %% Prep for actual use
 padding_time = 10;
