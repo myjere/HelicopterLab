@@ -1,7 +1,4 @@
-clear all
-close all
-init02
-clc
+clear all; close all; clc
 
 %% Continous model
 Ac = [0    1    0    0;
@@ -59,28 +56,14 @@ G = blkdiag(kron(eye(N), Q), kron(eye(N), R));
 
 %% Solve
 [z,fval,exitflag,output,lambda] = quadprog(G, [], [], [], Aeq, beq, LB, UB);
-output
 
 x = reshape(z(1:N*n_x), [n_x, N]);
 travel = [-xf(1), x(1,:)];
 pitch = [-xf(3), x(3,:)];
 u = [reshape(z(N*n_x+1:end), [n_u, N]) , zeros(n_u, 1)];
 
-time = (0:N)*dt;
-figure(1)
-hold on
-plot(time, u, 'r');
-plot(time, pitch, 'b');
-plot(time, travel, 'g');
-xlabel('Time [s]'); ylabel('Angle [rad]');
-legend('Opt. input', 'Opt. pitch', 'Opt. travel', 'Location', 'SouthEast');
-xlim([0 12.8])
-
 %% Prep for actual use
 padding_time = 10;
 padded_input = [zeros(1,floor(padding_time/dt)) , u]';
 time = [(0:length(padded_input) - 1)*dt]';
 heli_input = [time padded_input];
-
-
-
