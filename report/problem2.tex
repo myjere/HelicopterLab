@@ -104,35 +104,83 @@ Discuss differences with textbook model
 \subsection{Discretization}
 Let $x = \begin{bmatrix}\lambda&r&p&\dot{p}\end{bmatrix}^T$, and $A_c$, $B_c$ denote the state transition matrix and the **(Whatever B is called)** from \eqref{eq:sys} respectively. Then, discretizing \eqref{eq:sys} using forward Euler with a time step $\Delta t$ we get the discrete time state space model
 
+\begin{subequations}
+\label{eq:dmodel}
 \begin{align}
 	x_{k+1} &= x_k + \Delta t \dot{x_k} \\
-			&= x_k + \Delta t (A_c x_k + B_c p_c)\\
-			&= (I + \Delta t A_c) x_k + (\Delta t B_c) p_c
+			&= x_k + \Delta t (A_c x_k + B_c u_k)\\
+			&= (I + \Delta t A_c) x_k + (\Delta t B_c) u_k \\
+			&= A x_k + B u_k
 \end{align}
+\end{subequations}
 
-where $x_k = x(k\Delta t)$.
+where $x_k = x(k\Delta t)$ and $u_k = p_c(k\Delta t)$.
 
 \subsection{Optimal trajectory}
 
-Here is a matrix equation you can use as a template:
+We calculate the trajectory from $x_0 = \begin{bmatrix}\lambda_0&0&0&0\end{bmatrix}^T$ to $x_f = \begin{bmatrix}\lambda_f&0&0&0\end{bmatrix}^T$ minimizing the objective function 
+\begin{equation*}
+	\phi = \sum_{i=1}^{N}(\lambda_i - \lambda_f)^2 + qp^2_{c_i}, \quad q \ge 0,
+\end{equation*}
+subject to \eqref{eq:dmodel}, where $\lambda_0 = 0$, $\lambda_f = \pi$. (Copied prev eq from assignment, but are the indexes correct?) Or, alternatively
+
 \begin{equation}
-\begin{bmatrix}
- 1 &  0 &  0 & 0 & -b &  0 &  0 &  0 \\
--a &  1 &  0 & 0 &  0 & -b &  0 &  0 \\
- 0 & -a &  1 & 0 &  0 &  0 & -b &  0 \\
- 0 &  0 & -a & 1 &  0 &  0 &  0 & -b                                
-\end{bmatrix}
-\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \\ u_0 \\ u_1 \\ u_2 \\ u_3 \end{bmatrix}
+	\label{eq:QP}
+	\phi = \sum_{i=0}^{N-1} \frac{1}{2}(x_{i+1}-x_f)^TQ(x_{i+1}-x_f) + \frac{1}{2}u_i^TRu_i,
+\end{equation}
+where
+
+\begin{equation}
+Q = \begin{bmatrix}2&0&0&0\\0&0&0&0\\0&0&0&0\\0&0&0&0\end{bmatrix}, \ R = 2q.
+\end{equation}
+
+The system dynamics \eqref{eq:dmodel} subjects \eqref{eq:QP} to the linear equality constraints
+
+\begin{equation}
+	\label{eq:eq_constraints}
+	\left[\begin{array}{cccc | ccccc}
+	I	&&&&			-B	&&&			\\
+	-A	&\ddots&&&			&\ddots&&	\\
+		&\ddots&\ddots&&	&&\ddots&	\\
+		&& -A & I&			&&& -B		\\
+	\end{array}\right]
+\begin{bmatrix} x_1 \\ \vdots \\ x_N \\ u_0 \\ \vdots \\ u_{N-1} \end{bmatrix}
 =
 \begin{bmatrix}
-ax_0 \\ 0 \\ 0 \\ 0      
-\end{bmatrix}
+-A x_f \\ 0 \\ \vdots \\ 0      
+\end{bmatrix}.
 \end{equation}
+
+Let 
+\begin{equation*}
+	G = 2
+	\begin{bmatrix}
+	Q	&&&&&		\\
+		&\ddots&&&&	\\
+		&&Q&&&		\\
+		&&&R&&		\\
+		&&&&\ddots&	\\
+		&&&&&R		\\
+	\end{bmatrix}.
+\end{equation*}
+
+ We are then able to state the QP problem in terms of the optimization variable $z = \begin{bmatrix} x_1 & \dots & x_N & u_0 & \dots & u_{N-1} \end{bmatrix}$:
+\begin{equation*}
+	\min_z \ \frac{1}{2} z^T G z, \quad \textrm{s.t}\ A_{eq} z = B_{eq},
+\end{equation*}
+
+with $A_{eq}$, $B_{eq}$ given by \eqref{eq:eq_constraints}. In addition to the equality constraints, we impose lower and upper bounds on the input and pitch variables
+
+\begin{equation*}
+	|u_{k-1}|, |p_k| \le \frac{30 \pi}{180}, \quad k \in \{1, \dots, N\},
+\end{equation*}
+
+and solve the resulting system using MATLAB's \texttt{quadprog}.
 
 \begin{figure}[hp]
 	\centering
 		\includegraphics[width=0.9\textwidth]{figures/2/opt_traj.eps}
-	\caption{Optimal trajectory and input sequence.}
+	\caption{I guess this one is not really necessary...}
 	\label{fig:opt_traj}
 \end{figure}
 
