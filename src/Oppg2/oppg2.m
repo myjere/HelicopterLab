@@ -31,7 +31,7 @@ Aeq = [ eye(N*n_x) + kron(diag(ones(N-1,1),-1), -A) , kron(eye(N), -B)];
 beq = [-A*xf;
        zeros(n_x*(N-1),1)];
    
-%% Inequality constraints
+%% Bounds
 LB_x = repmat([-Inf -Inf -pitch_lim*pi/180 -Inf]', N, 1);
 UB_x = repmat([Inf Inf pitch_lim*pi/180 Inf]', N, 1);
 
