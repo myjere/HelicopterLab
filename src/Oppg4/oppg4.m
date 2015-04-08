@@ -1,6 +1,7 @@
 clear all; close all; clc
+init02
 
-%% Continous model
+%% Continuous model
 Ac = [0    1    0    0    0    0;
       0  -0.03 -0.39 0    0    0;
       0    0    0    1    0    0;
@@ -16,7 +17,7 @@ Bc = [ 0    0;
        0    3.13];
 
 %% Discrete model
-dt = 0.25;
+dt = .25;
 A = eye(6) + Ac*dt;
 B = Bc*dt;
 
@@ -27,7 +28,7 @@ n_x = size(A,2);
 n_u = size(B,2);
 
 %%
-duration = 5;
+duration = 15;
 N = floor(duration/dt);
 q1 = 1;
 q2 = 1;
@@ -69,19 +70,11 @@ R = [q1 0;
 
 G = blkdiag(kron(eye(N), Q), kron(eye(N), R));
           
-%% SQP
+%% Solving
 f = @(X) X'*G*X;
 
 OPT = optimset('Algorithm', 'sqp');
-[X, FVAL, EXITFLAG] = fmincon(f, zeros(N*8,1), [], [], Aeq, Beq, LB, UB, @constraint, OPT);
-
-
-
-%% Plotting....
-
-
-
-
+[X, FVAL, EXITFLAG] = fmincon(f, zeros(N*8,1), [], [], Aeq, Beq, LB, UB, @constraint);
 
 
 x = reshape(X(1:N*n_x), [n_x, N]);
@@ -91,15 +84,11 @@ elevation = [-xf(5), x(5,:)];
 u = [reshape(X(N*n_x+1:end), [n_u, N]) , zeros(n_u, 2)];
 
 
-
-
-
-
-
-
-
-
-
+%% Prep for actual use
+padding_time = 10;
+padded_input = [zeros(2,floor(padding_time/dt)) , u]';
+time = [(0:length(padded_input) - 1)*dt]';
+heli_input = [time padded_input];
 
 
 

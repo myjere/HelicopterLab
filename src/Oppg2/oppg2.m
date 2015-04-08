@@ -1,6 +1,6 @@
 clear all; close all; clc
 
-%% Continous model
+%% Continuous model
 Ac = [0    1    0    0;
       0    -0.03 -0.39   0;
       0    0    0    1;
