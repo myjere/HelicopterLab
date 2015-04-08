@@ -13,7 +13,7 @@ pitch_data = iddata(y_pitch, u_pitch, 0.001);
 pitch_time = 0.001:0.001:3;
 
 opt = tfestOptions('InitialCondition', 'zero');
-pitch_sys = tfest(pitch_data, 3, 0,opt); % poles, zeroes
+pitch_sys = tfest(pitch_data, 2, 0,opt); % poles, zeroes
 
 subplot(131);
 plot(pitch_time, y_pitch/(40*pi/180), 'r'); % scale for easy comparison with step()
