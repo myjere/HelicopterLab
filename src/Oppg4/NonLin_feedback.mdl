@@ -1,12 +1,12 @@
 Model {
-  Name			  "LQR_feedback"
+  Name			  "NonLin_feedback"
   Version		  7.5
   MdlSubVersion		  0
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.97"
+    ComputedModelVersion    "1.106"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -27,9 +27,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "chrimath"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Mar 20 09:50:44 2015"
-  RTWModifiedTimeStamp	  348745319
-  ModelVersionFormat	  "1.%<AutoIncrement:97>"
+  LastModifiedDate	  "Wed Apr 08 15:34:00 2015"
+  RTWModifiedTimeStamp	  350407501
+  ModelVersionFormat	  "1.%<AutoIncrement:106>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -741,23 +741,6 @@ Model {
       SaturateOnIntegerOverflow	on
     }
     Block {
-      BlockType		      Constant
-      Value		      "1"
-      VectorParams1D	      on
-      SamplingMode	      "Sample based"
-      OutMin		      "[]"
-      OutMax		      "[]"
-      OutDataTypeMode	      "Inherit from 'Constant value'"
-      OutDataType	      "fixdt(1,16,0)"
-      ConRadixGroup	      "Use specified scaling"
-      OutScaling	      "[]"
-      OutDataTypeStr	      "Inherit: Inherit from 'Constant value'"
-      LockScale		      off
-      SampleTime	      "inf"
-      FramePeriod	      "inf"
-      PreserveConstantTs      off
-    }
-    Block {
       BlockType		      Demux
       Outputs		      "4"
       DisplayOption	      "none"
@@ -943,14 +926,6 @@ Model {
       SampleTime	      "-1"
     }
     Block {
-      BlockType		      ToWorkspace
-      VariableName	      "simulink_output"
-      MaxDataPoints	      "1000"
-      Decimation	      "1"
-      SampleTime	      "0"
-      FixptAsFi		      off
-    }
-    Block {
       BlockType		      TransferFcn
       Numerator		      "[1]"
       Denominator	      "[1 2 1]"
@@ -960,8 +935,8 @@ Model {
     }
   }
   System {
-    Name		    "LQR_feedback"
-    Location		    [130, 298, 1456, 865]
+    Name		    "NonLin_feedback"
+    Location		    [320, 299, 1661, 957]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -975,7 +950,73 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    114
+    SIDHighWatermark	    119
+    Block {
+      BlockType		      Terminator
+      Name		      " "
+      SID		      54
+      Position		      [150, 170, 170, 190]
+    }
+    Block {
+      BlockType		      Reference
+      Name		      " \n "
+      SID		      103
+      Ports		      [1, 1]
+      Position		      [860, 65, 890, 95]
+      LibraryVersion	      "1.41"
+      SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
+      SourceType	      "DegreesToRadians"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      " \n  "
+      SID		      105
+      Ports		      [1, 1]
+      Position		      [815, 40, 845, 70]
+      LibraryVersion	      "1.41"
+      SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
+      SourceType	      "DegreesToRadians"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      " \n  1"
+      SID		      116
+      Ports		      [1, 1]
+      Position		      [905, 90, 935, 120]
+      LibraryVersion	      "1.41"
+      SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
+      SourceType	      "DegreesToRadians"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+    }
+    Block {
+      BlockType		      Terminator
+      Name		      "  "
+      SID		      55
+      Position		      [210, 185, 230, 205]
+    }
     Block {
       BlockType		      Bias
       Name		      "Bias"
@@ -994,28 +1035,10 @@ Model {
     }
     Block {
       BlockType		      Reference
-      Name		      "Degrees to\nRadians"
-      SID		      103
+      Name		      "Degrees to\nRadians2"
+      SID		      115
       Ports		      [1, 1]
-      Position		      [825, 50, 855, 80]
-      LibraryVersion	      "1.41"
-      SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
-      SourceType	      "DegreesToRadians"
-      ShowPortLabels	      "FromPortIcon"
-      SystemSampleTime	      "-1"
-      FunctionWithSeparateData off
-      RTWMemSecFuncInitTerm   "Inherit from model"
-      RTWMemSecFuncExecute    "Inherit from model"
-      RTWMemSecDataConstants  "Inherit from model"
-      RTWMemSecDataInternal   "Inherit from model"
-      RTWMemSecDataParameters "Inherit from model"
-    }
-    Block {
-      BlockType		      Reference
-      Name		      "Degrees to\nRadians1"
-      SID		      105
-      Ports		      [1, 1]
-      Position		      [870, 80, 900, 110]
+      Position		      [885, 215, 915, 245]
       LibraryVersion	      "1.41"
       SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
       SourceType	      "DegreesToRadians"
@@ -1036,6 +1059,16 @@ Model {
       Position		      [90, 178, 95, 257]
       ShowName		      off
       Outputs		      "6"
+      DisplayOption	      "bar"
+    }
+    Block {
+      BlockType		      Demux
+      Name		      "Demux1"
+      SID		      117
+      Ports		      [1, 2]
+      Position		      [315, 77, 320, 133]
+      ShowName		      off
+      Outputs		      "2"
       DisplayOption	      "bar"
     }
     Block {
@@ -1222,26 +1255,6 @@ Model {
 	  DstPort		  1
 	}
       }
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "Elevation"
-      SID		      65
-      Ports		      [1]
-      Position		      [1095, 254, 1125, 286]
-      Floating		      off
-      Location		      [92, 664, 416, 903]
-      Open		      off
-      NumInputPorts	      "1"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-      }
-      YMin		      "9.775"
-      YMax		      "10.125"
-      SaveName		      "ScopeData1"
-      DataFormat	      "StructureWithTime"
-      SampleTime	      "0"
     }
     Block {
       BlockType		      FromWorkspace
@@ -1852,40 +1865,10 @@ Model {
       Name		      "Mux1"
       SID		      102
       Ports		      [3, 1]
-      Position		      [970, 16, 980, 114]
+      Position		      [970, 41, 980, 119]
       ShowName		      off
       Inputs		      "3"
       DisplayOption	      "bar"
-    }
-    Block {
-      BlockType		      Mux
-      Name		      "Mux2"
-      SID		      111
-      Ports		      [4, 1]
-      Position		      [124, 110, 221, 115]
-      BlockRotation	      270
-      ShowName		      off
-      DisplayOption	      "bar"
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "Pitch"
-      SID		      68
-      Ports		      [1]
-      Position		      [1095, 184, 1125, 216]
-      Floating		      off
-      Location		      [442, 56, 1175, 1031]
-      Open		      off
-      NumInputPorts	      "1"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-      }
-      YMin		      "-0.55"
-      YMax		      "0.1"
-      SaveName		      "ScopeData2"
-      DataFormat	      "StructureWithTime"
-      SampleTime	      "0"
     }
     Block {
       BlockType		      SubSystem
@@ -2057,14 +2040,16 @@ Model {
     }
     Block {
       BlockType		      Sum
-      Name		      "Sum1"
-      SID		      114
+      Name		      "Sum2"
+      SID		      118
       Ports		      [2, 1]
-      Position		      [294, 65, 356, 90]
+      Position		      [285, 40, 305, 60]
       BlockRotation	      270
       BlockMirror	      on
       NamePlacement	      "alternate"
       ShowName		      off
+      IconShape		      "round"
+      Inputs		      "+|+"
       InputSameDT	      off
       OutDataTypeMode	      "Inherit via internal rule"
       OutDataType	      "fixdt(1, 16)"
@@ -2073,56 +2058,12 @@ Model {
       SaturateOnIntegerOverflow	off
     }
     Block {
-      BlockType		      Terminator
-      Name		      "Terminator"
-      SID		      54
-      Position		      [275, 135, 295, 155]
-    }
-    Block {
-      BlockType		      Terminator
-      Name		      "Terminator1"
-      SID		      55
-      Position		      [290, 170, 310, 190]
-    }
-    Block {
       BlockType		      ToFile
       Name		      "To File"
       SID		      99
-      Position		      [1025, 50, 1085, 80]
+      Position		      [1030, 65, 1090, 95]
       Filename		      "data.mat"
       MatrixName	      "data"
-    }
-    Block {
-      BlockType		      ToWorkspace
-      Name		      "To Workspace"
-      SID		      70
-      Ports		      [1]
-      Position		      [1000, 160, 1060, 190]
-      NamePlacement	      "alternate"
-      VariableName	      "travelRateStep20deg"
-      MaxDataPoints	      "inf"
-      SampleTime	      "-1"
-      SaveFormat	      "Structure With Time"
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "Travel"
-      SID		      100
-      Ports		      [1]
-      Position		      [1095, 124, 1125, 156]
-      Floating		      off
-      Location		      [442, 634, 766, 873]
-      Open		      off
-      NumInputPorts	      "1"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-      }
-      YMin		      "29.425"
-      YMax		      "29.725"
-      SaveName		      "ScopeData3"
-      DataFormat	      "StructureWithTime"
-      SampleTime	      "0"
     }
     Block {
       BlockType		      SubSystem
@@ -2268,32 +2209,6 @@ Model {
 	}
       }
     }
-    Block {
-      BlockType		      Constant
-      Name		      "Zero1"
-      SID		      66
-      Position		      [60, 405, 90, 435]
-      Value		      "0*pi/180"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^0"
-    }
-    Block {
-      BlockType		      Gain
-      Name		      "deg2rad"
-      SID		      16
-      Position		      [885, 215, 915, 245]
-      Gain		      "eye(6)*pi/180"
-      Multiplication	      "Matrix(K*u)"
-      ParameterDataTypeMode   "Inherit via internal rule"
-      ParameterDataType	      "sfix(16)"
-      ParameterScaling	      "2^0"
-      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
-      OutDataTypeMode	      "Inherit via internal rule"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^0"
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-      SaturateOnIntegerOverflow	off
-    }
     Line {
       SrcBlock		      "Pitch-kontroller"
       SrcPort		      1
@@ -2311,20 +2226,12 @@ Model {
       SrcPort		      1
       Points		      [35, 0]
       Branch {
-	Points			[35, 0]
-	Branch {
-	  DstBlock		  "Mux"
-	  DstPort		  1
-	}
-	Branch {
-	  Points		  [0, -15]
-	  DstBlock		  "Travel"
-	  DstPort		  1
-	}
+	Points			[0, -100]
+	DstBlock		" \n  "
+	DstPort			1
       }
       Branch {
-	Points			[0, -60]
-	DstBlock		"Degrees to\nRadians1"
+	DstBlock		"Mux"
 	DstPort			1
       }
     }
@@ -2343,70 +2250,34 @@ Model {
     Line {
       SrcBlock		      "Mux"
       SrcPort		      1
-      DstBlock		      "deg2rad"
+      DstBlock		      "Degrees to\nRadians2"
       DstPort		      1
     }
     Line {
       SrcBlock		      "Demux"
       SrcPort		      1
-      Points		      [35, 0]
-      Branch {
-	Points			[125, 0]
-	DstBlock		"Terminator"
-	DstPort			1
-      }
-      Branch {
-	DstBlock		"Mux2"
-	DstPort			1
-      }
+      DstBlock		      " "
+      DstPort		      1
     }
     Line {
       SrcBlock		      "Demux"
       SrcPort		      2
-      Points		      [60, 0]
-      Branch {
-	Points			[115, 0]
-	DstBlock		"Terminator1"
-	DstPort			1
-      }
-      Branch {
-	DstBlock		"Mux2"
-	DstPort			2
-      }
-    }
-    Line {
-      SrcBlock		      "deg2rad"
-      SrcPort		      1
-      Points		      [360, 0; 0, -225; -1230, 0; 0, 215]
-      DstBlock		      "Demux"
+      DstBlock		      "  "
       DstPort		      1
     }
     Line {
+      Labels		      [0, 0]
       SrcBlock		      "Demux"
       SrcPort		      3
-      Points		      [85, 0]
-      Branch {
-	Points			[145, 0; 0, -20]
-	DstBlock		"Pitch-kontroller"
-	DstPort			2
-      }
-      Branch {
-	DstBlock		"Mux2"
-	DstPort			3
-      }
+      Points		      [230, 0; 0, -20]
+      DstBlock		      "Pitch-kontroller"
+      DstPort		      2
     }
     Line {
       SrcBlock		      "Demux"
       SrcPort		      4
-      Points		      [110, 0]
-      Branch {
-	DstBlock		"Pitch-kontroller"
-	DstPort			3
-      }
-      Branch {
-	DstBlock		"Mux2"
-	DstPort			4
-      }
+      DstBlock		      "Pitch-kontroller"
+      DstPort		      3
     }
     Line {
       SrcBlock		      "Demux"
@@ -2425,16 +2296,8 @@ Model {
     Line {
       SrcBlock		      "Heli 3D"
       SrcPort		      2
-      Points		      [40, 0]
-      Branch {
-	DstBlock		"Mux"
-	DstPort			2
-      }
-      Branch {
-	Points			[0, -10]
-	DstBlock		"To Workspace"
-	DstPort			1
-      }
+      DstBlock		      "Mux"
+      DstPort		      2
     }
     Line {
       SrcBlock		      "V_d/V_s --> V_f/V_b"
@@ -2461,18 +2324,6 @@ Model {
       DstPort		      1
     }
     Line {
-      SrcBlock		      "Degrees to\nRadians"
-      SrcPort		      1
-      DstBlock		      "Mux1"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "Degrees to\nRadians1"
-      SrcPort		      1
-      DstBlock		      "Mux1"
-      DstPort		      3
-    }
-    Line {
       SrcBlock		      "Heli 3D"
       SrcPort		      5
       DstBlock		      "Bias"
@@ -2487,8 +2338,8 @@ Model {
 	DstPort			5
       }
       Branch {
-	Points			[0, -5]
-	DstBlock		"Elevation"
+	Points			[0, -170]
+	DstBlock		" \n  1"
 	DstPort			1
       }
     }
@@ -2497,41 +2348,20 @@ Model {
       SrcPort		      1
       Points		      [5, 0]
       Branch {
-	Points			[10, 0]
-	Branch {
-	  DstBlock		  "Mux"
-	  DstPort		  3
-	}
-	Branch {
-	  Points		  [0, -15]
-	  DstBlock		  "Pitch"
-	  DstPort		  1
-	}
+	Points			[0, -135]
+	DstBlock		" \n "
+	DstPort			1
       }
       Branch {
-	DstBlock		"Degrees to\nRadians"
-	DstPort			1
+	DstBlock		"Mux"
+	DstPort			3
       }
     }
     Line {
       SrcBlock		      "From\nWorkspace1"
       SrcPort		      1
-      Points		      [5, 0]
-      Branch {
-	DstBlock		"Sum"
-	DstPort			1
-      }
-      Branch {
-	Points			[0, -15]
-	DstBlock		"Mux1"
-	DstPort			1
-      }
-    }
-    Line {
-      SrcBlock		      "Mux2"
-      SrcPort		      1
       DstBlock		      "Sum"
-      DstPort		      2
+      DstPort		      1
     }
     Line {
       SrcBlock		      "Sum"
@@ -2542,20 +2372,67 @@ Model {
     Line {
       SrcBlock		      "Gain"
       SrcPort		      1
-      DstBlock		      "Sum1"
+      DstBlock		      "Sum2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Sum2"
+      SrcPort		      1
+      Points		      [0, 40]
+      DstBlock		      "Demux1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Demux1"
+      SrcPort		      2
+      Points		      [0, 230]
+      DstBlock		      "Elevasjonskontroller"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "Demux1"
+      SrcPort		      1
+      Points		      [10, 0]
+      DstBlock		      "Pitch-kontroller"
       DstPort		      1
     }
     Line {
       SrcBlock		      "From\nWorkspace"
       SrcPort		      1
-      DstBlock		      "Sum1"
+      DstBlock		      "Sum2"
       DstPort		      2
     }
     Line {
-      SrcBlock		      "Sum1"
+      SrcBlock		      "Degrees to\nRadians2"
       SrcPort		      1
-      Points		      [0, 60]
-      DstBlock		      "Pitch-kontroller"
+      Points		      [360, 0; 0, -225; -1230, 0; 0, 110]
+      Branch {
+	Points			[0, 105]
+	DstBlock		"Demux"
+	DstPort			1
+      }
+      Branch {
+	Points			[125, 0]
+	DstBlock		"Sum"
+	DstPort			2
+      }
+    }
+    Line {
+      SrcBlock		      " \n  1"
+      SrcPort		      1
+      DstBlock		      "Mux1"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      " \n "
+      SrcPort		      1
+      DstBlock		      "Mux1"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      " \n  "
+      SrcPort		      1
+      DstBlock		      "Mux1"
       DstPort		      1
     }
     Annotation {
@@ -2570,141 +2447,141 @@ MatData {
     Data		    "  %)30     .    & $   8    (     @         %    \"     $    !     0         %  0 #0    $    G    ;VQD7V"
     "YA;64      &ES7V1E;&5T960   !O8FIE8W1?8FQO8VL   X    X    !@    @    $          4    (     0    4    !         !  "
     "   %    2$E,+3$    .    ,     8    (    \"0(        %    \"     $    !     0         \"  $       X    X    !@    @"
-    "    &          4    (     0    $    !          D    (          F :D "
+    "    &          4    (     0    $    !          D    (        @ #\\GT "
   }
   DataRecord {
     Tag			    DataTag1
     Data		    "  %)30     .    & $   8    (     @         %    \"     $    !     0         %  0 #0    $    G    ;VQD7V"
     "YA;64      &ES7V1E;&5T960   !O8FIE8W1?8FQO8VL   X    X    !@    @    $          4    (     0    4    !         !  "
     "   %    2$E,+3$    .    ,     8    (    \"0(        %    \"     $    !     0         \"  $       X    X    !@    @"
-    "    &          4    (     0    $    !          D    (          F :D "
+    "    &          4    (     0    $    !          D    (        @ #\\GT "
   }
   DataRecord {
     Tag			    DataTag0
     Data		    "  %)30     .    0#<   8    (     @         %    \"     $    !     0         %  0 $0    $   !F    :7-?=6"
     "YI<75E          !O;&1?8FQO8VL          &]L9%]N86UE            :7-?;6]D96Q?8VQO<VEN9P!S971T:6YG<P           &ES7V1E"
     ";&5T960            .    ,     8    (    \"0(        %    \"     $    !     0         \"  $  0    X    X    !@    @"
-    "    &          4    (     0    $    !          D    (          F :D .    .     8    (    !          %    \"     $ "
-    "   %     0         0    !0   $A)3\"TQ    #@   #     &    \"     D\"        !0    @    !     0    $          @ !   "
-    "    .    <#4   8    (     @         %    \"     $    !     0         %  0 #P    $    M    ;VQD7V)O87)D7W1Y<&4 <3@ "
-    "                <30                     #@   #     &    \"     0         !0    @    !     @    $         $  \" '$T"
-    "   .    8!H   8    (     @         %    \"     $    !     0         %  0 +     $     \"P  :61E;G1I9FEE<@          "
-    "                                  !O<'1I;VYS                                                 &-L;V-K<P            "
-    "                                      8VQO8VM?;6]D97,                                           !C;&]C:U]S971?<&%R"
-    "86US7V%T7VUO9&5L7W-T87)T                 &-L;V-K7W-E=%]P87)A;7-?<W=I=&-H:6YG7W1O7VUO9&5L            86YA;&]G7VEN<'"
-    "5T7V-H86YN96QS                              !A;F%L;V=?:6YP=71?;6%X:6UU;7,                              &%N86QO9U]I"
-    ";G!U=%]M:6YI;75M<P                              86YA;&]G7VEN<'5T7W-E=%]P87)A;7-?871?;6]D96Q?<W1A<G0       !A;F%L;V"
-    "=?:6YP=71?<V5T7W!A<F%M<U]S=VET8VAI;F=?=&]?;6]D96P  &%N86QO9U]O=71P=71?8VAA;FYE;',                             86YA"
-    ";&]G7V]U='!U=%]M87AI;75M<P                            !A;F%L;V=?;W5T<'5T7VUI;FEM=6US                             &"
-    "%N86QO9U]O=71P=71?:6YI=&EA;                               86YA;&]G7V]U='!U=%]F:6YA;                               "
-    "  !A;F%L;V=?;W5T<'5T7W=A=&-H9&]G                             &%N86QO9U]O=71P=71?<V5T7W!A<F%M<U]A=%]M;V1E;%]S=&%R= "
-    "      86YA;&]G7V]U='!U=%]S971?<&%R86US7W-W:71C:&EN9U]T;U]M;V1E; !A;F%L;V=?;W5T<'5T7W-E=%]A=%]M;V1E;%]S=&%R=       "
-    "         &%N86QO9U]O=71P=71?<V5T7W-W:71C:&EN9U]T;U]M;V1E;           86YA;&]G7V]U='!U=%]S971?871?;6]D96Q?=&5R;6EN87"
-    "1I;VX       !A;F%L;V=?;W5T<'5T7W-E=%]S=VET8VAI;F=?9G)O;5]M;V1E;        &%N86QO9U]O=71P=71?<V5T7V]N7W=A=&-H9&]G    "
-    "                9&EG:71A;%]I;G!U=%]C:&%N;F5L<P                            !D:6=I=&%L7V]U='!U=%]C:&%N;F5L<P        "
-    "                   &1I9VET86Q?;W5T<'5T7VEN:71I86P                             9&EG:71A;%]O=71P=71?9FEN86P         "
-    "                      !D:6=I=&%L7V]U='!U=%]W871C:&1O9P                           &1I9VET86Q?;W5T<'5T7W-E=%]A=%]M;V"
-    "1E;%]S=&%R=               9&EG:71A;%]O=71P=71?<V5T7W-W:71C:&EN9U]T;U]M;V1E;         !D:6=I=&%L7V]U='!U=%]S971?871?"
-    ";6]D96Q?=&5R;6EN871I;VX      &1I9VET86Q?;W5T<'5T7W-E=%]S=VET8VAI;F=?9G)O;5]M;V1E;       9&EG:71A;%]O=71P=71?<V5T7V"
-    "]N7W=A=&-H9&]G                  !E;F-O9&5R7VEN<'5T7V-H86YN96QS                             &5N8V]D97)?:6YP=71?<75A"
-    "9')A='5R90                          96YC;V1E<E]I;G!U=%]F<F5Q=65N8WD                           !E;F-O9&5R7VEN<'5T7V"
-    "EN:71I86P                              &5N8V]D97)?:6YP=71?<V5T7W!A<F%M<U]A=%]M;V1E;%]S=&%R=       96YC;V1E<E]I;G!U"
-    "=%]S971?<&%R86US7W-W:71C:&EN9U]T;U]M;V1E; !E;F-O9&5R7VEN<'5T7W-E=%]A=%]M;V1E;%]S=&%R=                &5N8V]D97)?:6"
-    "YP=71?<V5T7W-W:71C:&EN9U]T;U]M;V1E;           <'=M7V]U='!U=%]C:&%N;F5L<P                                !P=VU?;W5T"
-    "<'5T7VUO9&5S                                     '!W;5]O=71P=71?9G)E<75E;F-Y                                <'=M7V"
-    "]U='!U=%]I;FET:6%L                                  !P=VU?;W5T<'5T7V9I;F%L                                     '!W"
-    ";5]O=71P=71?=V%T8VAD;V<                                 <'=M7V]U='!U=%]S971?<&%R86US7V%T7VUO9&5L7W-T87)T          "
-    "!P=VU?;W5T<'5T7W-E=%]P87)A;7-?<W=I=&-H:6YG7W1O7VUO9&5L     '!W;5]O=71P=71?<V5T7V%T7VUO9&5L7W-T87)T                "
-    "    <'=M7V]U='!U=%]S971?<W=I=&-H:6YG7W1O7VUO9&5L              !P=VU?;W5T<'5T7W-E=%]A=%]M;V1E;%]T97)M:6YA=&EO;@    "
-    "       '!W;5]O=71P=71?<V5T7W-W:71C:&EN9U]F<F]M7VUO9&5L            <'=M7V]U='!U=%]S971?;VY?=V%T8VAD;V<             "
-    "          !O=&AE<E]O=71P=71?8VAA;FYE;',                              &]T:&5R7V]U='!U=%]I;FET:6%L                  "
-    "              ;W1H97)?;W5T<'5T7V9I;F%L                                  !O=&AE<E]O=71P=71?=V%T8VAD;V<             "
-    "                 &]T:&5R7V]U='!U=%]S971?871?;6]D96Q?<W1A<G0                 ;W1H97)?;W5T<'5T7W-E=%]S=VET8VAI;F=?=&"
-    "]?;6]D96P           !O=&AE<E]O=71P=71?<V5T7V%T7VUO9&5L7W1E<FUI;F%T:6]N         &]T:&5R7V]U='!U=%]S971?<W=I=&-H:6YG"
-    "7V9R;VU?;6]D96P         ;W1H97)?;W5T<'5T7W-E=%]O;E]W871C:&1O9P                     .    ,     8    (    !         "
-    " %    \"     $    !     0         0  $ ,     X    P    !@    @    $          4    (               !         !     "
-    "     #@   #     &    \"     0         !0    @    !     P    $         $  # # Z,0 .    .     8    (    !          %"
-    "    \"     $    %     0         0    !0   %LP(#!=    #@   #@    &    \"     8         !0    @    !     0    $     "
-    "    \"0    @           #P/PX    X    !@    @    &          4    (     0    $    !          D    (               . "
-    "   ,     8    (    !          %    \"     $    #     0         0  , ,#HW  X    P    !@    @    $          4    (  "
-    "   0    (    !         !   @ Q,   #@   #     &    \"     0         !0    @    !     P    $         $  # \"TQ,  .  "
-    "  .     8    (    !@         %    \"     $    !     0         )    \"            / _#@   #@    &    \"     8      "
-    "   !0    @    !     0    $         \"0    @               X    P    !@    @    $          4    (     0    ,    !  "
-    "       !   P P.C< #@   #     &    \"     0         !0    @    !     @    $         $  \" #$P   .    ,     8    (  "
-    "  !          %    \"     $    #     0         0  , +3$P  X    P    !@    @    $          4    (     0    $    !   "
-    "      !   0 P    #@   #     &    \"     0         !0    @    !     0    $         $  ! #     .    ,     8    (    "
-    "!          %    \"     $    !     0         0  $ ,     X    X    !@    @    &          4    (     0    $    !     "
-    "     D    (            \\#\\.    .     8    (    !@         %    \"     $    !     0         )    \"              "
-    " #@   #@    &    \"     8         !0    @    !     0    $         \"0    @           #P/PX    X    !@    @    &   "
-    "       4    (     0    $    !          D    (               .    .     8    (    !@         %    \"     $    !    "
-    " 0         )    \"            / _#@   #@    &    \"     8         !0    @    !     0    $         \"0    @        "
-    "       X    X    !@    @    &          4    (     0    $    !          D    (               .    ,     8    (    !"
-    "          %    \"     $    \"     0         0  ( 6UT   X    P    !@    @    $          4    (     0    (    !     "
-    "    !   @!;70  #@   #     &    \"     0         !0    @    !     0    $         $  ! #$    .    ,     8    (    ! "
-    "         %    \"     $    !     0         0  $ ,0    X    P    !@    @    $          4    (     0    $    !       "
-    "  !   0 P    #@   #@    &    \"     8         !0    @    !     0    $         \"0    @           #P/PX    X    !@ "
-    "   @    &          4    (     0    $    !          D    (               .    .     8    (    !@         %    \"   "
-    "  $    !     0         )    \"            / _#@   #@    &    \"     8         !0    @    !     0    $         \"0 "
-    "   @               X    X    !@    @    &          4    (     0    $    !          D    (               .    ,    "
-    " 8    (    !          %    \"     $    #     0         0  , ,#HW  X    P    !@    @    $          4    (     0    "
-    "$    !         !   0 T    #@   $     &    \"     0         !0    @    !    #     $         $     P    H,2\\Q,C!E+3"
-    "DI+S$     #@   #     &    \"     0         !0    @    !     0    $         $  ! #     .    .     8    (    !@     "
-    "    %    \"     $    !     0         )    \"            / _#@   #@    &    \"     8         !0    @    !     0    "
-    "$         \"0    @               X    X    !@    @    &          4    (     0    $    !          D    (           "
-    " \\#\\.    .     8    (    !@         %    \"     $    !     0         )    \"               #@   #     &    \"   "
-    "  0         !0    @    !     @    $         $  \" %M=   .    ,     8    (    !          %    \"     $    !     0  "
-    "       0  $ ,     X   !     !@    @    $          4    (     0    X    !         !     .    *#$O-C!E+3DI+S$P,C0   "
-    "X    P    !@    @    $          4    (     0    $    !         !   0 P    #@   #     &    \"     0         !0    @"
-    "    !     0    $         $  ! #     .    ,     8    (    !          %    \"     $    !     0         0  $ ,     X "
+    "    &          4    (     0    $    !          D    (        @ #\\GT .    .     8    (    !          %    \"     $"
+    "    %     0         0    !0   $A)3\"TQ    #@   #     &    \"     D\"        !0    @    !     0    $          @ !  "
+    "     .    <#4   8    (     @         %    \"     $    !     0         %  0 #P    $    M    ;VQD7V)O87)D7W1Y<&4 <3@"
+    "                 <30                     #@   #     &    \"     0         !0    @    !     @    $         $  \" '$"
+    "T   .    8!H   8    (     @         %    \"     $    !     0         %  0 +     $     \"P  :61E;G1I9FEE<@         "
+    "                                   !O<'1I;VYS                                                 &-L;V-K<P           "
+    "                                       8VQO8VM?;6]D97,                                           !C;&]C:U]S971?<&%"
+    "R86US7V%T7VUO9&5L7W-T87)T                 &-L;V-K7W-E=%]P87)A;7-?<W=I=&-H:6YG7W1O7VUO9&5L            86YA;&]G7VEN<"
+    "'5T7V-H86YN96QS                              !A;F%L;V=?:6YP=71?;6%X:6UU;7,                              &%N86QO9U]"
+    "I;G!U=%]M:6YI;75M<P                              86YA;&]G7VEN<'5T7W-E=%]P87)A;7-?871?;6]D96Q?<W1A<G0       !A;F%L;"
+    "V=?:6YP=71?<V5T7W!A<F%M<U]S=VET8VAI;F=?=&]?;6]D96P  &%N86QO9U]O=71P=71?8VAA;FYE;',                             86Y"
+    "A;&]G7V]U='!U=%]M87AI;75M<P                            !A;F%L;V=?;W5T<'5T7VUI;FEM=6US                             "
+    "&%N86QO9U]O=71P=71?:6YI=&EA;                               86YA;&]G7V]U='!U=%]F:6YA;                              "
+    "   !A;F%L;V=?;W5T<'5T7W=A=&-H9&]G                             &%N86QO9U]O=71P=71?<V5T7W!A<F%M<U]A=%]M;V1E;%]S=&%R="
+    "       86YA;&]G7V]U='!U=%]S971?<&%R86US7W-W:71C:&EN9U]T;U]M;V1E; !A;F%L;V=?;W5T<'5T7W-E=%]A=%]M;V1E;%]S=&%R=      "
+    "          &%N86QO9U]O=71P=71?<V5T7W-W:71C:&EN9U]T;U]M;V1E;           86YA;&]G7V]U='!U=%]S971?871?;6]D96Q?=&5R;6EN8"
+    "71I;VX       !A;F%L;V=?;W5T<'5T7W-E=%]S=VET8VAI;F=?9G)O;5]M;V1E;        &%N86QO9U]O=71P=71?<V5T7V]N7W=A=&-H9&]G   "
+    "                 9&EG:71A;%]I;G!U=%]C:&%N;F5L<P                            !D:6=I=&%L7V]U='!U=%]C:&%N;F5L<P       "
+    "                    &1I9VET86Q?;W5T<'5T7VEN:71I86P                             9&EG:71A;%]O=71P=71?9FEN86P        "
+    "                       !D:6=I=&%L7V]U='!U=%]W871C:&1O9P                           &1I9VET86Q?;W5T<'5T7W-E=%]A=%]M;"
+    "V1E;%]S=&%R=               9&EG:71A;%]O=71P=71?<V5T7W-W:71C:&EN9U]T;U]M;V1E;         !D:6=I=&%L7V]U='!U=%]S971?871"
+    "?;6]D96Q?=&5R;6EN871I;VX      &1I9VET86Q?;W5T<'5T7W-E=%]S=VET8VAI;F=?9G)O;5]M;V1E;       9&EG:71A;%]O=71P=71?<V5T7"
+    "V]N7W=A=&-H9&]G                  !E;F-O9&5R7VEN<'5T7V-H86YN96QS                             &5N8V]D97)?:6YP=71?<75"
+    "A9')A='5R90                          96YC;V1E<E]I;G!U=%]F<F5Q=65N8WD                           !E;F-O9&5R7VEN<'5T7"
+    "VEN:71I86P                              &5N8V]D97)?:6YP=71?<V5T7W!A<F%M<U]A=%]M;V1E;%]S=&%R=       96YC;V1E<E]I;G!"
+    "U=%]S971?<&%R86US7W-W:71C:&EN9U]T;U]M;V1E; !E;F-O9&5R7VEN<'5T7W-E=%]A=%]M;V1E;%]S=&%R=                &5N8V]D97)?:"
+    "6YP=71?<V5T7W-W:71C:&EN9U]T;U]M;V1E;           <'=M7V]U='!U=%]C:&%N;F5L<P                                !P=VU?;W5"
+    "T<'5T7VUO9&5S                                     '!W;5]O=71P=71?9G)E<75E;F-Y                                <'=M7"
+    "V]U='!U=%]I;FET:6%L                                  !P=VU?;W5T<'5T7V9I;F%L                                     '!"
+    "W;5]O=71P=71?=V%T8VAD;V<                                 <'=M7V]U='!U=%]S971?<&%R86US7V%T7VUO9&5L7W-T87)T         "
+    " !P=VU?;W5T<'5T7W-E=%]P87)A;7-?<W=I=&-H:6YG7W1O7VUO9&5L     '!W;5]O=71P=71?<V5T7V%T7VUO9&5L7W-T87)T               "
+    "     <'=M7V]U='!U=%]S971?<W=I=&-H:6YG7W1O7VUO9&5L              !P=VU?;W5T<'5T7W-E=%]A=%]M;V1E;%]T97)M:6YA=&EO;@   "
+    "        '!W;5]O=71P=71?<V5T7W-W:71C:&EN9U]F<F]M7VUO9&5L            <'=M7V]U='!U=%]S971?;VY?=V%T8VAD;V<            "
+    "           !O=&AE<E]O=71P=71?8VAA;FYE;',                              &]T:&5R7V]U='!U=%]I;FET:6%L                 "
+    "               ;W1H97)?;W5T<'5T7V9I;F%L                                  !O=&AE<E]O=71P=71?=V%T8VAD;V<            "
+    "                  &]T:&5R7V]U='!U=%]S971?871?;6]D96Q?<W1A<G0                 ;W1H97)?;W5T<'5T7W-E=%]S=VET8VAI;F=?="
+    "&]?;6]D96P           !O=&AE<E]O=71P=71?<V5T7V%T7VUO9&5L7W1E<FUI;F%T:6]N         &]T:&5R7V]U='!U=%]S971?<W=I=&-H:6Y"
+    "G7V9R;VU?;6]D96P         ;W1H97)?;W5T<'5T7W-E=%]O;E]W871C:&1O9P                     .    ,     8    (    !        "
+    "  %    \"     $    !     0         0  $ ,     X    P    !@    @    $          4    (               !         !    "
+    "      #@   #     &    \"     0         !0    @    !     P    $         $  # # Z,0 .    .     8    (    !          "
+    "%    \"     $    %     0         0    !0   %LP(#!=    #@   #@    &    \"     8         !0    @    !     0    $    "
+    "     \"0    @           #P/PX    X    !@    @    &          4    (     0    $    !          D    (               ."
+    "    ,     8    (    !          %    \"     $    #     0         0  , ,#HW  X    P    !@    @    $          4    ( "
+    "    0    (    !         !   @ Q,   #@   #     &    \"     0         !0    @    !     P    $         $  # \"TQ,  . "
+    "   .     8    (    !@         %    \"     $    !     0         )    \"            / _#@   #@    &    \"     8     "
+    "    !0    @    !     0    $         \"0    @               X    P    !@    @    $          4    (     0    ,    ! "
+    "        !   P P.C< #@   #     &    \"     0         !0    @    !     @    $         $  \" #$P   .    ,     8    ( "
+    "   !          %    \"     $    #     0         0  , +3$P  X    P    !@    @    $          4    (     0    $    !  "
+    "       !   0 P    #@   #     &    \"     0         !0    @    !     0    $         $  ! #     .    ,     8    (   "
+    " !          %    \"     $    !     0         0  $ ,     X    X    !@    @    &          4    (     0    $    !    "
+    "      D    (            \\#\\.    .     8    (    !@         %    \"     $    !     0         )    \"             "
+    "  #@   #@    &    \"     8         !0    @    !     0    $         \"0    @           #P/PX    X    !@    @    &  "
+    "        4    (     0    $    !          D    (               .    .     8    (    !@         %    \"     $    !   "
+    "  0         )    \"            / _#@   #@    &    \"     8         !0    @    !     0    $         \"0    @       "
+    "        X    X    !@    @    &          4    (     0    $    !          D    (               .    ,     8    (    "
+    "!          %    \"     $    \"     0         0  ( 6UT   X    P    !@    @    $          4    (     0    (    !    "
+    "     !   @!;70  #@   #     &    \"     0         !0    @    !     0    $         $  ! #$    .    ,     8    (    !"
+    "          %    \"     $    !     0         0  $ ,0    X    P    !@    @    $          4    (     0    $    !      "
+    "   !   0 P    #@   #@    &    \"     8         !0    @    !     0    $         \"0    @           #P/PX    X    !@"
+    "    @    &          4    (     0    $    !          D    (               .    .     8    (    !@         %    \"  "
+    "   $    !     0         )    \"            / _#@   #@    &    \"     8         !0    @    !     0    $         \"0"
+    "    @               X    X    !@    @    &          4    (     0    $    !          D    (               .    ,   "
+    "  8    (    !          %    \"     $    #     0         0  , ,#HW  X    P    !@    @    $          4    (     0   "
+    " $    !         !   0 T    #@   $     &    \"     0         !0    @    !    #     $         $     P    H,2\\Q,C!E+"
+    "3DI+S$     #@   #     &    \"     0         !0    @    !     0    $         $  ! #     .    .     8    (    !@    "
+    "     %    \"     $    !     0         )    \"            / _#@   #@    &    \"     8         !0    @    !     0   "
+    " $         \"0    @               X    X    !@    @    &          4    (     0    $    !          D    (          "
+    "  \\#\\.    .     8    (    !@         %    \"     $    !     0         )    \"               #@   #     &    \"  "
+    "   0         !0    @    !     @    $         $  \" %M=   .    ,     8    (    !          %    \"     $    !     0 "
+    "        0  $ ,     X   !     !@    @    $          4    (     0    X    !         !     .    *#$O-C!E+3DI+S$P,C0  "
+    " X    P    !@    @    $          4    (     0    $    !         !   0 P    #@   #     &    \"     0         !0    "
+    "@    !     0    $         $  ! #     .    ,     8    (    !          %    \"     $    !     0         0  $ ,     X"
+    "    X    !@    @    &          4    (     0    $    !          D    (            \\#\\.    .     8    (    !@     "
+    "    %    \"     $    !     0         )    \"               #@   #@    &    \"     8         !0    @    !     0    "
+    "$         \"0    @           #P/PX    X    !@    @    &          4    (     0    $    !          D    (           "
+    "    .    .     8    (    !@         %    \"     $    !     0         )    \"            / _#@   #@    &    \"     "
+    "8         !0    @    !     0    $         \"0    @               X    X    !@    @    &          4    (     0    $"
+    "    !          D    (               .    ,     8    (    !          %    \"     $    \"     0         0  ( 6UT   X"
+    "    P    !@    @    $          4    (     0    (    !         !   @!;70  #@   #     &    \"     0         !0    @ "
+    "   !     @    $         $  \" %M=   .    ,     8    (    !          %    \"     $    !     0         0  $ ,     X "
     "   X    !@    @    &          4    (     0    $    !          D    (            \\#\\.    .     8    (    !@      "
     "   %    \"     $    !     0         )    \"               #@   #@    &    \"     8         !0    @    !     0    $"
     "         \"0    @           #P/PX    X    !@    @    &          4    (     0    $    !          D    (            "
-    "   .    .     8    (    !@         %    \"     $    !     0         )    \"            / _#@   #@    &    \"     8"
-    "         !0    @    !     0    $         \"0    @               X    X    !@    @    &          4    (     0    $ "
-    "   !          D    (               .    ,     8    (    !          %    \"     $    \"     0         0  ( 6UT   X "
-    "   P    !@    @    $          4    (     0    (    !         !   @!;70  #@   #     &    \"     0         !0    @  "
-    "  !     @    $         $  \" %M=   .    ,     8    (    !          %    \"     $    !     0         0  $ ,     X  "
-    "  X    !@    @    &          4    (     0    $    !          D    (            \\#\\.    .     8    (    !@       "
-    "  %    \"     $    !     0         )    \"               #@   #@    &    \"     8         !0    @    !     0    $ "
-    "        \"0    @           #P/PX    X    !@    @    &          4    (     0    $    !          D    (             "
-    "  .    .     8    (    !@         %    \"     $    !     0         )    \"               #@   & :   &    \"     ( "
-    "        !0    @    !     0    $         !0 $ \"P    !      L  &ED96YT:69I97(                                      "
-    "       ;W!T:6]N<P                                                !C;&]C:W,                                        "
-    "          &-L;V-K7VUO9&5S                                            8VQO8VM?<V5T7W!A<F%M<U]A=%]M;V1E;%]S=&%R=    "
-    "             !C;&]C:U]S971?<&%R86US7W-W:71C:&EN9U]T;U]M;V1E;            &%N86QO9U]I;G!U=%]C:&%N;F5L<P             "
-    "                 86YA;&]G7VEN<'5T7VUA>&EM=6US                              !A;F%L;V=?:6YP=71?;6EN:6UU;7,          "
-    "                    &%N86QO9U]I;G!U=%]S971?<&%R86US7V%T7VUO9&5L7W-T87)T        86YA;&]G7VEN<'5T7W-E=%]P87)A;7-?<W="
-    "I=&-H:6YG7W1O7VUO9&5L  !A;F%L;V=?;W5T<'5T7V-H86YN96QS                             &%N86QO9U]O=71P=71?;6%X:6UU;7,  "
-    "                           86YA;&]G7V]U='!U=%]M:6YI;75M<P                            !A;F%L;V=?;W5T<'5T7VEN:71I86P"
-    "                              &%N86QO9U]O=71P=71?9FEN86P                                 86YA;&]G7V]U='!U=%]W871C:"
-    "&1O9P                            !A;F%L;V=?;W5T<'5T7W-E=%]P87)A;7-?871?;6]D96Q?<W1A<G0      &%N86QO9U]O=71P=71?<V5"
-    "T7W!A<F%M<U]S=VET8VAI;F=?=&]?;6]D96P 86YA;&]G7V]U='!U=%]S971?871?;6]D96Q?<W1A<G0               !A;F%L;V=?;W5T<'5T7"
-    "W-E=%]S=VET8VAI;F=?=&]?;6]D96P          &%N86QO9U]O=71P=71?<V5T7V%T7VUO9&5L7W1E<FUI;F%T:6]N        86YA;&]G7V]U='!"
-    "U=%]S971?<W=I=&-H:6YG7V9R;VU?;6]D96P       !A;F%L;V=?;W5T<'5T7W-E=%]O;E]W871C:&1O9P                   &1I9VET86Q?:"
-    "6YP=71?8VAA;FYE;',                             9&EG:71A;%]O=71P=71?8VAA;FYE;',                           !D:6=I=&%"
-    "L7V]U='!U=%]I;FET:6%L                             &1I9VET86Q?;W5T<'5T7V9I;F%L                                9&EG:"
-    "71A;%]O=71P=71?=V%T8VAD;V<                           !D:6=I=&%L7V]U='!U=%]S971?871?;6]D96Q?<W1A<G0              &1"
-    "I9VET86Q?;W5T<'5T7W-E=%]S=VET8VAI;F=?=&]?;6]D96P         9&EG:71A;%]O=71P=71?<V5T7V%T7VUO9&5L7W1E<FUI;F%T:6]N     "
-    " !D:6=I=&%L7V]U='!U=%]S971?<W=I=&-H:6YG7V9R;VU?;6]D96P      &1I9VET86Q?;W5T<'5T7W-E=%]O;E]W871C:&1O9P             "
-    "     96YC;V1E<E]I;G!U=%]C:&%N;F5L<P                            !E;F-O9&5R7VEN<'5T7W%U861R871U<F4                  "
-    "        &5N8V]D97)?:6YP=71?9G)E<75E;F-Y                            96YC;V1E<E]I;G!U=%]I;FET:6%L                   "
-    "           !E;F-O9&5R7VEN<'5T7W-E=%]P87)A;7-?871?;6]D96Q?<W1A<G0      &5N8V]D97)?:6YP=71?<V5T7W!A<F%M<U]S=VET8VAI;"
-    "F=?=&]?;6]D96P 96YC;V1E<E]I;G!U=%]S971?871?;6]D96Q?<W1A<G0               !E;F-O9&5R7VEN<'5T7W-E=%]S=VET8VAI;F=?=&]"
-    "?;6]D96P          '!W;5]O=71P=71?8VAA;FYE;',                                 <'=M7V]U='!U=%]M;V1E<P               "
-    "                     !P=VU?;W5T<'5T7V9R97%U96YC>0                               '!W;5]O=71P=71?:6YI=&EA;          "
-    "                         <'=M7V]U='!U=%]F:6YA;                                     !P=VU?;W5T<'5T7W=A=&-H9&]G     "
-    "                            '!W;5]O=71P=71?<V5T7W!A<F%M<U]A=%]M;V1E;%]S=&%R=           <'=M7V]U='!U=%]S971?<&%R86U"
-    "S7W-W:71C:&EN9U]T;U]M;V1E;     !P=VU?;W5T<'5T7W-E=%]A=%]M;V1E;%]S=&%R=                    '!W;5]O=71P=71?<V5T7W-W:"
-    "71C:&EN9U]T;U]M;V1E;               <'=M7V]U='!U=%]S971?871?;6]D96Q?=&5R;6EN871I;VX           !P=VU?;W5T<'5T7W-E=%]"
-    "S=VET8VAI;F=?9G)O;5]M;V1E;            '!W;5]O=71P=71?<V5T7V]N7W=A=&-H9&]G                        ;W1H97)?;W5T<'5T7"
-    "V-H86YN96QS                              !O=&AE<E]O=71P=71?:6YI=&EA;                                &]T:&5R7V]U='!"
-    "U=%]F:6YA;                                   ;W1H97)?;W5T<'5T7W=A=&-H9&]G                              !O=&AE<E]O="
-    "71P=71?<V5T7V%T7VUO9&5L7W-T87)T                 &]T:&5R7V]U='!U=%]S971?<W=I=&-H:6YG7W1O7VUO9&5L            ;W1H97)"
-    "?;W5T<'5T7W-E=%]A=%]M;V1E;%]T97)M:6YA=&EO;@        !O=&AE<E]O=71P=71?<V5T7W-W:71C:&EN9U]F<F]M7VUO9&5L         &]T:"
-    "&5R7V]U='!U=%]S971?;VY?=V%T8VAD;V<                     #@   #     &    \"     0         !0    @    !     0    $   "
-    "      $  ! #     .    ,     8    (    !          %    \"                0         0          X    P    !@    @    "
-    "$          4    (     0    ,    !         !   P P.C$ #@   #@    &    \"     0         !0    @    !    !0    $     "
-    "    $     4   !;,\" P70    X    X    !@    @    &          4    (     0    $    !          D    (            \\#\\"
+    "   .    .     8    (    !@         %    \"     $    !     0         )    \"               #@   & :   &    \"     ("
+    "         !0    @    !     0    $         !0 $ \"P    !      L  &ED96YT:69I97(                                     "
+    "        ;W!T:6]N<P                                                !C;&]C:W,                                       "
+    "           &-L;V-K7VUO9&5S                                            8VQO8VM?<V5T7W!A<F%M<U]A=%]M;V1E;%]S=&%R=   "
+    "              !C;&]C:U]S971?<&%R86US7W-W:71C:&EN9U]T;U]M;V1E;            &%N86QO9U]I;G!U=%]C:&%N;F5L<P            "
+    "                  86YA;&]G7VEN<'5T7VUA>&EM=6US                              !A;F%L;V=?:6YP=71?;6EN:6UU;7,         "
+    "                     &%N86QO9U]I;G!U=%]S971?<&%R86US7V%T7VUO9&5L7W-T87)T        86YA;&]G7VEN<'5T7W-E=%]P87)A;7-?<W"
+    "=I=&-H:6YG7W1O7VUO9&5L  !A;F%L;V=?;W5T<'5T7V-H86YN96QS                             &%N86QO9U]O=71P=71?;6%X:6UU;7, "
+    "                            86YA;&]G7V]U='!U=%]M:6YI;75M<P                            !A;F%L;V=?;W5T<'5T7VEN:71I86"
+    "P                              &%N86QO9U]O=71P=71?9FEN86P                                 86YA;&]G7V]U='!U=%]W871C"
+    ":&1O9P                            !A;F%L;V=?;W5T<'5T7W-E=%]P87)A;7-?871?;6]D96Q?<W1A<G0      &%N86QO9U]O=71P=71?<V"
+    "5T7W!A<F%M<U]S=VET8VAI;F=?=&]?;6]D96P 86YA;&]G7V]U='!U=%]S971?871?;6]D96Q?<W1A<G0               !A;F%L;V=?;W5T<'5T"
+    "7W-E=%]S=VET8VAI;F=?=&]?;6]D96P          &%N86QO9U]O=71P=71?<V5T7V%T7VUO9&5L7W1E<FUI;F%T:6]N        86YA;&]G7V]U='"
+    "!U=%]S971?<W=I=&-H:6YG7V9R;VU?;6]D96P       !A;F%L;V=?;W5T<'5T7W-E=%]O;E]W871C:&1O9P                   &1I9VET86Q?"
+    ":6YP=71?8VAA;FYE;',                             9&EG:71A;%]O=71P=71?8VAA;FYE;',                           !D:6=I=&"
+    "%L7V]U='!U=%]I;FET:6%L                             &1I9VET86Q?;W5T<'5T7V9I;F%L                                9&EG"
+    ":71A;%]O=71P=71?=V%T8VAD;V<                           !D:6=I=&%L7V]U='!U=%]S971?871?;6]D96Q?<W1A<G0              &"
+    "1I9VET86Q?;W5T<'5T7W-E=%]S=VET8VAI;F=?=&]?;6]D96P         9&EG:71A;%]O=71P=71?<V5T7V%T7VUO9&5L7W1E<FUI;F%T:6]N    "
+    "  !D:6=I=&%L7V]U='!U=%]S971?<W=I=&-H:6YG7V9R;VU?;6]D96P      &1I9VET86Q?;W5T<'5T7W-E=%]O;E]W871C:&1O9P            "
+    "      96YC;V1E<E]I;G!U=%]C:&%N;F5L<P                            !E;F-O9&5R7VEN<'5T7W%U861R871U<F4                 "
+    "         &5N8V]D97)?:6YP=71?9G)E<75E;F-Y                            96YC;V1E<E]I;G!U=%]I;FET:6%L                  "
+    "            !E;F-O9&5R7VEN<'5T7W-E=%]P87)A;7-?871?;6]D96Q?<W1A<G0      &5N8V]D97)?:6YP=71?<V5T7W!A<F%M<U]S=VET8VAI"
+    ";F=?=&]?;6]D96P 96YC;V1E<E]I;G!U=%]S971?871?;6]D96Q?<W1A<G0               !E;F-O9&5R7VEN<'5T7W-E=%]S=VET8VAI;F=?=&"
+    "]?;6]D96P          '!W;5]O=71P=71?8VAA;FYE;',                                 <'=M7V]U='!U=%]M;V1E<P              "
+    "                      !P=VU?;W5T<'5T7V9R97%U96YC>0                               '!W;5]O=71P=71?:6YI=&EA;         "
+    "                          <'=M7V]U='!U=%]F:6YA;                                     !P=VU?;W5T<'5T7W=A=&-H9&]G    "
+    "                             '!W;5]O=71P=71?<V5T7W!A<F%M<U]A=%]M;V1E;%]S=&%R=           <'=M7V]U='!U=%]S971?<&%R86"
+    "US7W-W:71C:&EN9U]T;U]M;V1E;     !P=VU?;W5T<'5T7W-E=%]A=%]M;V1E;%]S=&%R=                    '!W;5]O=71P=71?<V5T7W-W"
+    ":71C:&EN9U]T;U]M;V1E;               <'=M7V]U='!U=%]S971?871?;6]D96Q?=&5R;6EN871I;VX           !P=VU?;W5T<'5T7W-E=%"
+    "]S=VET8VAI;F=?9G)O;5]M;V1E;            '!W;5]O=71P=71?<V5T7V]N7W=A=&-H9&]G                        ;W1H97)?;W5T<'5T"
+    "7V-H86YN96QS                              !O=&AE<E]O=71P=71?:6YI=&EA;                                &]T:&5R7V]U='"
+    "!U=%]F:6YA;                                   ;W1H97)?;W5T<'5T7W=A=&-H9&]G                              !O=&AE<E]O"
+    "=71P=71?<V5T7V%T7VUO9&5L7W-T87)T                 &]T:&5R7V]U='!U=%]S971?<W=I=&-H:6YG7W1O7VUO9&5L            ;W1H97"
+    ")?;W5T<'5T7W-E=%]A=%]M;V1E;%]T97)M:6YA=&EO;@        !O=&AE<E]O=71P=71?<V5T7W-W:71C:&EN9U]F<F]M7VUO9&5L         &]T"
+    ":&5R7V]U='!U=%]S971?;VY?=V%T8VAD;V<                     #@   #     &    \"     0         !0    @    !     0    $  "
+    "       $  ! #     .    ,     8    (    !          %    \"                0         0          X    P    !@    @   "
+    " $          4    (     0    ,    !         !   P P.C$ #@   #@    &    \"     0         !0    @    !    !0    $    "
+    "     $     4   !;,\" P70    X    X    !@    @    &          4    (     0    $    !          D    (            \\#\\"
     ".    .     8    (    !@         %    \"     $    !     0         )    \"               #@   #     &    \"     0   "
     "      !0    @    !     P    $         $  # # Z,P .    ,     8    (    !          %    \"     $    \"     0        "
     " 0  ( ,3    X    P    !@    @    $          4    (     0    ,    !         !   P M,3  #@   #@    &    \"     8    "

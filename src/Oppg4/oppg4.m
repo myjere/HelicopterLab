@@ -28,9 +28,9 @@ n_x = size(A,2);
 n_u = size(B,2);
 
 %%
-duration = 15;
+duration = 12;
 N = floor(duration/dt);
-q1 = 1;
+q1 = .1;
 q2 = 1;
 pitch_lim = 45; % deg
 elev_lim = 20;
@@ -74,13 +74,14 @@ G = blkdiag(kron(eye(N), Q), kron(eye(N), R));
 f = @(X) X'*G*X;
 
 OPT = optimset('Algorithm', 'sqp');
+tic
 [X, FVAL, EXITFLAG] = fmincon(f, zeros(N*8,1), [], [], Aeq, Beq, LB, UB, @constraint);
-
+toc
 
 x = reshape(X(1:N*n_x), [n_x, N]);
-travel = [-xf(1), x(1,:)];
-pitch = [-xf(3), x(3,:)];
-elevation = [-xf(5), x(5,:)];
+travel_opt = [-xf(1), x(1,:)];
+pitch_opt = [-xf(3), x(3,:)];
+elevation_opt = [-xf(5), x(5,:)];
 u = [reshape(X(N*n_x+1:end), [n_u, N]) , zeros(n_u, 2)];
 
 

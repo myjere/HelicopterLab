@@ -5,24 +5,26 @@ load data
 wait = 10;
 
 h = 0.001;
-p_c = data(2,floor(wait/dt):end);
-e_c = data(3,floor(wait/dt):end);
-p = data(4,floor(wait/dt):end);
-travel = data(5,floor(wait/dt):end) - pi;
-elev = data(6,floor(wait/dt):end);
-time = (0:length(p_c)-1)*h;
+travel = data(2,floor(wait/h):end) - data(2,floor(wait/h)) - pi;
+pitch = data(3,floor(wait/h):end);
+elevation = data(4,floor(wait/h):end);
+time = (0:length(travel)-1)*h;
+
+time_opt = (0:length(pitch_opt)-1)*dt;
 
 figure
 hold on
-plot(time, p, 'b');
+plot(time, pitch, 'b');
 plot(time, travel, 'g');
-plot(time, elev, 'k');
-plot(time, p_c, ':b');
-plot(time, e_c, ':k');
+plot(time, elevation, 'k');
+plot(time_opt, pitch_opt, 'O:b');
+plot(time_opt, travel_opt, 'O:g');
+plot(time_opt, elevation_opt, 'O:k');
+
 %plot([0 time(end)],[0 0], ':k');
-xlim([10 16]);
+xlim([0 12]);
 xlabel('Time [s]'); ylabel('Angle [rad]');
-legend('p', '\lambda','e','p_c', 'e_c', 'Location', 'NorthWest');
+%legend('p', '\lambda','e','p_c', 'e_c', 'Location', 'NorthWest');
 hold off
 
 % figure
