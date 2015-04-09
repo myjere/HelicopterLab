@@ -1,5 +1,8 @@
 close all;
 
+%load openLoop
+%load closedLoop
+%load closedConstrained
 load data
 
 wait = 10;
@@ -22,18 +25,21 @@ plot(time_opt, pitch_opt, 'O:b');
 plot(time_opt, travel_opt, 'O:g');
 plot(time_opt, elevation_opt, 'O:k');
 
-%plot([0 time(end)],[0 0], ':k');
 xlim([0 12]);
 xlabel('Time [s]'); ylabel('Angle [rad]');
-%legend('p', '\lambda','e','p_c', 'e_c', 'Location', 'NorthWest');
+legend('p', '\lambda','e','p^*', '\lambda^*', 'e^*', 'Location', 'SouthEast');
 hold off
 
 con = 0.2*exp(-20*(travel + 2*pi/3).^2);
 
 figure
 hold on
-plot(travel, con);
-plot(travel, elevation);
+plot(travel, con, 'r');
+plot(travel, elevation, 'k');
 plot(travel_opt, elevation_opt, 'O:k');
+xlabel('Travel [rad]'); ylabel('Elevation [rad]');
+legend('c', 'e', 'e^*');
+xlim([-pi 0.1]);
+hold off
 
 

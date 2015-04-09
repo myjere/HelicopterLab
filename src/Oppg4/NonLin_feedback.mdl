@@ -25,10 +25,10 @@ Model {
   Creator		  "Administrator"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "chrimath"
+  LastModifiedBy	  "eirikwor"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Apr 08 15:34:00 2015"
-  RTWModifiedTimeStamp	  350407501
+  LastModifiedDate	  "Thu Apr 09 12:43:38 2015"
+  RTWModifiedTimeStamp	  350476811
   ModelVersionFormat	  "1.%<AutoIncrement:106>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
@@ -936,7 +936,7 @@ Model {
   }
   System {
     Name		    "NonLin_feedback"
-    Location		    [320, 299, 1661, 957]
+    Location		    [157, 296, 1499, 954]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -2447,21 +2447,21 @@ MatData {
     Data		    "  %)30     .    & $   8    (     @         %    \"     $    !     0         %  0 #0    $    G    ;VQD7V"
     "YA;64      &ES7V1E;&5T960   !O8FIE8W1?8FQO8VL   X    X    !@    @    $          4    (     0    4    !         !  "
     "   %    2$E,+3$    .    ,     8    (    \"0(        %    \"     $    !     0         \"  $       X    X    !@    @"
-    "    &          4    (     0    $    !          D    (        @ #\\GT "
+    "    &          4    (     0    $    !          D    (         \"R 1$ "
   }
   DataRecord {
     Tag			    DataTag1
     Data		    "  %)30     .    & $   8    (     @         %    \"     $    !     0         %  0 #0    $    G    ;VQD7V"
     "YA;64      &ES7V1E;&5T960   !O8FIE8W1?8FQO8VL   X    X    !@    @    $          4    (     0    4    !         !  "
     "   %    2$E,+3$    .    ,     8    (    \"0(        %    \"     $    !     0         \"  $       X    X    !@    @"
-    "    &          4    (     0    $    !          D    (        @ #\\GT "
+    "    &          4    (     0    $    !          D    (         \"R 1$ "
   }
   DataRecord {
     Tag			    DataTag0
     Data		    "  %)30     .    0#<   8    (     @         %    \"     $    !     0         %  0 $0    $   !F    :7-?=6"
     "YI<75E          !O;&1?8FQO8VL          &]L9%]N86UE            :7-?;6]D96Q?8VQO<VEN9P!S971T:6YG<P           &ES7V1E"
     ";&5T960            .    ,     8    (    \"0(        %    \"     $    !     0         \"  $  0    X    X    !@    @"
-    "    &          4    (     0    $    !          D    (        @ #\\GT .    .     8    (    !          %    \"     $"
+    "    &          4    (     0    $    !          D    (         \"R 1$ .    .     8    (    !          %    \"     $"
     "    %     0         0    !0   $A)3\"TQ    #@   #     &    \"     D\"        !0    @    !     0    $          @ !  "
     "     .    <#4   8    (     @         %    \"     $    !     0         %  0 #P    $    M    ;VQD7V)O87)D7W1Y<&4 <3@"
     "                 <30                     #@   #     &    \"     0         !0    @    !     @    $         $  \" '$"

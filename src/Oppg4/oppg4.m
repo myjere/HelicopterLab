@@ -3,7 +3,7 @@ init02
 
 %% Continuous model
 Ac = [0    1    0    0    0    0;
-      0  -0.05 -0.45 0    0    0;
+      0  -0.03 -0.39 0    0    0;
       0    0    0    1    0    0;
       0    0 -7.13 -3.6   0    0;
       0    0    0    0    0    1;
@@ -32,8 +32,10 @@ duration = 12;
 N = floor(duration/dt);
 q1 = .1;
 q2 = .1;
-pitch_lim = 45; % deg
+pitch_lim = 25; % deg
 elev_lim = 50;
+elev_rate_lim = 0.05;
+travel_rate_lim = 0.4;
 
 %% Equality constraints
 
@@ -43,8 +45,8 @@ Beq = [-A*xf;
        zeros(n_x*(N-1),1)];
    
 %% Bounds
-LB_x = repmat([-Inf -Inf -pitch_lim*pi/180 -Inf -elev_lim*pi/180 -Inf ]', N, 1);
-UB_x = repmat([Inf Inf pitch_lim*pi/180 Inf elev_lim*pi/180 Inf]', N, 1);
+LB_x = repmat([-Inf -travel_rate_lim -pitch_lim*pi/180 -Inf -elev_lim*pi/180 -elev_rate_lim ]', N, 1);
+UB_x = repmat([Inf travel_rate_lim pitch_lim*pi/180 Inf elev_lim*pi/180 elev_rate_lim]', N, 1);
 
 LB_u = repmat([-pitch_lim*pi/180 -elev_lim*pi/180]', N, 1);
 UB_u = repmat([pitch_lim*pi/180 elev_lim*pi/180]', N, 1);
