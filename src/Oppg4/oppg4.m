@@ -3,7 +3,7 @@ init02
 
 %% Continuous model
 Ac = [0    1    0    0    0    0;
-      0  -0.03 -0.39 0    0    0;
+      0  -0.05 -0.45 0    0    0;
       0    0    0    1    0    0;
       0    0 -7.13 -3.6   0    0;
       0    0    0    0    0    1;
@@ -31,9 +31,9 @@ n_u = size(B,2);
 duration = 12;
 N = floor(duration/dt);
 q1 = .1;
-q2 = 1;
+q2 = .1;
 pitch_lim = 45; % deg
-elev_lim = 20;
+elev_lim = 50;
 
 %% Equality constraints
 
@@ -73,7 +73,6 @@ G = blkdiag(kron(eye(N), Q), kron(eye(N), R));
 %% Solving
 f = @(X) X'*G*X;
 
-OPT = optimset('Algorithm', 'sqp');
 tic
 [X, FVAL, EXITFLAG] = fmincon(f, zeros(N*8,1), [], [], Aeq, Beq, LB, UB, @constraint);
 toc

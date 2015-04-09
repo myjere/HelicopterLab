@@ -12,6 +12,7 @@ time = (0:length(travel)-1)*h;
 
 time_opt = (0:length(pitch_opt)-1)*dt;
 
+
 figure
 hold on
 plot(time, pitch, 'b');
@@ -27,8 +28,12 @@ xlabel('Time [s]'); ylabel('Angle [rad]');
 %legend('p', '\lambda','e','p_c', 'e_c', 'Location', 'NorthWest');
 hold off
 
-% figure
-% plot((0:length(heli_input)-wait/h)*dt, heli_input(wait/h:end,2), 'r', time, p_c, ':r');
-% xlim([0 16]);
-% xlabel('Time [s]'); ylabel('Angle [rad]');
-% legend('u^*', 'u', 'Location', 'SouthEast'); 
+con = 0.2*exp(-20*(travel + 2*pi/3).^2);
+
+figure
+hold on
+plot(travel, con);
+plot(travel, elevation);
+plot(travel_opt, elevation_opt, 'O:k');
+
+

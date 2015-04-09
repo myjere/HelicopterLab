@@ -1,5 +1,5 @@
-Q = diag([10,1,3,1, 5, 2]);
-R = diag([5 10]);
+Q = diag([2,1,0,0,2,1]);
+R = diag([1 1]);
 
 x_opt = x + repmat(xf, 1, length(x)); % Shift travel ref by pi
 
@@ -9,3 +9,4 @@ time = (0:length(padded_x_opt) - 1)*dt;
 heli_ref = [time; padded_x_opt]';
 
 K = dlqr(A,B,Q,R);
+K = zeros(2,6);
