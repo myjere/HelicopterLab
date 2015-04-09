@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.95"
+    ComputedModelVersion    "1.96"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -25,11 +25,11 @@ Model {
   Creator		  "Administrator"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "chrimath"
+  LastModifiedBy	  "eirikwor"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Mar 12 17:50:20 2015"
-  RTWModifiedTimeStamp	  348083419
-  ModelVersionFormat	  "1.%<AutoIncrement:95>"
+  LastModifiedDate	  "Thu Apr 09 13:26:44 2015"
+  RTWModifiedTimeStamp	  350486763
+  ModelVersionFormat	  "1.%<AutoIncrement:96>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -943,14 +943,6 @@ Model {
       SampleTime	      "-1"
     }
     Block {
-      BlockType		      ToWorkspace
-      VariableName	      "simulink_output"
-      MaxDataPoints	      "1000"
-      Decimation	      "1"
-      SampleTime	      "0"
-      FixptAsFi		      off
-    }
-    Block {
       BlockType		      TransferFcn
       Numerator		      "[1]"
       Denominator	      "[1 2 1]"
@@ -961,7 +953,7 @@ Model {
   }
   System {
     Name		    "helikopter_openloop"
-    Location		    [401, 335, 1727, 902]
+    Location		    [234, 278, 1560, 845]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -975,26 +967,34 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    108
+    SIDHighWatermark	    109
     Block {
-      BlockType		      Bias
-      Name		      "Bias"
-      SID		      107
-      Position		      [780, 260, 820, 290]
-      Bias		      "-30"
-      SaturateOnIntegerOverflow	off
-    }
-    Block {
-      BlockType		      Bias
-      Name		      "Bias1"
-      SID		      108
-      Position		      [760, 200, 800, 230]
-      Bias		      "-4"
-      SaturateOnIntegerOverflow	off
+      BlockType		      Terminator
+      Name		      " "
+      SID		      54
+      Position		      [195, 170, 215, 190]
     }
     Block {
       BlockType		      Reference
-      Name		      "Degrees to\nRadians"
+      Name		      " \n "
+      SID		      105
+      Ports		      [1, 1]
+      Position		      [870, 80, 900, 110]
+      LibraryVersion	      "1.41"
+      SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
+      SourceType	      "DegreesToRadians"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      " \n  "
       SID		      103
       Ports		      [1, 1]
       Position		      [825, 50, 855, 80]
@@ -1012,10 +1012,10 @@ Model {
     }
     Block {
       BlockType		      Reference
-      Name		      "Degrees to\nRadians1"
-      SID		      105
+      Name		      " \n     "
+      SID		      109
       Ports		      [1, 1]
-      Position		      [870, 80, 900, 110]
+      Position		      [885, 215, 915, 245]
       LibraryVersion	      "1.41"
       SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
       SourceType	      "DegreesToRadians"
@@ -1029,11 +1029,33 @@ Model {
       RTWMemSecDataParameters "Inherit from model"
     }
     Block {
+      BlockType		      Terminator
+      Name		      "  "
+      SID		      55
+      Position		      [245, 180, 265, 200]
+    }
+    Block {
+      BlockType		      Bias
+      Name		      "Bias"
+      SID		      107
+      Position		      [780, 260, 820, 290]
+      Bias		      "-30"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Bias
+      Name		      "Bias1"
+      SID		      108
+      Position		      [760, 200, 800, 230]
+      Bias		      "-4"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
       BlockType		      Demux
       Name		      "Demux"
       SID		      3
       Ports		      [1, 6]
-      Position		      [90, 178, 95, 257]
+      Position		      [160, 178, 165, 257]
       ShowName		      off
       Outputs		      "6"
       DisplayOption	      "bar"
@@ -1222,26 +1244,6 @@ Model {
 	  DstPort		  1
 	}
       }
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "Elevation"
-      SID		      65
-      Ports		      [1]
-      Position		      [1095, 254, 1125, 286]
-      Floating		      off
-      Location		      [92, 664, 416, 903]
-      Open		      off
-      NumInputPorts	      "1"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-      }
-      YMin		      "9.775"
-      YMax		      "10.125"
-      SaveName		      "ScopeData1"
-      DataFormat	      "StructureWithTime"
-      SampleTime	      "0"
     }
     Block {
       BlockType		      FromWorkspace
@@ -1830,26 +1832,6 @@ Model {
       DisplayOption	      "bar"
     }
     Block {
-      BlockType		      Scope
-      Name		      "Pitch"
-      SID		      68
-      Ports		      [1]
-      Position		      [1095, 184, 1125, 216]
-      Floating		      off
-      Location		      [442, 56, 1175, 1031]
-      Open		      off
-      NumInputPorts	      "1"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-      }
-      YMin		      "-0.55"
-      YMax		      "0.1"
-      SaveName		      "ScopeData2"
-      DataFormat	      "StructureWithTime"
-      SampleTime	      "0"
-    }
-    Block {
       BlockType		      SubSystem
       Name		      "Pitch-kontroller"
       SID		      44
@@ -2002,56 +1984,12 @@ Model {
       }
     }
     Block {
-      BlockType		      Terminator
-      Name		      "Terminator"
-      SID		      54
-      Position		      [145, 150, 165, 170]
-    }
-    Block {
-      BlockType		      Terminator
-      Name		      "Terminator1"
-      SID		      55
-      Position		      [215, 150, 235, 170]
-    }
-    Block {
       BlockType		      ToFile
       Name		      "To File"
       SID		      99
       Position		      [1025, 50, 1085, 80]
       Filename		      "data.mat"
       MatrixName	      "data"
-    }
-    Block {
-      BlockType		      ToWorkspace
-      Name		      "To Workspace"
-      SID		      70
-      Ports		      [1]
-      Position		      [1000, 160, 1060, 190]
-      NamePlacement	      "alternate"
-      VariableName	      "travelRateStep20deg"
-      MaxDataPoints	      "inf"
-      SampleTime	      "-1"
-      SaveFormat	      "Structure With Time"
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "Travel"
-      SID		      100
-      Ports		      [1]
-      Position		      [1095, 124, 1125, 156]
-      Floating		      off
-      Location		      [442, 634, 766, 873]
-      Open		      off
-      NumInputPorts	      "1"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-      }
-      YMin		      "29.425"
-      YMax		      "29.725"
-      SaveName		      "ScopeData3"
-      DataFormat	      "StructureWithTime"
-      SampleTime	      "0"
     }
     Block {
       BlockType		      SubSystem
@@ -2206,23 +2144,6 @@ Model {
       OutDataType	      "sfix(16)"
       OutScaling	      "2^0"
     }
-    Block {
-      BlockType		      Gain
-      Name		      "deg2rad"
-      SID		      16
-      Position		      [885, 215, 915, 245]
-      Gain		      "eye(6)*pi/180"
-      Multiplication	      "Matrix(K*u)"
-      ParameterDataTypeMode   "Inherit via internal rule"
-      ParameterDataType	      "sfix(16)"
-      ParameterScaling	      "2^0"
-      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
-      OutDataTypeMode	      "Inherit via internal rule"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^0"
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-      SaturateOnIntegerOverflow	off
-    }
     Line {
       SrcBlock		      "Pitch-kontroller"
       SrcPort		      1
@@ -2240,20 +2161,12 @@ Model {
       SrcPort		      1
       Points		      [35, 0]
       Branch {
-	Points			[35, 0]
-	Branch {
-	  DstBlock		  "Mux"
-	  DstPort		  1
-	}
-	Branch {
-	  Points		  [0, -15]
-	  DstBlock		  "Travel"
-	  DstPort		  1
-	}
+	Points			[0, -60]
+	DstBlock		" \n "
+	DstPort			1
       }
       Branch {
-	Points			[0, -60]
-	DstBlock		"Degrees to\nRadians1"
+	DstBlock		"Mux"
 	DstPort			1
       }
     }
@@ -2272,34 +2185,33 @@ Model {
     Line {
       SrcBlock		      "Mux"
       SrcPort		      1
-      DstBlock		      "deg2rad"
+      DstBlock		      " \n     "
       DstPort		      1
     }
     Line {
       SrcBlock		      "Demux"
       SrcPort		      1
-      Points		      [10, 0; 0, -20]
-      DstBlock		      "Terminator"
+      DstBlock		      " "
       DstPort		      1
     }
     Line {
       SrcBlock		      "Demux"
       SrcPort		      2
-      Points		      [100, 0]
-      DstBlock		      "Terminator1"
+      Points		      [60, 0]
+      DstBlock		      "  "
       DstPort		      1
     }
     Line {
-      SrcBlock		      "deg2rad"
+      SrcBlock		      " \n     "
       SrcPort		      1
-      Points		      [360, 0; 0, -225; -1230, 0; 0, 215]
+      Points		      [180, 0; 0, -225; -975, 0; 0, 215]
       DstBlock		      "Demux"
       DstPort		      1
     }
     Line {
       SrcBlock		      "Demux"
       SrcPort		      3
-      Points		      [230, 0; 0, -20]
+      Points		      [160, 0; 0, -20]
       DstBlock		      "Pitch-kontroller"
       DstPort		      2
     }
@@ -2312,30 +2224,22 @@ Model {
     Line {
       SrcBlock		      "Demux"
       SrcPort		      5
-      Points		      [235, 0]
+      Points		      [165, 0]
       DstBlock		      "Elevasjonskontroller"
       DstPort		      1
     }
     Line {
       SrcBlock		      "Demux"
       SrcPort		      6
-      Points		      [220, 0; 0, 70]
+      Points		      [150, 0; 0, 70]
       DstBlock		      "Elevasjonskontroller"
       DstPort		      2
     }
     Line {
       SrcBlock		      "Heli 3D"
       SrcPort		      2
-      Points		      [40, 0]
-      Branch {
-	DstBlock		"Mux"
-	DstPort			2
-      }
-      Branch {
-	Points			[0, -10]
-	DstBlock		"To Workspace"
-	DstPort			1
-      }
+      DstBlock		      "Mux"
+      DstPort		      2
     }
     Line {
       SrcBlock		      "V_d/V_s --> V_f/V_b"
@@ -2364,9 +2268,9 @@ Model {
     Line {
       SrcBlock		      "From\nWorkspace"
       SrcPort		      1
-      Points		      [15, 0]
+      Points		      [25, 0]
       Branch {
-	Points			[10, 0; 0, -60]
+	Points			[0, -60]
 	DstBlock		"Mux1"
 	DstPort			1
       }
@@ -2383,13 +2287,13 @@ Model {
       DstPort		      1
     }
     Line {
-      SrcBlock		      "Degrees to\nRadians"
+      SrcBlock		      " \n  "
       SrcPort		      1
       DstBlock		      "Mux1"
       DstPort		      2
     }
     Line {
-      SrcBlock		      "Degrees to\nRadians1"
+      SrcBlock		      " \n "
       SrcPort		      1
       DstBlock		      "Mux1"
       DstPort		      3
@@ -2403,36 +2307,20 @@ Model {
     Line {
       SrcBlock		      "Bias"
       SrcPort		      1
-      Points		      [5, 0]
-      Branch {
-	DstBlock		"Mux"
-	DstPort			5
-      }
-      Branch {
-	Points			[0, -5]
-	DstBlock		"Elevation"
-	DstPort			1
-      }
+      DstBlock		      "Mux"
+      DstPort		      5
     }
     Line {
       SrcBlock		      "Bias1"
       SrcPort		      1
       Points		      [5, 0]
       Branch {
-	Points			[10, 0]
-	Branch {
-	  DstBlock		  "Mux"
-	  DstPort		  3
-	}
-	Branch {
-	  Points		  [0, -15]
-	  DstBlock		  "Pitch"
-	  DstPort		  1
-	}
+	DstBlock		" \n  "
+	DstPort			1
       }
       Branch {
-	DstBlock		"Degrees to\nRadians"
-	DstPort			1
+	DstBlock		"Mux"
+	DstPort			3
       }
     }
     Annotation {
@@ -2447,21 +2335,21 @@ MatData {
     Data		    "  %)30     .    & $   8    (     @         %    \"     $    !     0         %  0 #0    $    G    ;VQD7V"
     "YA;64      &ES7V1E;&5T960   !O8FIE8W1?8FQO8VL   X    X    !@    @    $          4    (     0    4    !         !  "
     "   %    2$E,+3$    .    ,     8    (    \"0(        %    \"     $    !     0         \"  $       X    X    !@    @"
-    "    &          4    (     0    $    !          D    (         $@ 0$ "
+    "    &          4    (     0    $    !          D    (         #B 04 "
   }
   DataRecord {
     Tag			    DataTag1
     Data		    "  %)30     .    & $   8    (     @         %    \"     $    !     0         %  0 #0    $    G    ;VQD7V"
     "YA;64      &ES7V1E;&5T960   !O8FIE8W1?8FQO8VL   X    X    !@    @    $          4    (     0    4    !         !  "
     "   %    2$E,+3$    .    ,     8    (    \"0(        %    \"     $    !     0         \"  $       X    X    !@    @"
-    "    &          4    (     0    $    !          D    (         $@ 0$ "
+    "    &          4    (     0    $    !          D    (         #B 04 "
   }
   DataRecord {
     Tag			    DataTag0
     Data		    "  %)30     .    0#<   8    (     @         %    \"     $    !     0         %  0 $0    $   !F    :7-?=6"
     "YI<75E          !O;&1?8FQO8VL          &]L9%]N86UE            :7-?;6]D96Q?8VQO<VEN9P!S971T:6YG<P           &ES7V1E"
     ";&5T960            .    ,     8    (    \"0(        %    \"     $    !     0         \"  $  0    X    X    !@    @"
-    "    &          4    (     0    $    !          D    (         $@ 0$ .    .     8    (    !          %    \"     $ "
+    "    &          4    (     0    $    !          D    (         #B 04 .    .     8    (    !          %    \"     $ "
     "   %     0         0    !0   $A)3\"TQ    #@   #     &    \"     D\"        !0    @    !     0    $          @ !   "
     "    .    <#4   8    (     @         %    \"     $    !     0         %  0 #P    $    M    ;VQD7V)O87)D7W1Y<&4 <3@ "
     "                <30                     #@   #     &    \"     0         !0    @    !     @    $         $  \" '$T"
