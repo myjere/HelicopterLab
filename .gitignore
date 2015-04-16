@@ -6,7 +6,6 @@ actxlicense.m
 *.rt-windows
 
 *.sty
-*.pdf
 *.aux
 *.log
 *.bbl
