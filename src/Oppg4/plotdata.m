@@ -1,8 +1,9 @@
 close all;
 
-%load openLoop
-%load closedLoop
-%load closedConstrained
+%load openLoop25
+%load openLoop45
+%load closedLoop25
+%load closedLoopConstrained25
 load data
 
 wait = 10;

@@ -34,8 +34,8 @@ q1 = .1;
 q2 = .1;
 pitch_lim = 25; % deg
 elev_lim = 50;
-elev_rate_lim = 0.05;
-travel_rate_lim = 0.4;
+elev_rate_lim = Inf;%0.05;
+travel_rate_lim = Inf;%0.5;
 
 %% Equality constraints
 
@@ -92,7 +92,19 @@ padded_input = [zeros(2,floor(padding_time/dt)) , u]';
 time = [(0:length(padded_input) - 1)*dt]';
 heli_input = [time padded_input];
 
+%% Calculate feedback
+Q = diag([4,2,0,0,3,0]);
+R = diag([1 1]);
 
+x_opt = x + repmat(xf, 1, length(x)); % Shift travel ref by pi
+
+padding_time = 10;
+padded_x_opt = [zeros(6,floor(padding_time/dt)) , x_opt];
+time = (0:length(padded_x_opt) - 1)*dt;
+heli_ref = [time; padded_x_opt]';
+
+%K = dlqr(A,B,Q,R); % Closed loop
+K = zeros(2,6);     % Open loop
 
 
 
