@@ -1,14 +1,102 @@
 \section{Optimal Control of Pitch/Travel and Elevation with and without Feedback}\label{sec:prob4}
 
+Refer to system id TF for elevation, and we get the following extended continuous state space model:
+
 \subsection{State space model}
+\begin{equation}
+	\begin{bmatrix}
+		\dot{\lambda}\\
+		\ddot{\lambda}	\\
+		\dot{p}	\\
+		\ddot{p}\\
+		\dot{e}	\\
+		\ddot{e}
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		0 & 1 & 0 & 0 & 0  & 0 \\
+		0 & -0.03 & -0.39 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 1 & 0 & 0 \\
+		0 & 0 & -7.13 & -3.6 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 1 \\
+		0 & 0 & 0 & 1 & -3.03 & -2.44 \\
+	\end{bmatrix}
+	\begin{bmatrix}
+		\lambda	\\
+		\dot{\lambda}\\
+		p		\\
+		\dot{p} \\
+		e		\\
+		\dot{e}
+	\end{bmatrix} +
+	\begin{bmatrix}
+		0 & 0\\
+		0 & 0\\
+		0 & 0\\
+		6.74 & 0\\
+		0 & 0 \\
+		0 & 3.13 \\
+	\end{bmatrix}
+	\begin{bmatrix}
+	p_c \\
+	e_c
+	\end{bmatrix}
+	\label{eq:ex_sys}
+\end{equation}
+
+Discuss decoupling...?
 
 \subsection{Discretization}
+Now let $x = \begin{bmatrix}\lambda&\dot{\lambda}&p&\dot{p}&e&\dot{e}\end{bmatrix}^\top$, $u = \begin{bmatrix}p_c&e_c\end{bmatrix}^\top$, and $A_c$, $B_c$ denote the state transition matrix and ** matrix in \eqref{eq:ex_sys}, respectively. Again, using approximate discretization via Euler we obtain a discrete state space model
+
+\begin{equation}
+	\label{eq:ex_dsys}
+	x_{k+1} = (I + \Delta t A_c) x_k + (\Delta t B_c) u_k. \\
+\end{equation}
 
 \subsection{Optimization problem with nonlinear constraints}
 
-\subsection{Optional: Additonal constraints}
+We wish to calculate an optimal trajectory from $x_0 = \begin{bmatrix}\lambda_0&0&0&0&0&0\end{bmatrix}^\top$ to $x_f = \begin{bmatrix}\lambda_f&0&0&0&0&0\end{bmatrix}^\top$ minimizing the objective function 
+\begin{equation*}
+	\phi = \sum_{i=1}^{N}(\lambda_i - \lambda_f)^2 + q_1 p^2_{c_i} + q_2 e^2_{c_i}, \quad q_1,q_2 \ge 0,
+\end{equation*}
 
+or alternatively
+\begin{equation}
+	\label{eq:quad_cost}
+	\phi = \sum_{i=0}^{N-1} (x_{i+1}-x_f)^\top Q(x_{i+1}-x_f) + u_i^\top R u_i,
+\end{equation}
+where
+
+\begin{equation}
+Q = \begin{bmatrix}1&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\end{bmatrix}, \ R = \begin{bmatrix}q_1&0\\0&q_2\end{bmatrix}.
+\end{equation}
+
+The objective function \eqref{eq:quad_cost} is subject to the system dynamics \eqref{eq:ex_dsys} and we impose linear equality constraints similarly to \eqref{eq:eq_constraints}. Additionally we impose a non-linear inequality constraint on the elevation for every time step:
+
+\begin{equation}
+	\label{eq:cons}
+	e_k \ge \alpha \exp{\left(-\beta\left(\lambda_k - \lambda_t\right)^2\right)}, \quad k = \{1, \dots , N\},
+\end{equation}
+
+where we let $\alpha = 0.2$, $\beta = 20$. Because of the non-linearity of \eqref{eq:cons} we can no longer use a QP-solver, and the following optimization problem in terms of the optimization variable $z = \begin{bmatrix} x_1 & \dots & x_N & u_0 & \dots & u_{N-1} \end{bmatrix}$ is solved using MATLAB's \texttt{fmincon}
+
+\begin{align*}
+	\min_z \quad &z^T G z \\
+	\textrm{s.t}\quad &A_{eq} z = B_{eq}, \\
+				  &\alpha \exp{\left(-\beta\left(\lambda_k - \lambda_t\right)^2\right)} - e_k \le 0,\\
+				  &|p_k| \le \frac{25 \pi}{180}.
+\end{align*}
+
+The optimal input sequence $u^* = [u_0 \dots u_{N-1}]$ is applied to the plant in an open loop with results show in fig. X. Explain 25 vs. 45 discrepency. We further employ an LQ-controller similarly to \ref{text:LQR} to guide the trajectory to the set-point and elminiate steady state deviations.
+
+\subsection{Optional: Additonal constraints}
+For some clever reason or another we impose additional lower and upper bounds on the elevation rate and travel rate with favourable results...
+
+\begin{align*}
+	|\dot{e_k}| &\le 0.05, \\
+	|\dot{\lambda_k}| &\le 0.5.
+\end{align*}
 \subsection{Results and discussion}
-Each of the four problems should have their own discussion of results. 
+
 
 

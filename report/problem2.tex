@@ -102,7 +102,7 @@ Discuss: 2 pole vs 3 pole, include transfer functions...Not exactly sure exactly
 Discuss differences with textbook model
 
 \subsection{Discretization}
-Let $x = \begin{bmatrix}\lambda&r&p&\dot{p}\end{bmatrix}^T$, and $A_c$, $B_c$ denote the state transition matrix and the **(Whatever B is called)** from \eqref{eq:sys} respectively. Then, discretizing \eqref{eq:sys} using forward Euler with a time step $\Delta t$ we get the discrete time state space model
+Let $x = \begin{bmatrix}\lambda&r&p&\dot{p}\end{bmatrix}^T$, $u = p_c$, and $A_c$, $B_c$ denote the state transition matrix and the **(Whatever B is called)** from \eqref{eq:sys} respectively. Then, discretizing \eqref{eq:sys} using forward Euler with a time step $\Delta t$ we get the discrete time state space model
 
 \begin{subequations}
 \label{eq:dmodel}
@@ -114,7 +114,7 @@ Let $x = \begin{bmatrix}\lambda&r&p&\dot{p}\end{bmatrix}^T$, and $A_c$, $B_c$ de
 \end{align}
 \end{subequations}
 
-where $x_k = x(k\Delta t)$ and $u_k = p_c(k\Delta t)$.
+where $x_k = x(k\Delta t)$ and $u_k = u(k\Delta t)$.
 
 \subsection{Optimal trajectory}
 
