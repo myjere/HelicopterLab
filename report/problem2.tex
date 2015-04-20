@@ -1,18 +1,11 @@
 \section{Optimal Control of Pitch/Travel without Feedback}\label{sec:prob2}
 
-\begin{figure}[hp]
-	\centering
-		\includegraphics[width=1.00\textwidth]{figures/layers_openloop.pdf}
-	\caption{A figure created with Ipe.}
-	\label{fig:layers_openloop}
-\end{figure}
-
 \subsection{State space model}
 From the model equations in \eqref{eq:model} we get the continuous state space equation
 \begin{equation*}
 	\begin{bmatrix}
 		\dot{\lambda}\\
-		\dot{r}\\
+		\ddot{\lambda}\\
 		\dot{p}\\
 		\ddot{p}
 	\end{bmatrix} = 
@@ -24,7 +17,7 @@ From the model equations in \eqref{eq:model} we get the continuous state space e
 	\end{bmatrix}
 	\begin{bmatrix}
 		\lambda	\\
-		r		\\
+		\dot{\lambda}		\\
 		p		\\
 		\dot{p}
 	\end{bmatrix} +
@@ -41,7 +34,7 @@ or, alternatively
 \begin{equation*}
 	\begin{bmatrix}
 		\dot{\lambda}\\
-		\dot{r}\\
+		\ddot{\lambda}\\
 		\dot{p}\\
 		\ddot{p}
 	\end{bmatrix} = 
@@ -53,7 +46,7 @@ or, alternatively
 	\end{bmatrix}
 	\begin{bmatrix}
 		\lambda	\\
-		r		\\
+		\dot{\lambda}		\\
 		p		\\
 		\dot{p}
 	\end{bmatrix} +
@@ -73,7 +66,7 @@ Discuss: 2 pole vs 3 pole, include transfer functions...Not exactly sure exactly
 \begin{equation}
 	\begin{bmatrix}
 		\dot{\lambda}\\
-		\dot{r}\\
+		\ddot{\lambda}\\
 		\dot{p}\\
 		\ddot{p}
 	\end{bmatrix} = 
@@ -85,7 +78,7 @@ Discuss: 2 pole vs 3 pole, include transfer functions...Not exactly sure exactly
 	\end{bmatrix}
 	\begin{bmatrix}
 		\lambda	\\
-		r		\\
+		\dot{\lambda}		\\
 		p		\\
 		\dot{p}
 	\end{bmatrix} +
@@ -102,7 +95,7 @@ Discuss: 2 pole vs 3 pole, include transfer functions...Not exactly sure exactly
 Discuss differences with textbook model
 
 \subsection{Discretization}
-Let $x = \begin{bmatrix}\lambda&r&p&\dot{p}\end{bmatrix}^T$, $u = p_c$, and $A_c$, $B_c$ denote the state transition matrix and the **(Whatever B is called)** from \eqref{eq:sys} respectively. Then, discretizing \eqref{eq:sys} using forward Euler with a time step $\Delta t$ we get the discrete time state space model
+Let $x = \begin{bmatrix}\lambda&\dot{\lambda}&p&\dot{p}\end{bmatrix}^\top$, $u = p_c$, and $A_c$, $B_c$ denote the state transition matrix and the **(Whatever B is called)** from \eqref{eq:sys} respectively. Then, discretizing \eqref{eq:sys} using forward Euler with a time step $\Delta t$ we get the discrete time state space model
 
 \begin{subequations}
 \label{eq:dmodel}
@@ -118,23 +111,26 @@ where $x_k = x(k\Delta t)$ and $u_k = u(k\Delta t)$.
 
 \subsection{Optimal trajectory}
 
-We calculate the trajectory from $x_0 = \begin{bmatrix}\lambda_0&0&0&0\end{bmatrix}^T$ to $x_f = \begin{bmatrix}\lambda_f&0&0&0\end{bmatrix}^T$ minimizing the objective function 
-\begin{equation*}
+We calculate the trajectory from $x_0 = \begin{bmatrix}\lambda_0&0&0&0\end{bmatrix}^\top$ to $x_f = \begin{bmatrix}\lambda_f&0&0&0\end{bmatrix}^\top$ minimizing the objective function 
+\begin{equation}
+\label{eq:QC_p}
 	\phi = \sum_{i=1}^{N}(\lambda_i - \lambda_f)^2 + qp^2_{c_i}, \quad q \ge 0,
-\end{equation*}
-subject to \eqref{eq:dmodel}, where $\lambda_0 = 0$, $\lambda_f = \pi$. (Copied prev eq from assignment, but are the indexes correct?) Or, alternatively
+\end{equation}
+for a chosen $q$ penalizing input expendature in favour of minimizing deviations in the travel trajectory, and vice verca for $q < 1$. (Copied prev eq from assignment, but are the indexes correct?) Equivalently we can define \eqref{eq:QC_p} in terms of the full state and input variables.
 
 \begin{equation}
-	\label{eq:QP}
-	\phi = \sum_{i=0}^{N-1} \frac{1}{2}(x_{i+1}-x_f)^TQ(x_{i+1}-x_f) + \frac{1}{2}u_i^TRu_i,
+	\label{eq:QC_p_QR}
+	\phi = \frac{1}{2}\sum_{i=0}^{N-1} (x_{i+1}-x_f)^\top Q (x_{i+1}-x_f) + u_i^\top R u_i,
 \end{equation}
+
 where
-
-\begin{equation}
+\begin{equation*}
 Q = \begin{bmatrix}2&0&0&0\\0&0&0&0\\0&0&0&0\\0&0&0&0\end{bmatrix}, \ R = 2q.
-\end{equation}
+\end{equation*}
 
-The system dynamics \eqref{eq:dmodel} subjects \eqref{eq:QP} to the linear equality constraints
+We need to choose different symbols than Q,R, but I don't know which...
+
+The system dynamics \eqref{eq:dmodel} subjects \eqref{eq:QC_p_QR} to the linear equality constraints
 
 \begin{equation}
 	\label{eq:eq_constraints}
@@ -151,7 +147,7 @@ The system dynamics \eqref{eq:dmodel} subjects \eqref{eq:QP} to the linear equal
 \end{bmatrix}.
 \end{equation}
 
-Let 
+If we let $z = \begin{bmatrix} x_1 & \dots & x_N & u_0 & \dots & u_{N-1} \end{bmatrix}^\top$ and define
 \begin{equation*}
 	G =
 	\begin{bmatrix}
@@ -161,21 +157,21 @@ Let
 		&&&R&&		\\
 		&&&&\ddots&	\\
 		&&&&&R		\\
-	\end{bmatrix}.
+	\end{bmatrix},
 \end{equation*}
 
- We are then able to state the QP problem in terms of the optimization variable $z = \begin{bmatrix} x_1 & \dots & x_N & u_0 & \dots & u_{N-1} \end{bmatrix}$:
+we can then state the QP-problem in terms of the optimization variable $z$:
 \begin{equation*}
-	\min_z \ \frac{1}{2} z^T G z, \quad \textrm{s.t}\ A_{eq} z = B_{eq},
+	\min_z \ \frac{1}{2} z^\top G z, \quad \textrm{s.t}\ A_{eq} z = B_{eq},
 \end{equation*}
 
-with $A_{eq}$, $B_{eq}$ given by \eqref{eq:eq_constraints}. In addition to the equality constraints, we impose lower and upper bounds on the input and pitch variables
+with $A_{eq}$, $B_{eq}$ given by \eqref{eq:eq_constraints}. In addition to the equality constraints, we impose lower and upper bounds on the pitch state and controller set-point:
 
 \begin{equation*}
-	|u_{k-1}|, |p_k| \le \frac{30 \pi}{180}, \quad k \in \{1, \dots, N\},
+	|p_k| \le \frac{30 \pi}{180}, \quad k \in \{1, \dots, N\},
 \end{equation*}
 
-and solve the resulting system using MATLAB's \texttt{quadprog}.
+and solve the resulting system using MATLAB's \texttt{quadprog}. The optimal input sequence $u^*$ is applied to the plant in an open loop with results show in figure \ref{fig:opt_openloop}, with the measured trajectory compared to the calculated optimal trajectory $x^*$.
 
 \subsection{Results and discussion}
 
@@ -183,7 +179,7 @@ and solve the resulting system using MATLAB's \texttt{quadprog}.
 	\centering
 		\includegraphics[width=1.00\textwidth]{figures/2/opt_vs_meas_traj.eps}
 	\caption{Optimal vs. measured trajectory and input sequence.}
-	\label{fig:opt_traj}
+	\label{fig:opt_openloop}
 \end{figure}
 
 Opt. input vs measured input discrepency due to interpolation stuff...?

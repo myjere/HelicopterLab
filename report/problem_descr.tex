@@ -1,6 +1,6 @@
 \section{Problem Description}\label{sec:prob_descr}
 
-\begin{table}[tbp]
+\begin{table}[p]
 	\centering
 	\caption{Parameters and values.}
 	\begin{tabular}{llll}
@@ -22,7 +22,7 @@
 	\label{tab:parameters}
 \end{table}
 
-\begin{table}[tbp]
+\begin{table}[p]
 	\centering
 	\caption{Variables}
 	\begin{tabular}{ll}
@@ -32,8 +32,7 @@
 		$p$ & Pitch \\
 		$p_c$ & Pitch setpoint \\
 		$\lambda$ & Travel \\
-		$r$ & Travel rate \\
-		$r_c$ & Travel rate setpoint \\
+		$\lambda_c$ & Travel rate setpoint \\
 		$e$ & Elevation \\
 		$e_c$ & Elevation setpoint \\
 		$V_f$ & Voltage input, front motor \\
@@ -56,7 +55,7 @@ Discussing the model: From first principles analysis we can derive simple differ
 	\begin{align}
 		\ddot{p} &= K_1 V_d\\
 		\ddot{e} &= K_3 V_s - \frac{T_g}{J_e}\\
-		\dot{r} &= -K_2 p
+		\ddot{\lambda} &= -K_2 p
 	\end{align}
 \end{subequations}
 \begin{equation*}
@@ -87,7 +86,7 @@ yields the model equations
 \begin{align}
 	\ddot{e} + K_{3} K_{ed} \dot{e} + K_{3} K_{ep} e &= K_{3} K_{ep} e_{c} \label{eq:model_se_al_elev} \\
 	\ddot{p} + K_{1} K_{pd} \dot{p} + K_{1} K_{pp} p &= K_{1} K_{pp} p_{c} \label{eq:model_se_al_pitch} \\
-	\dot{r} &= -K_{2} p \label{eq:model_se_al_r} 
+	\ddot{\lambda} &= -K_{2} p \label{eq:model_se_al_r} 
 \end{align}
 \end{subequations}
 where it is assumed the elevation integral term counteracts the constant disturbance $-\frac{T_g}{J_e}$ and cancel out.

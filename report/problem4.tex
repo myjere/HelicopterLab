@@ -71,7 +71,7 @@ where
 Q = \begin{bmatrix}1&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\end{bmatrix}, \ R = \begin{bmatrix}q_1&0\\0&q_2\end{bmatrix}.
 \end{equation}
 
-The objective function \eqref{eq:quad_cost} is subject to the system dynamics \eqref{eq:ex_dsys} and we impose linear equality constraints similarly to \eqref{eq:eq_constraints}. Additionally we impose a non-linear inequality constraint on the elevation for every time step:
+The objective function \eqref{eq:quad_cost} is subject to the system dynamics \eqref{eq:ex_dsys} and we impose linear equality constraints similarily to \eqref{eq:eq_constraints}. Additionally we impose a non-linear inequality constraint on the elevation for every time step:
 
 \begin{equation}
 	\label{eq:cons}
@@ -87,7 +87,7 @@ where we let $\alpha = 0.2$, $\beta = 20$. Because of the non-linearity of \eqre
 				  &|p_k| \le \frac{25 \pi}{180}.
 \end{align*}
 
-The optimal input sequence $u^* = [u_0 \dots u_{N-1}]$ is applied to the plant in an open loop with results show in fig. X. Explain 25 vs. 45 discrepency. We further employ an LQ-controller similarly to \ref{text:LQR} to guide the trajectory to the set-point and elminiate steady state deviations.
+The optimal input sequence $u^*$ is applied to the plant in an open loop with results show in fig. X. Explain 25 vs. 45 discrepency. We further employ an LQ-controller similarily to \ref{text:LQR} to guide the trajectory to the set-point and elminiate steady state deviations.
 
 \subsection{Optional: Additonal constraints}
 For some clever reason or another we impose additional lower and upper bounds on the elevation rate and travel rate with favourable results...

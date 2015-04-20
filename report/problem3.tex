@@ -1,8 +1,9 @@
 \section{Optimal Control of Pitch/Travel with Feedback (LQ)}\label{sec:prob3}
 
 \subsection{Discrete LQR}
+\label{text:LQR}
 
-To eliminate the discrepency between the optimal and measured trajectory observed in figure \ref{fig:opt_traj}, we can update the optimal trajectory for every time step with a state feedback term weighted by a suitable gain matrix:
+To eliminate the discrepency between the optimal and measured trajectory observed in figure \ref{fig:opt_openloop}, we can update the optimal trajectory for every time step with a state feedback term weighted by a suitable gain matrix:
 \begin{equation*}
 u_k = u_k^* - K^\top(x_k - x_k^*),
 \end{equation*}
@@ -19,7 +20,7 @@ where
 \Delta u_k &= u_k - u_k^*.
 \end{align*}
 
-It can be shown (some clever reference here...) that the controller \eqref{eq:LQ_ctrl} is the optimal solution which minimizes the quadratic objective function
+It can be shown (some clever reference here...) that the controller \eqref{eq:LQ_ctrl} is the optimal solution minimizing the quadratic objective function
 
 \begin{equation*}
 	J = \sum_{i=0}^{\infty} \Delta x_{i+1}^\top Q \Delta x_{i+1} + \Delta u_i^\top R \Delta u_i,
@@ -31,7 +32,7 @@ subject to the system dynamics \eqref{eq:dmodel}, where
 	K = (R + B^\top P B)^{-1} B^\top P A,
 \end{equation}
 
-and $P$ is the unique positive definite solution to the discrete time algebraic Riccati equation. \eqref{eq:LQ_gain} is used as the state feedback gain, and the resulting Linear Quadratic controller is implemented, with weigthing matrices $Q$ and $R$ chosen to penalize deviations in states and input for a satisfactory results.
+and $P$ is the unique positive definite solution to the discrete time algebraic Riccati equation.\eqref{eq:LQ_gain} is used as the state feedback gain, and the resulting Linear Quadratic controller is implemented, with weigthing matrices $Q$ and $R$ chosen to penalize deviations in states and input for a satisfactory results.
 
 Maybe discuss (L)QR (pun intended), tuning...
 
