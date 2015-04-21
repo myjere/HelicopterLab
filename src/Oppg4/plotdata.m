@@ -4,7 +4,7 @@ close all;
 %load openLoop45
 %load closedLoop25
 %load closedLoopConstrained25
-load data
+%load data
 
 wait = 10;
 

@@ -34,8 +34,8 @@ q1 = .1;
 q2 = .1;
 pitch_lim = 25; % deg
 elev_lim = 50;
-elev_rate_lim = Inf;%0.05;
-travel_rate_lim = Inf;%0.5;
+elev_rate_lim = 0.05; % Inf
+travel_rate_lim = 0.5; % Inf 
 
 %% Equality constraints
 
