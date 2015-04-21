@@ -70,24 +70,26 @@ Discuss: 2 pole vs 3 pole, include transfer functions...Not exactly sure exactly
 		\dot{p}\\
 		\ddot{p}
 	\end{bmatrix} = 
+	\underbrace{
 	\begin{bmatrix}
 		0 & 1 & 0 & 0 \\
 		0 & -0.03 & -0.39 & 0 \\
 		0 & 0 & 0 & 1 \\
 		0 & 0 & -7.13 & -3.6
-	\end{bmatrix}
+	\end{bmatrix}}_{A_c}
 	\begin{bmatrix}
 		\lambda	\\
 		\dot{\lambda}		\\
 		p		\\
 		\dot{p}
 	\end{bmatrix} +
+	\underbrace{
 	\begin{bmatrix}
 		0 \\
 		0 \\
 		0 \\
 		6.74 \\
-	\end{bmatrix}
+	\end{bmatrix}}_{B_c}
 	p_c
 	\label{eq:sys}
 \end{equation}
@@ -134,20 +136,22 @@ The system dynamics \eqref{eq:dmodel} subjects \eqref{eq:QC_p_QR} to the linear 
 
 \begin{equation}
 	\label{eq:eq_constraints}
+	\underbrace{
 	\left[\begin{array}{cccc | ccccc}
 	I	&&&&			-B	&&&			\\
 	-A	&\ddots&&&			&\ddots&&	\\
 		&\ddots&\ddots&&	&&\ddots&	\\
 		&& -A & I&			&&& -B		\\
-	\end{array}\right]
+	\end{array}\right]}_{A_eq}
 \begin{bmatrix} x_1 \\ \vdots \\ x_N \\ u_0 \\ \vdots \\ u_{N-1} \end{bmatrix}
 =
+\underbrace{
 \begin{bmatrix}
 -A x_f \\ 0 \\ \vdots \\ 0      
-\end{bmatrix}.
+\end{bmatrix}}_{B_eq}.
 \end{equation}
 
-If we let $z = \begin{bmatrix} x_1 & \dots & x_N & u_0 & \dots & u_{N-1} \end{bmatrix}^\top$ and define
+We let $z = \begin{bmatrix} x_1 & \dots & x_N & u_0 & \dots & u_{N-1} \end{bmatrix}^\top$ and define
 \begin{equation*}
 	G =
 	\begin{bmatrix}
@@ -157,21 +161,23 @@ If we let $z = \begin{bmatrix} x_1 & \dots & x_N & u_0 & \dots & u_{N-1} \end{bm
 		&&&R&&		\\
 		&&&&\ddots&	\\
 		&&&&&R		\\
-	\end{bmatrix},
+	\end{bmatrix}.
 \end{equation*}
 
-we can then state the QP-problem in terms of the optimization variable $z$:
-\begin{equation*}
-	\min_z \ \frac{1}{2} z^\top G z, \quad \textrm{s.t}\ A_{eq} z = B_{eq},
-\end{equation*}
+We impose lower bounds $p^{\textrm{low}} = -\frac{30\pi}{180}$ and upper bounds $p^{\textrm{high}} = \frac{30\pi}{180}$ on the pitch state and set-point, and state the resulting QP-problem in terms of the optimization variable $z$:
+\begin{subequations}
+\label{eq:QP_travel}
+\begin{equation}
+	\min_z \quad \frac{1}{2} z^\top G z
+\end{equation}
+	subject to
+\begin{align}
+	A_{eq} z &= B_{eq}, \\
+	p^{\textrm{low}} &\le p_k \le p^{\textrm{high}}, \quad k \in \{1, \dots, N\}.
+\end{align}
+\end{subequations}
 
-with $A_{eq}$, $B_{eq}$ given by \eqref{eq:eq_constraints}. In addition to the equality constraints, we impose lower and upper bounds on the pitch state and controller set-point:
-
-\begin{equation*}
-	|p_k| \le \frac{30 \pi}{180}, \quad k \in \{1, \dots, N\},
-\end{equation*}
-
-and solve the resulting system using MATLAB's \texttt{quadprog}. The optimal input sequence $u^*$ is applied to the plant in an open loop with results show in figure \ref{fig:opt_openloop}, with the measured trajectory compared to the calculated optimal trajectory $x^*$.
+\eqref{eq:QP_travel} is solved using MATLAB's \texttt{quadprog}. The optimal input sequence $u^*$ is applied to the plant in an open loop with results show in figure \ref{fig:opt_openloop}, with the measured trajectory compared to the calculated optimal trajectory $x^*$.
 
 \subsection{Results and discussion}
 

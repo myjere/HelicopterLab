@@ -53,13 +53,12 @@ Discussing the model: From first principles analysis we can derive simple differ
 \begin{subequations}
 	\label{eq:dynamics}
 	\begin{align}
-		\ddot{p} &= K_1 V_d\\
-		\ddot{e} &= K_3 V_s - \frac{T_g}{J_e}\\
-		\ddot{\lambda} &= -K_2 p
+		\ddot{p} &= K_1 V_d, &K_1 = \frac{K_f l_h}{J_p},\\
+		\ddot{\lambda} &= -K_2 p, &K_3 = \frac{K_f l_a}{J_e}\\
+		\ddot{e} &= K_3 V_s - \frac{T_g}{J_e}, &K_2 = \frac{K_p l_a}{J_t}
 	\end{align}
 \end{subequations}
 \begin{equation*}
-K_1 = \frac{K_f l_h}{J_p}, \quad K_3 = \frac{K_f l_a}{J_e}, \quad K_2 = \frac{K_p l_a}{J_t}
 \end{equation*}
 
 Note simplifications and limitations:
@@ -67,8 +66,6 @@ Note simplifications and limitations:
 	\item{Travel rate proportional to pitch, otherwize decoupled}
 	\item{Pitch has no counteracting 'spring' force}
 \end{itemize}
-
-\paragraph{}
 
 To stabilize the plant, adding the pitch PD controller
 \begin{equation*}
@@ -91,6 +88,5 @@ yields the model equations
 \end{subequations}
 where it is assumed the elevation integral term counteracts the constant disturbance $-\frac{T_g}{J_e}$ and cancel out.
 
-\paragraph{}
 However, in order to achieve a more accurate model we can utilize statistical procedures to best identify the parameters of the first and second order systems, i.e: see problem2...
 

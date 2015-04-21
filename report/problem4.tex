@@ -80,12 +80,17 @@ The objective function \eqref{eq:quad_cost} is subject to the system dynamics \e
 
 where we let $\alpha = 0.2$, $\beta = 20$. Because of the non-linearity of \eqref{eq:cons} we can no longer use a QP-solver, and the following optimization problem in terms of the optimization variable $z = \begin{bmatrix} x_1 & \dots & x_N & u_0 & \dots & u_{N-1} \end{bmatrix}$ is solved using MATLAB's \texttt{fmincon}
 
-\begin{align*}
-	\min_z \quad &z^T G z \\
-	\textrm{s.t}\quad &A_{eq} z = B_{eq}, \\
-				  &\alpha \exp{\left(-\beta\left(\lambda_k - \lambda_t\right)^2\right)} - e_k \le 0,\\
-				  &|p_k| \le \frac{25 \pi}{180}.
-\end{align*}
+\begin{subequations}
+	\begin{equation}
+		\min_z \quad z^T G z \\
+	\end{equation}
+	subject to
+\begin{align}
+	A_{eq} z &= B_{eq}, \\
+	\alpha \exp{\left(-\beta\left(\lambda_k - \lambda_t\right)^2\right)} - e_k &\le 0,\\
+	-\frac{25 \pi}{180} \le p_k &\le \frac{25 \pi}{180}
+\end{align}
+\end{subequations}
 
 The optimal input sequence $u^*$ is applied to the plant in an open loop with results show in fig. X. Explain 25 vs. 45 discrepency. We further employ an LQ-controller similarily to \ref{text:LQR} to guide the trajectory to the set-point and elminiate steady state deviations.
 
