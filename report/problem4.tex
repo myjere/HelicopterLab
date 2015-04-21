@@ -3,6 +3,7 @@
 Refer to system id TF for elevation, and we get the following extended continuous state space model:
 
 \subsection{State space model}
+We wish to calculate an optimal trajectory in two dimension, adding a constraint to the elevation. Adding $e$ and $\dot{e}$ to the previous state space model \eqref{eq:sys}, we get
 \begin{equation}
 	\begin{bmatrix}
 		\dot{\lambda}\\
@@ -49,12 +50,11 @@ Discuss decoupling...?
 
 \subsection{Discretization}
 Now let $x = \begin{bmatrix}\lambda&\dot{\lambda}&p&\dot{p}&e&\dot{e}\end{bmatrix}^\top$, $u = \begin{bmatrix}p_c&e_c\end{bmatrix}^\top$. Again, using approximate discretization via Euler we obtain a discrete state space model
-
 \begin{subequations}
 \begin{align}
 	\label{eq:ex_dsys}
 	x_{k+1} &= (I + \Delta t A_c) x_k + (\Delta t B_c) u_k. \\
-	&= Ax_k + bu_k,
+	&= Ax_k + Bu_k,
 \end{align}
 \end{subequations}
 
@@ -82,7 +82,7 @@ where
 
 \subsection{Optimization problem with nonlinear constraints}
 
-We wish to calculate an optimal trajectory from $x_0 = \begin{bmatrix}\lambda_0&0&0&0&0&0\end{bmatrix}^\top$ to $x_f = \begin{bmatrix}\lambda_f&0&0&0&0&0\end{bmatrix}^\top$ minimizing the objective function 
+We calculate an optimal trajectory from $x_0 = \begin{bmatrix}\lambda_0&0&0&0&0&0\end{bmatrix}^\top$ to $x_f = \begin{bmatrix}\lambda_f&0&0&0&0&0\end{bmatrix}^\top$ minimizing the objective function 
 \begin{equation*}
 	\phi = \sum_{i=1}^{N}(\lambda_i - \lambda_f)^2 + r_1 p^2_{c_i} + r_2 e^2_{c_i}, \quad r_1,r_2 \ge 0,
 \end{equation*}
@@ -102,7 +102,7 @@ Q = \begin{bmatrix}1&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0
 
 \begin{equation}
 	\label{eq:cons}
-	e_k \ge \alpha \exp{\left(-\beta\left(\lambda_k - \lambda_t\right)^2\right)}, \quad k = \{1, \dots , N\},
+	c(x_k) = \alpha \exp{\left(-\beta\left(\lambda_k - \lambda_t\right)^2\right)} - e_k \le 0, \quad k = \{1, \dots , N\},
 \end{equation}
 where we let $\alpha = 0.2$, $\beta = 20$, $\lambda_t = \frac{2\pi}{3}$.
 
@@ -115,7 +115,7 @@ The objective function \eqref{eq:quad_cost} is subject to the system dynamics \e
 subject to
 \begin{align}
 	A_{eq} z &= B_{eq}, \\
-	\alpha \exp{\left(-\beta\left(\lambda_k - \lambda_t\right)^2\right)} - e_k &\le 0, \quad k = \{1, \dots N\},\\
+	c(x_k) &\le 0, \quad k = \{1, \dots N\},\\
 	p^{\textrm{low}} \le p_k &\le p^{\textrm{high}}, \quad k = \{1, \dots N\}.
 \end{align}
 \end{subequations}
@@ -134,5 +134,40 @@ For some clever reason or another we impose additional lower and upper bounds on
 
 The optimal input sequence $u^*$ is applied to the plant in an open loop with results show in fig. X. Explain 25 vs. 45 discrepency. We further employ an LQ-controller similarily to \ref{text:LQR} to guide the trajectory to the set-point and elminiate steady state deviations.
 
-
+\begin{figure}[hp]
+	\centering
+		\includegraphics[width=0.85\textwidth]{figures/4/openloop25.eps}
+	\caption{Open Loop 25.}
+	\label{fig:openloop25}
+\end{figure}
+\begin{figure}[hp]
+	\centering
+		\includegraphics[width=0.85\textwidth]{figures/4/openloop45.eps}
+	\caption{Open Loop 45.}
+	\label{fig:openloop45}
+\end{figure}
+\begin{figure}[hp]
+	\centering
+		\includegraphics[width=0.85\textwidth]{figures/4/closedloop25.eps}
+	\caption{Closed Loop 25.}
+	\label{fig:closedloop25}
+\end{figure}
+\begin{figure}[hp]
+	\centering
+		\includegraphics[width=0.85\textwidth]{figures/4/closedloopConstrained25.eps}
+	\caption{Closed Loop 25, extra constraints.}
+	\label{fig:closedloopConstrained25}
+\end{figure}
+\begin{figure}[hp]
+	\centering
+		\includegraphics[width=0.85\textwidth]{figures/4/closedloop25_cons.eps}
+	\caption{Closed Loop 25 - contraint hill.}
+	\label{fig:closedloop25_cons}
+\end{figure}
+\begin{figure}[hp]
+	\centering
+		\includegraphics[width=0.85\textwidth]{figures/4/closedloopConstrained25_cons.eps}
+	\caption{Closed Loop 25, extra constraints - contraint hill.}
+	\label{fig:closedloopConstrained25_cons}
+\end{figure}
 
