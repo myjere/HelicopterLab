@@ -93,7 +93,7 @@ However, in an effort to achieve a more accurate model, alternative state space 
 	\label{eq:sys}
 \end{equation}
 
-is constructed from (\ref{eq:p_pc}) and (\ref{eq:e_ec}), as well as some preliminary testing. The latter lead to a slight increase in the amount of change in travel rate as a function of pitch.
+is constructed from \eqref{eq:p_pc} and \eqref{eq:e_ec}, as well as some preliminary testing. The latter lead to a slight increase in the amount of change in travel rate as a function of pitch.
 
 The reason for the increase in pitch's effect on travel rate is due to the fact that the pitch step response was run with a step size of $20$ degrees. The usual operating range (when aiming for somewhat aggressive maneuvers) is round $30$ to $45$ degrees. This amount of pitch angle will lead to a significant loss of downwards thrust and sequentially elevation. The elevation controller will in turn attempt to compensate by increasing the overall thrust by a large amount, but since the pitch head is far from equilibrium, a substantial amount of that thrust will be affecting the travel rate. This effect overshadows that of the small angle approximation.
 
