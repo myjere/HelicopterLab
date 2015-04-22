@@ -196,7 +196,7 @@ With lower and upper bounds imposed on the pitch state and controller set-point,
 \end{subequations}
 
 \subsection{Results and discussion}
-\eqref{eq:QP_travel} is solved using MATLAB's \texttt{quadprog}. $r = 0.1$ is chosen to achieve a relatively rapid convergence rate in with the effect of maximizing the pitch between the lower and higher bounds. The optimal input sequence $u^*$ is applied to the plant in an open loop with results show in figure \ref{fig:opt_openloop}, with the measured trajectory compared to the calculated optimal trajectory $x^*$. For some clever reason or another, the pitch bounds was set to $\frac{45 \pi}{180}$.
+\eqref{eq:QP_travel} is solved using MATLAB's \texttt{quadprog}. $r = 0.1$ is chosen to achieve a relatively rapid convergence rate in with the effect of maximizing the pitch between the lower and higher bounds. With rapid convergence rate in mind the pitch bounds were set to $\pm\frac{45 \pi}{180}$. The optimal input sequence $u^*$ is applied to the plant in an open loop with results show in figure \ref{fig:opt_openloop}, with the measured trajectory compared to the calculated optimal trajectory $x^*$.
 
 \begin{figure}[hp]
 	\centering
@@ -205,5 +205,5 @@ With lower and upper bounds imposed on the pitch state and controller set-point,
 	\label{fig:opt_openloop}
 \end{figure}
 
-Opt. input vs measured input discrepency due to interpolation stuff...?
+The measured trajectory of pitch coincides with the calculated optimal trajectory. The lack of substantial deviation is also a testimonial to the pitch model. Unlike pitch, travel is not controlled by an inner controller, and its deviation from the optimal trajectory should therefore be expected when using open loop.
 
