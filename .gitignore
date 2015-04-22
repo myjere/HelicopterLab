@@ -5,6 +5,7 @@ slprj/
 actxlicense.m
 *.rt-windows
 
+*converted-to.pdf
 *.sty
 *.aux
 *.log
