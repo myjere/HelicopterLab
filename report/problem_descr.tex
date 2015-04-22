@@ -65,6 +65,7 @@ Note simplifications and limitations:
 \begin{itemize}
 	\item{The time derivative of travel rate is a linear function of pitch only. This small angle approximation does not really hold, as the intended operating range of pitch is as much as $40$ degrees.}
 	\item{By simple inspection of the lab setup it is clear that the pitch head assembly is hinged slightly above its center of mass. The resulting restoring force, as well as the hinge joint dampening, is not directly included in this model.}
+	\item{The rotor thrust is assumed to be proportional to the voltage applied to the motor. This is a simplification. Generally, rotor angular velocity is proportional to the voltage applied, and thrust is proportional to the square of the angular velocity.}
 \end{itemize}
 
 To stabilize the plant, adding the pitch PD controller

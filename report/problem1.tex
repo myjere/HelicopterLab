@@ -40,10 +40,29 @@ The measured parameters used in (\ref{eq:dynamics}) yielded a model with conside
 
 TODO: Step responses of both the actual system, and the newly identified awesome model. Possibly also with the bad model. For awesomeness and glory.
 
-
 \subsection{Results and discussion}
+\label{subsection:part1_results}
 
-The calculated step response of both the elevation and travel rate model elevation in figure (something) is almost identical to the recorded step response. The pitch model is satisfactory, but the dynamics are clearly not matching the actual dynamics to the same degree as with elevation and travel rate. This should be expected, as the small angle approximation used is bound to yield errors when using angles of up to $1$ radian. Combining this with the fact that the off axis hinge is unaccounted for in our model, two states are clearly not enough to capture the complete pitch dynamics.
+
+The following transfer functions were obtained:
+
+\begin{equation}
+\label{eq:p_pc}
+	\frac{p}{p_c}(s) = \frac{6.74}{s^2 + 3.60 s + 7.13}
+\end{equation}
+
+\begin{equation}
+\label{eq:e_ec}
+	\frac{e}{e_c}(s) = \frac{3.13}{s^2 + 2.45 s + 3.03}
+\end{equation}
+
+\begin{equation}
+\label{eq:travelRate_p}
+	\frac{\lambda}{p}(s) = \frac{-0.29}{s + 0.05}
+\end{equation}
+
+
+The calculated step response of the travel rate in figure (something) is almost identical to the recorded step response. The pitch and elevation models are satisfactory, but the dynamics are clearly not matching the actual dynamics to the same degree as with travel rate. This should be expected, as the small angle approximation used is bound to yield errors, especially in the pitch model. Both the off-axis hinged pitch head and the non-linearity of rotor thrust are also unaccounted for when settling on the number of states. A third state for both pitch and elevation might have helped capture some of the dynamics, but as we want to minimize the number of states, the results are found to be well within acceptable levels.
 
 
 

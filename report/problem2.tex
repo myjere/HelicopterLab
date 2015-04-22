@@ -60,9 +60,7 @@ or, alternatively
 	p_c
 \end{equation*}
 
-However, in an effort to achieve a more accurate model, alternative state space equations are developed from estimated transfer functions based on measured step response output.
-
-Discuss: 2 pole vs 3 pole, include transfer functions...Not exactly sure exactly what decided on, and how the model got these parameters...
+However, in an effort to achieve a more accurate model, alternative state space equations are developed from estimated transfer functions based on measured step responses as discussed in \ref{subsection:part1_results}. The model
 
 \begin{equation}
 	\begin{bmatrix}
@@ -95,7 +93,10 @@ Discuss: 2 pole vs 3 pole, include transfer functions...Not exactly sure exactly
 	\label{eq:sys}
 \end{equation}
 
-asdfDiscuss differences with textbook model
+is constructed from (\ref{eq:p_pc}) and (\ref{eq:e_ec}), as well as some preliminary testing. The latter lead to a slight increase in the amount of change in travel rate as a function of pitch.
+
+The reason for the increase in pitch's effect on travel rate is due to the fact that the pitch step response was run with a step size of $20$ degrees. The usual operating range (when aiming for somewhat aggressive maneuvers) is round $30$ to $45$ degrees. This amount of pitch angle will lead to a significant loss of downwards thrust and sequentially elevation. The elevation controller will in turn attempt to compensate by increasing the overall thrust by a large amount, but since the pitch head is far from equilibrium, a substantial amount of that thrust will be affecting the travel rate. This effect overshadows that of the small angle approximation.
+
 
 \subsection{Discretization}
 Let $x = \begin{bmatrix}\lambda&\dot{\lambda}&p&\dot{p}\end{bmatrix}^\top$, $u = p_c$. Using forward Euler with a time step $\Delta t = 0.25$ we are able to obtain an approximate discretization of \eqref{eq:sys}:
