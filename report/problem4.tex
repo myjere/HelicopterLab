@@ -95,7 +95,7 @@ or alternatively
 where
 
 \begin{equation}
-Q = \begin{bmatrix}1&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\end{bmatrix}, \ R = \begin{bmatrix}r_1&0\\0&r_2\end{bmatrix}.
+Q = \begin{bmatrix}1&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\end{bmatrix}, \quad R = \begin{bmatrix}r_1&0\\0&r_2\end{bmatrix}.
 \end{equation}
 
  The second weighting parameter $r_2$ is added as we impose an inequality constraint on the elevation for every time step:
@@ -121,6 +121,12 @@ subject to
 \end{subequations}
 
 
+\subsection{Discrete LQR}
+In addition to running the optimal input sequence $u^*$ in an open loop, a discrete LQ-controller is applied, with the weigthing matrices
+
+\begin{equation}
+Q = \begin{bmatrix}4&0&0&0&0&0\\0&2&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&3&0\\0&0&0&0&0&0\end{bmatrix}, \quad R = \begin{bmatrix}1&0\\0&1\end{bmatrix}.
+\end{equation}
 \subsection{Optional: Additonal constraints}
 
 For some clever reason or another we impose additional lower and upper bounds on the elevation rate and travel rate with favourable results...
