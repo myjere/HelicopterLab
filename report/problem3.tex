@@ -6,13 +6,13 @@
 
 To eliminate the discrepency between the optimal and measured trajectory observed in figure \ref{fig:opt_openloop}, we can update the optimal trajectory for every time step with a state feedback term weighted by a suitable gain matrix $K$:
 \begin{equation*}
-u_k = u_k^* - K^\top(x_k - x_k^*),
+u_k = u_k^* - K (x_k - x_k^*),
 \end{equation*}
 
 or, alternatively
 \begin{equation}
 \label{eq:LQ_ctrl}
-\Delta u_k = - K^\top \Delta x_k,
+\Delta u_k = - K \Delta x_k,
 \end{equation}
 
 where 
