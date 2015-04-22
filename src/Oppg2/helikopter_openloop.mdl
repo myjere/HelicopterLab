@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.96"
+    ComputedModelVersion    "1.99"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -25,11 +25,11 @@ Model {
   Creator		  "Administrator"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "eirikwor"
+  LastModifiedBy	  "chrimath"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Apr 09 13:26:44 2015"
-  RTWModifiedTimeStamp	  350486763
-  ModelVersionFormat	  "1.%<AutoIncrement:96>"
+  LastModifiedDate	  "Wed Apr 22 10:50:24 2015"
+  RTWModifiedTimeStamp	  351600574
+  ModelVersionFormat	  "1.%<AutoIncrement:99>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -953,7 +953,7 @@ Model {
   }
   System {
     Name		    "helikopter_openloop"
-    Location		    [234, 278, 1560, 845]
+    Location		    [504, 92, 1830, 659]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -979,7 +979,7 @@ Model {
       Name		      " \n "
       SID		      105
       Ports		      [1, 1]
-      Position		      [870, 80, 900, 110]
+      Position		      [870, 50, 900, 80]
       LibraryVersion	      "1.41"
       SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
       SourceType	      "DegreesToRadians"
@@ -997,7 +997,7 @@ Model {
       Name		      " \n  "
       SID		      103
       Ports		      [1, 1]
-      Position		      [825, 50, 855, 80]
+      Position		      [825, 90, 855, 120]
       LibraryVersion	      "1.41"
       SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
       SourceType	      "DegreesToRadians"
@@ -1076,7 +1076,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"Elevasjonskontroller"
-	Location		[69, 383, 604, 739]
+	Location		[50, 407, 568, 753]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1825,10 +1825,10 @@ Model {
       BlockType		      Mux
       Name		      "Mux1"
       SID		      102
-      Ports		      [3, 1]
-      Position		      [970, 16, 980, 114]
+      Ports		      [2, 1]
+      Position		      [970, 47, 980, 123]
       ShowName		      off
-      Inputs		      "3"
+      Inputs		      "2"
       DisplayOption	      "bar"
     }
     Block {
@@ -1987,7 +1987,7 @@ Model {
       BlockType		      ToFile
       Name		      "To File"
       SID		      99
-      Position		      [1025, 50, 1085, 80]
+      Position		      [1025, 70, 1085, 100]
       Filename		      "data.mat"
       MatrixName	      "data"
     }
@@ -2161,7 +2161,7 @@ Model {
       SrcPort		      1
       Points		      [35, 0]
       Branch {
-	Points			[0, -60]
+	Points			[0, -90]
 	DstBlock		" \n "
 	DstPort			1
       }
@@ -2204,7 +2204,7 @@ Model {
     Line {
       SrcBlock		      " \n     "
       SrcPort		      1
-      Points		      [180, 0; 0, -225; -975, 0; 0, 215]
+      Points		      [180, 0; 0, -190; -975, 0; 0, 180]
       DstBlock		      "Demux"
       DstPort		      1
     }
@@ -2268,35 +2268,15 @@ Model {
     Line {
       SrcBlock		      "From\nWorkspace"
       SrcPort		      1
-      Points		      [25, 0]
-      Branch {
-	Points			[0, -60]
-	DstBlock		"Mux1"
-	DstPort			1
-      }
-      Branch {
-	Points			[0, 60]
-	DstBlock		"Pitch-kontroller"
-	DstPort			1
-      }
+      Points		      [25, 0; 0, 60]
+      DstBlock		      "Pitch-kontroller"
+      DstPort		      1
     }
     Line {
       SrcBlock		      "Mux1"
       SrcPort		      1
       DstBlock		      "To File"
       DstPort		      1
-    }
-    Line {
-      SrcBlock		      " \n  "
-      SrcPort		      1
-      DstBlock		      "Mux1"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      " \n "
-      SrcPort		      1
-      DstBlock		      "Mux1"
-      DstPort		      3
     }
     Line {
       SrcBlock		      "Heli 3D"
@@ -2323,6 +2303,18 @@ Model {
 	DstPort			3
       }
     }
+    Line {
+      SrcBlock		      " \n  "
+      SrcPort		      1
+      DstBlock		      "Mux1"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      " \n "
+      SrcPort		      1
+      DstBlock		      "Mux1"
+      DstPort		      1
+    }
     Annotation {
       Position		      [780, 263]
     }
@@ -2335,21 +2327,21 @@ MatData {
     Data		    "  %)30     .    & $   8    (     @         %    \"     $    !     0         %  0 #0    $    G    ;VQD7V"
     "YA;64      &ES7V1E;&5T960   !O8FIE8W1?8FQO8VL   X    X    !@    @    $          4    (     0    4    !         !  "
     "   %    2$E,+3$    .    ,     8    (    \"0(        %    \"     $    !     0         \"  $       X    X    !@    @"
-    "    &          4    (     0    $    !          D    (         #B 04 "
+    "    &          4    (     0    $    !          D    (        0 $XH$ "
   }
   DataRecord {
     Tag			    DataTag1
     Data		    "  %)30     .    & $   8    (     @         %    \"     $    !     0         %  0 #0    $    G    ;VQD7V"
     "YA;64      &ES7V1E;&5T960   !O8FIE8W1?8FQO8VL   X    X    !@    @    $          4    (     0    4    !         !  "
     "   %    2$E,+3$    .    ,     8    (    \"0(        %    \"     $    !     0         \"  $       X    X    !@    @"
-    "    &          4    (     0    $    !          D    (         #B 04 "
+    "    &          4    (     0    $    !          D    (        0 $XH$ "
   }
   DataRecord {
     Tag			    DataTag0
     Data		    "  %)30     .    0#<   8    (     @         %    \"     $    !     0         %  0 $0    $   !F    :7-?=6"
     "YI<75E          !O;&1?8FQO8VL          &]L9%]N86UE            :7-?;6]D96Q?8VQO<VEN9P!S971T:6YG<P           &ES7V1E"
     ";&5T960            .    ,     8    (    \"0(        %    \"     $    !     0         \"  $  0    X    X    !@    @"
-    "    &          4    (     0    $    !          D    (         #B 04 .    .     8    (    !          %    \"     $ "
+    "    &          4    (     0    $    !          D    (        0 $XH$ .    .     8    (    !          %    \"     $ "
     "   %     0         0    !0   $A)3\"TQ    #@   #     &    \"     D\"        !0    @    !     0    $          @ !   "
     "    .    <#4   8    (     @         %    \"     $    !     0         %  0 #P    $    M    ;VQD7V)O87)D7W1Y<&4 <3@ "
     "                <30                     #@   #     &    \"     0         !0    @    !     @    $         $  \" '$T"

@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.97"
+    ComputedModelVersion    "1.99"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -27,9 +27,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "chrimath"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Mar 20 09:50:44 2015"
-  RTWModifiedTimeStamp	  348745319
-  ModelVersionFormat	  "1.%<AutoIncrement:97>"
+  LastModifiedDate	  "Wed Apr 22 12:04:28 2015"
+  RTWModifiedTimeStamp	  351605064
+  ModelVersionFormat	  "1.%<AutoIncrement:99>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -943,14 +943,6 @@ Model {
       SampleTime	      "-1"
     }
     Block {
-      BlockType		      ToWorkspace
-      VariableName	      "simulink_output"
-      MaxDataPoints	      "1000"
-      Decimation	      "1"
-      SampleTime	      "0"
-      FixptAsFi		      off
-    }
-    Block {
       BlockType		      TransferFcn
       Numerator		      "[1]"
       Denominator	      "[1 2 1]"
@@ -961,7 +953,7 @@ Model {
   }
   System {
     Name		    "LQR_feedback"
-    Location		    [130, 298, 1456, 865]
+    Location		    [457, 282, 1783, 849]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -975,7 +967,61 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    114
+    SIDHighWatermark	    116
+    Block {
+      BlockType		      Reference
+      Name		      " "
+      SID		      105
+      Ports		      [1, 1]
+      Position		      [830, 35, 860, 65]
+      LibraryVersion	      "1.41"
+      SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
+      SourceType	      "DegreesToRadians"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "  "
+      SID		      103
+      Ports		      [1, 1]
+      Position		      [875, 70, 905, 100]
+      LibraryVersion	      "1.41"
+      SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
+      SourceType	      "DegreesToRadians"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "    "
+      SID		      115
+      Ports		      [1, 1]
+      Position		      [885, 215, 915, 245]
+      LibraryVersion	      "1.41"
+      SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
+      SourceType	      "DegreesToRadians"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+    }
     Block {
       BlockType		      Bias
       Name		      "Bias"
@@ -991,42 +1037,6 @@ Model {
       Position		      [760, 200, 800, 230]
       Bias		      "-4"
       SaturateOnIntegerOverflow	off
-    }
-    Block {
-      BlockType		      Reference
-      Name		      "Degrees to\nRadians"
-      SID		      103
-      Ports		      [1, 1]
-      Position		      [825, 50, 855, 80]
-      LibraryVersion	      "1.41"
-      SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
-      SourceType	      "DegreesToRadians"
-      ShowPortLabels	      "FromPortIcon"
-      SystemSampleTime	      "-1"
-      FunctionWithSeparateData off
-      RTWMemSecFuncInitTerm   "Inherit from model"
-      RTWMemSecFuncExecute    "Inherit from model"
-      RTWMemSecDataConstants  "Inherit from model"
-      RTWMemSecDataInternal   "Inherit from model"
-      RTWMemSecDataParameters "Inherit from model"
-    }
-    Block {
-      BlockType		      Reference
-      Name		      "Degrees to\nRadians1"
-      SID		      105
-      Ports		      [1, 1]
-      Position		      [870, 80, 900, 110]
-      LibraryVersion	      "1.41"
-      SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
-      SourceType	      "DegreesToRadians"
-      ShowPortLabels	      "FromPortIcon"
-      SystemSampleTime	      "-1"
-      FunctionWithSeparateData off
-      RTWMemSecFuncInitTerm   "Inherit from model"
-      RTWMemSecFuncExecute    "Inherit from model"
-      RTWMemSecDataConstants  "Inherit from model"
-      RTWMemSecDataInternal   "Inherit from model"
-      RTWMemSecDataParameters "Inherit from model"
     }
     Block {
       BlockType		      Demux
@@ -1222,26 +1232,6 @@ Model {
 	  DstPort		  1
 	}
       }
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "Elevation"
-      SID		      65
-      Ports		      [1]
-      Position		      [1095, 254, 1125, 286]
-      Floating		      off
-      Location		      [92, 664, 416, 903]
-      Open		      off
-      NumInputPorts	      "1"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-      }
-      YMin		      "9.775"
-      YMax		      "10.125"
-      SaveName		      "ScopeData1"
-      DataFormat	      "StructureWithTime"
-      SampleTime	      "0"
     }
     Block {
       BlockType		      FromWorkspace
@@ -1851,10 +1841,10 @@ Model {
       BlockType		      Mux
       Name		      "Mux1"
       SID		      102
-      Ports		      [3, 1]
-      Position		      [970, 16, 980, 114]
+      Ports		      [2, 1]
+      Position		      [970, 32, 975, 103]
       ShowName		      off
-      Inputs		      "3"
+      Inputs		      "2"
       DisplayOption	      "bar"
     }
     Block {
@@ -1866,26 +1856,6 @@ Model {
       BlockRotation	      270
       ShowName		      off
       DisplayOption	      "bar"
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "Pitch"
-      SID		      68
-      Ports		      [1]
-      Position		      [1095, 184, 1125, 216]
-      Floating		      off
-      Location		      [442, 56, 1175, 1031]
-      Open		      off
-      NumInputPorts	      "1"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-      }
-      YMin		      "-0.55"
-      YMax		      "0.1"
-      SaveName		      "ScopeData2"
-      DataFormat	      "StructureWithTime"
-      SampleTime	      "0"
     }
     Block {
       BlockType		      SubSystem
@@ -2057,14 +2027,16 @@ Model {
     }
     Block {
       BlockType		      Sum
-      Name		      "Sum1"
-      SID		      114
+      Name		      "Sum2"
+      SID		      116
       Ports		      [2, 1]
-      Position		      [294, 65, 356, 90]
+      Position		      [315, 40, 335, 60]
       BlockRotation	      270
       BlockMirror	      on
       NamePlacement	      "alternate"
       ShowName		      off
+      IconShape		      "round"
+      Inputs		      "+|+"
       InputSameDT	      off
       OutDataTypeMode	      "Inherit via internal rule"
       OutDataType	      "fixdt(1, 16)"
@@ -2091,38 +2063,6 @@ Model {
       Position		      [1025, 50, 1085, 80]
       Filename		      "data.mat"
       MatrixName	      "data"
-    }
-    Block {
-      BlockType		      ToWorkspace
-      Name		      "To Workspace"
-      SID		      70
-      Ports		      [1]
-      Position		      [1000, 160, 1060, 190]
-      NamePlacement	      "alternate"
-      VariableName	      "travelRateStep20deg"
-      MaxDataPoints	      "inf"
-      SampleTime	      "-1"
-      SaveFormat	      "Structure With Time"
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "Travel"
-      SID		      100
-      Ports		      [1]
-      Position		      [1095, 124, 1125, 156]
-      Floating		      off
-      Location		      [442, 634, 766, 873]
-      Open		      off
-      NumInputPorts	      "1"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-      }
-      YMin		      "29.425"
-      YMax		      "29.725"
-      SaveName		      "ScopeData3"
-      DataFormat	      "StructureWithTime"
-      SampleTime	      "0"
     }
     Block {
       BlockType		      SubSystem
@@ -2272,27 +2212,10 @@ Model {
       BlockType		      Constant
       Name		      "Zero1"
       SID		      66
-      Position		      [60, 405, 90, 435]
+      Position		      [280, 335, 310, 365]
       Value		      "0*pi/180"
       OutDataType	      "sfix(16)"
       OutScaling	      "2^0"
-    }
-    Block {
-      BlockType		      Gain
-      Name		      "deg2rad"
-      SID		      16
-      Position		      [885, 215, 915, 245]
-      Gain		      "eye(6)*pi/180"
-      Multiplication	      "Matrix(K*u)"
-      ParameterDataTypeMode   "Inherit via internal rule"
-      ParameterDataType	      "sfix(16)"
-      ParameterScaling	      "2^0"
-      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
-      OutDataTypeMode	      "Inherit via internal rule"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^0"
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-      SaturateOnIntegerOverflow	off
     }
     Line {
       SrcBlock		      "Pitch-kontroller"
@@ -2311,20 +2234,12 @@ Model {
       SrcPort		      1
       Points		      [35, 0]
       Branch {
-	Points			[35, 0]
-	Branch {
-	  DstBlock		  "Mux"
-	  DstPort		  1
-	}
-	Branch {
-	  Points		  [0, -15]
-	  DstBlock		  "Travel"
-	  DstPort		  1
-	}
+	Points			[0, -105]
+	DstBlock		" "
+	DstPort			1
       }
       Branch {
-	Points			[0, -60]
-	DstBlock		"Degrees to\nRadians1"
+	DstBlock		"Mux"
 	DstPort			1
       }
     }
@@ -2343,7 +2258,7 @@ Model {
     Line {
       SrcBlock		      "Mux"
       SrcPort		      1
-      DstBlock		      "deg2rad"
+      DstBlock		      "    "
       DstPort		      1
     }
     Line {
@@ -2375,7 +2290,7 @@ Model {
       }
     }
     Line {
-      SrcBlock		      "deg2rad"
+      SrcBlock		      "    "
       SrcPort		      1
       Points		      [360, 0; 0, -225; -1230, 0; 0, 215]
       DstBlock		      "Demux"
@@ -2425,16 +2340,8 @@ Model {
     Line {
       SrcBlock		      "Heli 3D"
       SrcPort		      2
-      Points		      [40, 0]
-      Branch {
-	DstBlock		"Mux"
-	DstPort			2
-      }
-      Branch {
-	Points			[0, -10]
-	DstBlock		"To Workspace"
-	DstPort			1
-      }
+      DstBlock		      "Mux"
+      DstPort		      2
     }
     Line {
       SrcBlock		      "V_d/V_s --> V_f/V_b"
@@ -2461,18 +2368,6 @@ Model {
       DstPort		      1
     }
     Line {
-      SrcBlock		      "Degrees to\nRadians"
-      SrcPort		      1
-      DstBlock		      "Mux1"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "Degrees to\nRadians1"
-      SrcPort		      1
-      DstBlock		      "Mux1"
-      DstPort		      3
-    }
-    Line {
       SrcBlock		      "Heli 3D"
       SrcPort		      5
       DstBlock		      "Bias"
@@ -2481,51 +2376,28 @@ Model {
     Line {
       SrcBlock		      "Bias"
       SrcPort		      1
-      Points		      [5, 0]
-      Branch {
-	DstBlock		"Mux"
-	DstPort			5
-      }
-      Branch {
-	Points			[0, -5]
-	DstBlock		"Elevation"
-	DstPort			1
-      }
+      DstBlock		      "Mux"
+      DstPort		      5
     }
     Line {
       SrcBlock		      "Bias1"
       SrcPort		      1
       Points		      [5, 0]
       Branch {
-	Points			[10, 0]
-	Branch {
-	  DstBlock		  "Mux"
-	  DstPort		  3
-	}
-	Branch {
-	  Points		  [0, -15]
-	  DstBlock		  "Pitch"
-	  DstPort		  1
-	}
+	Points			[0, -130]
+	DstBlock		"  "
+	DstPort			1
       }
       Branch {
-	DstBlock		"Degrees to\nRadians"
-	DstPort			1
+	DstBlock		"Mux"
+	DstPort			3
       }
     }
     Line {
       SrcBlock		      "From\nWorkspace1"
       SrcPort		      1
-      Points		      [5, 0]
-      Branch {
-	DstBlock		"Sum"
-	DstPort			1
-      }
-      Branch {
-	Points			[0, -15]
-	DstBlock		"Mux1"
-	DstPort			1
-      }
+      DstBlock		      "Sum"
+      DstPort		      1
     }
     Line {
       SrcBlock		      "Mux2"
@@ -2540,22 +2412,40 @@ Model {
       DstPort		      1
     }
     Line {
-      SrcBlock		      "Gain"
+      SrcBlock		      "Sum2"
       SrcPort		      1
-      DstBlock		      "Sum1"
+      Points		      [0, 90]
+      DstBlock		      "Pitch-kontroller"
       DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Zero1"
+      SrcPort		      1
+      DstBlock		      "Elevasjonskontroller"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      " "
+      SrcPort		      1
+      DstBlock		      "Mux1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "  "
+      SrcPort		      1
+      DstBlock		      "Mux1"
+      DstPort		      2
     }
     Line {
       SrcBlock		      "From\nWorkspace"
       SrcPort		      1
-      DstBlock		      "Sum1"
+      DstBlock		      "Sum2"
       DstPort		      2
     }
     Line {
-      SrcBlock		      "Sum1"
+      SrcBlock		      "Gain"
       SrcPort		      1
-      Points		      [0, 60]
-      DstBlock		      "Pitch-kontroller"
+      DstBlock		      "Sum2"
       DstPort		      1
     }
     Annotation {
@@ -2570,21 +2460,21 @@ MatData {
     Data		    "  %)30     .    & $   8    (     @         %    \"     $    !     0         %  0 #0    $    G    ;VQD7V"
     "YA;64      &ES7V1E;&5T960   !O8FIE8W1?8FQO8VL   X    X    !@    @    $          4    (     0    4    !         !  "
     "   %    2$E,+3$    .    ,     8    (    \"0(        %    \"     $    !     0         \"  $       X    X    !@    @"
-    "    &          4    (     0    $    !          D    (          F :D "
+    "    &          4    (     0    $    !          D    (        ( $,G$ "
   }
   DataRecord {
     Tag			    DataTag1
     Data		    "  %)30     .    & $   8    (     @         %    \"     $    !     0         %  0 #0    $    G    ;VQD7V"
     "YA;64      &ES7V1E;&5T960   !O8FIE8W1?8FQO8VL   X    X    !@    @    $          4    (     0    4    !         !  "
     "   %    2$E,+3$    .    ,     8    (    \"0(        %    \"     $    !     0         \"  $       X    X    !@    @"
-    "    &          4    (     0    $    !          D    (          F :D "
+    "    &          4    (     0    $    !          D    (        ( $,G$ "
   }
   DataRecord {
     Tag			    DataTag0
     Data		    "  %)30     .    0#<   8    (     @         %    \"     $    !     0         %  0 $0    $   !F    :7-?=6"
     "YI<75E          !O;&1?8FQO8VL          &]L9%]N86UE            :7-?;6]D96Q?8VQO<VEN9P!S971T:6YG<P           &ES7V1E"
     ";&5T960            .    ,     8    (    \"0(        %    \"     $    !     0         \"  $  0    X    X    !@    @"
-    "    &          4    (     0    $    !          D    (          F :D .    .     8    (    !          %    \"     $ "
+    "    &          4    (     0    $    !          D    (        ( $,G$ .    .     8    (    !          %    \"     $ "
     "   %     0         0    !0   $A)3\"TQ    #@   #     &    \"     D\"        !0    @    !     0    $          @ !   "
     "    .    <#4   8    (     @         %    \"     $    !     0         %  0 #P    $    M    ;VQD7V)O87)D7W1Y<&4 <3@ "
     "                <30                     #@   #     &    \"     0         !0    @    !     @    $         $  \" '$T"
