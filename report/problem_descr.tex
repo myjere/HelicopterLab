@@ -45,10 +45,10 @@
 	\end{tabular}
 	\label{tab:variables}
 \end{table}
-Discussing the lab setup: Dual rotor movable arm, differential thrust, etc.
+The lab setup consists of a movable arm equipped with two rotors. The movable arm is hinged to a fixed point, allowing for both lateral and longitudinal motion. The arm is also fitted with a counterweight which effectively slows the dynamics down considerably, as well as lower the amount of rotor thrust needed. The two rotors are fixed to a pitch head assembly hinged to the movable arm. This allows the rotor thrust direction to be indirectly controlled by the differential thrust applied.
 
 \paragraph{}
-Discussing the model: From first principles analysis we can derive simple differential equations to describe the system dynamics:
+From first principles analysis we can derive simple differential equations to describe the system dynamics about the equilibrium:
 
 \begin{subequations}
 	\label{eq:dynamics}
@@ -63,8 +63,8 @@ Discussing the model: From first principles analysis we can derive simple differ
 
 Note simplifications and limitations:
 \begin{itemize}
-	\item{Travel rate proportional to pitch, otherwize decoupled}
-	\item{Pitch has no counteracting 'spring' force}
+	\item{The time derivative of travel rate is a linear function of pitch only. This small angle approximation does not really hold, as the intended operating range of pitch is as much as $40$ degrees.}
+	\item{By simple inspection of the lab setup it is clear that the pitch head assembly is hinged slightly above its center of mass. The resulting restoring force, as well as the hinge joint dampening, is not directly included in this model.}
 \end{itemize}
 
 To stabilize the plant, adding the pitch PD controller
@@ -88,5 +88,5 @@ yields the model equations
 \end{subequations}
 where it is assumed the elevation integral term counteracts the constant disturbance $-\frac{T_g}{J_e}$ and cancel out.
 
-However, in order to achieve a more accurate model we can utilize statistical procedures to best identify the parameters of the first and second order systems, i.e: see problem2...
+However, in order to achieve a more accurate model we can utilize statistical procedures to best identify the parameters of the first and second order systems. This eliminates errors present in the measurement of the lab setup, and gives us the best model with the given number of states. This system gray-box system identification also allows us to verify that the proposed number of states, derived by first principles, yields a model whose performance matches that of the actual system.
 
