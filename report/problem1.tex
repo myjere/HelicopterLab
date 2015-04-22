@@ -38,12 +38,12 @@ The measured parameters used in (\ref{eq:dynamics}) yielded a model with conside
 	\item{Pitch to travel rate}
 \end{itemize}
 
-TODO: Step responses of both the actual system, and the newly identified awesome model.
+TODO: Step responses of both the actual system, and the newly identified awesome model. Possibly also with the bad model. For awesomeness and glory.
+
 
 \subsection{Results and discussion}
 
-Figure \ref{fig:step_response} shows the pitch and elevation response to a step input, as well as the resulting travel rate to a step pitch input.
-Would be nice to have a plot of the step responses with the original gains, to compare...
+The calculated step response of both the elevation and travel rate model elevation in figure (something) is almost identical to the recorded step response. The pitch model is satisfactory, but the dynamics are clearly not matching the actual dynamics to the same degree as with elevation and travel rate. This should be expected, as the small angle approximation used is bound to yield errors when using angles of up to $1$ radian. Combining this with the fact that the off axis hinge is unaccounted for in our model, two states are clearly not enough to capture the complete pitch dynamics.
 
 
 
