@@ -27,11 +27,11 @@ xf = [pi 0 0 0 0 0]';
 n_x = size(A,2);
 n_u = size(B,2);
 
-%%
+%% Simulation parameters
 duration = 12;
 N = floor(duration/dt);
-q1 = .1;
-q2 = .1;
+r1 = .1;
+r2 = .1;
 pitch_lim = 25; % deg
 elev_lim = 50;
 elev_rate_lim = 0.05; % Inf
@@ -58,23 +58,18 @@ UB = [UB_x;
       UB_u];
   
 
-%% Problem
-
-Q = [1 0 0 0 0 0;
-     0 0 0 0 0 0;
-     0 0 0 0 0 0;
-     0 0 0 0 0 0;
-     0 0 0 0 0 0;
-     0 0 0 0 0 0];
-
-R = [q1 0;
-     0  q2];
+%% Quadratic objective function
+Q = zeros(n_x);
+Q(1,1) = 1;
+ 
+R = [r1 0;
+     0  r2];
 
 G = blkdiag(kron(eye(N), Q), kron(eye(N), R));
-          
-%% Solving
-f = @(X) X'*G*X;
 
+f = @(X) X'*G*X;
+         
+%% Solve optimization problem
 tic
 [X, FVAL, EXITFLAG] = fmincon(f, zeros(N*8,1), [], [], Aeq, Beq, LB, UB, @constraint);
 toc
@@ -85,27 +80,21 @@ pitch_opt = [-xf(3), x(3,:)];
 elevation_opt = [-xf(5), x(5,:)];
 u = [reshape(X(N*n_x+1:end), [n_u, N]) , zeros(n_u, 2)];
 
+%% LQR
+Q = diag([4,2,0,0,3,0]);
+R = diag([1 1]);
 
-%% Prep for actual use
+K = dlqr(A,B,Q,R); % Closed loop
+%K = zeros(2,6);     % Open loop
+
+%% Prep input sequence
 padding_time = 10;
 padded_input = [zeros(2,floor(padding_time/dt)) , u]';
 time = [(0:length(padded_input) - 1)*dt]';
 heli_input = [time padded_input];
 
-%% Calculate feedback
-Q = diag([4,2,0,0,3,0]);
-R = diag([1 1]);
-
+%% Prep reference trajectory
 x_opt = x + repmat(xf, 1, length(x)); % Shift travel ref by pi
-
-padding_time = 10;
 padded_x_opt = [zeros(6,floor(padding_time/dt)) , x_opt];
 time = (0:length(padded_x_opt) - 1)*dt;
 heli_ref = [time; padded_x_opt]';
-
-%K = dlqr(A,B,Q,R); % Closed loop
-K = zeros(2,6);     % Open loop
-
-
-
-

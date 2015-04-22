@@ -1,6 +1,6 @@
 close all; clc;
 
-load openLoop
+load data
 
 wait = 10;
 
