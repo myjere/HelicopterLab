@@ -27,14 +27,14 @@ title('Pitch');
 % h = elevation/elevation_ref
 
 load elevStep30deg
-u_elev = 30*pi/180 * ones(4000,1);
+u_elev = 30*pi/180 * ones(7000,1);
 u_elev(1) = 0;
-y_elev = elevStep30deg.signals.values(1:4000) + 16.8*pi/180; % unbias the step
+y_elev = elevStep30deg.signals.values(1:7000) + 16.8*pi/180; % unbias the step
 elev_data = iddata(y_elev, u_elev, 0.001);
-elev_time = 0.001:0.001:4;
+elev_time = 0.001:0.001:7;
 
 opt = tfestOptions('InitialCondition', 'zero');
-elev_sys = tfest(elev_data, 3, 0,opt); % poles, zeroes
+elev_sys = tfest(elev_data, 2, 0,opt); % poles, zeroes
 
 subplot(132);
 plot(elev_time, y_elev/(30*pi/180), 'r'); % scale for easy comparison with step()
