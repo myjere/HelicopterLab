@@ -1,4 +1,5 @@
 clear all; close all; clc
+init02
 
 %% Continuous model
 Ac = [0    1    0    0;
@@ -21,7 +22,7 @@ n_u = size(B,2);
 %%
 duration = 25;
 N = floor(duration/dt);
-q = .1;
+r = .1;
 pitch_lim = 45; % deg
 
 %% Equality constraints
@@ -50,7 +51,7 @@ Q = zeros(n_x);
 Q(1, 1) = 1;
  
 R = zeros(n_u);
-R(1,1) = q/(1/2);
+R(1,1) = r;
 
 G = blkdiag(kron(eye(N), Q), kron(eye(N), R));
 
@@ -58,8 +59,8 @@ G = blkdiag(kron(eye(N), Q), kron(eye(N), R));
 [z,fval,exitflag,output,lambda] = quadprog(G, [], [], [], Aeq, beq, LB, UB);
 
 x = reshape(z(1:N*n_x), [n_x, N]);
-travel = [-xf(1), x(1,:)];
-pitch = [-xf(3), x(3,:)];
+travel_opt = [-xf(1), x(1,:)];
+pitch_opt = [-xf(3), x(3,:)];
 u = [reshape(z(N*n_x+1:end), [n_u, N]) , zeros(n_u, 1)];
 
 %% Prep for actual use

@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.75"
+    ComputedModelVersion    "1.76"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -25,11 +25,11 @@ Model {
   Creator		  "Administrator"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "eirikwor"
+  LastModifiedBy	  "chrimath"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Apr 09 12:18:55 2015"
-  RTWModifiedTimeStamp	  350482732
-  ModelVersionFormat	  "1.%<AutoIncrement:75>"
+  LastModifiedDate	  "Wed Apr 22 11:24:16 2015"
+  RTWModifiedTimeStamp	  351602333
+  ModelVersionFormat	  "1.%<AutoIncrement:76>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -736,6 +736,11 @@ Model {
   }
   BlockParameterDefaults {
     Block {
+      BlockType		      Bias
+      Bias		      "0"
+      SaturateOnIntegerOverflow	on
+    }
+    Block {
       BlockType		      Constant
       Value		      "1"
       VectorParams1D	      on
@@ -949,7 +954,7 @@ Model {
   }
   System {
     Name		    "helikopter02"
-    Location		    [189, 173, 1282, 788]
+    Location		    [681, 172, 1774, 787]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -963,28 +968,32 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    97
+    SIDHighWatermark	    99
     Block {
-      BlockType		      Sum
-      Name		      "Add"
-      SID		      1
-      Ports		      [2, 1]
-      Position		      [785, 337, 815, 368]
-      InputSameDT	      off
-      OutDataTypeMode	      "Inherit via internal rule"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^-10"
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+      BlockType		      Bias
+      Name		      "Bias"
+      SID		      99
+      Position		      [775, 260, 815, 290]
+      Bias		      "-30"
       SaturateOnIntegerOverflow	off
     }
     Block {
-      BlockType		      Constant
-      Name		      "Constant"
-      SID		      2
-      Position		      [715, 345, 745, 375]
-      Value		      "-30"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^0"
+      BlockType		      Reference
+      Name		      "Degrees to\nRadians"
+      SID		      98
+      Ports		      [1, 1]
+      Position		      [885, 215, 915, 245]
+      LibraryVersion	      "1.41"
+      SourceBlock	      "simulink_extras/Transformations/Degrees to\nRadians"
+      SourceType	      "DegreesToRadians"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
     }
     Block {
       BlockType		      Demux
@@ -1180,26 +1189,6 @@ Model {
 	  DstPort		  1
 	}
       }
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "Elevation"
-      SID		      65
-      Ports		      [1]
-      Position		      [855, 339, 885, 371]
-      Floating		      off
-      Location		      [92, 664, 416, 903]
-      Open		      off
-      NumInputPorts	      "1"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-      }
-      YMin		      "9.775"
-      YMax		      "10.125"
-      SaveName		      "ScopeData1"
-      DataFormat	      "StructureWithTime"
-      SampleTime	      "0"
     }
     Block {
       BlockType		      Reference
@@ -1769,26 +1758,6 @@ Model {
       DisplayOption	      "bar"
     }
     Block {
-      BlockType		      Scope
-      Name		      "Pitch"
-      SID		      68
-      Ports		      [1]
-      Position		      [975, 174, 1005, 206]
-      Floating		      off
-      Location		      [442, 634, 766, 873]
-      Open		      off
-      NumInputPorts	      "1"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-      }
-      YMin		      "29.425"
-      YMax		      "29.725"
-      SaveName		      "ScopeData2"
-      DataFormat	      "StructureWithTime"
-      SampleTime	      "0"
-    }
-    Block {
       BlockType		      SubSystem
       Name		      "Pitch-kontroller"
       SID		      44
@@ -1965,28 +1934,8 @@ Model {
       BlockType		      ToFile
       Name		      "To File"
       SID		      97
-      Position		      [885, 405, 945, 435]
+      Position		      [830, 90, 890, 120]
       Filename		      "travelRateStep40deg"
-    }
-    Block {
-      BlockType		      Scope
-      Name		      "Travel"
-      SID		      69
-      Ports		      [1]
-      Position		      [975, 114, 1005, 146]
-      Floating		      off
-      Location		      [187, 390, 511, 629]
-      Open		      off
-      NumInputPorts	      "1"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-      }
-      YMin		      "-1"
-      YMax		      "1"
-      SaveName		      "ScopeData3"
-      DataFormat	      "StructureWithTime"
-      SampleTime	      "0"
     }
     Block {
       BlockType		      SubSystem
@@ -2133,23 +2082,6 @@ Model {
       }
     }
     Block {
-      BlockType		      Gain
-      Name		      "deg2rad"
-      SID		      16
-      Position		      [885, 215, 915, 245]
-      Gain		      "eye(6)*pi/180"
-      Multiplication	      "Matrix(K*u)"
-      ParameterDataTypeMode   "Inherit via internal rule"
-      ParameterDataType	      "sfix(16)"
-      ParameterScaling	      "2^0"
-      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
-      OutDataTypeMode	      "Inherit via internal rule"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^0"
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-      SaturateOnIntegerOverflow	off
-    }
-    Block {
       BlockType		      Constant
       Name		      "elevation"
       SID		      66
@@ -2182,29 +2114,14 @@ Model {
     Line {
       SrcBlock		      "Heli 3D"
       SrcPort		      1
-      Points		      [80, 0]
-      Branch {
-	DstBlock		"Mux"
-	DstPort			1
-      }
-      Branch {
-	Points			[0, -25]
-	DstBlock		"Travel"
-	DstPort			1
-      }
+      DstBlock		      "Mux"
+      DstPort		      1
     }
     Line {
       SrcBlock		      "Heli 3D"
       SrcPort		      4
       DstBlock		      "Mux"
       DstPort		      4
-    }
-    Line {
-      SrcBlock		      "Heli 3D"
-      SrcPort		      5
-      Points		      [15, 0; 0, 70]
-      DstBlock		      "Add"
-      DstPort		      1
     }
     Line {
       SrcBlock		      "Heli 3D"
@@ -2215,7 +2132,7 @@ Model {
     Line {
       SrcBlock		      "Mux"
       SrcPort		      1
-      DstBlock		      "deg2rad"
+      DstBlock		      "Degrees to\nRadians"
       DstPort		      1
     }
     Line {
@@ -2233,7 +2150,7 @@ Model {
       DstPort		      1
     }
     Line {
-      SrcBlock		      "deg2rad"
+      SrcBlock		      "Degrees to\nRadians"
       SrcPort		      1
       Points		      [0, -160; -870, 0; 0, 150]
       DstBlock		      "Demux"
@@ -2267,12 +2184,6 @@ Model {
       DstPort		      2
     }
     Line {
-      SrcBlock		      "Constant"
-      SrcPort		      1
-      DstBlock		      "Add"
-      DstPort		      2
-    }
-    Line {
       SrcBlock		      "Heli 3D"
       SrcPort		      2
       Points		      [55, 0]
@@ -2281,7 +2192,7 @@ Model {
 	DstPort			2
       }
       Branch {
-	Points			[0, 235]
+	Points			[0, -80]
 	DstBlock		"To File"
 	DstPort			1
       }
@@ -2305,32 +2216,10 @@ Model {
       DstPort		      3
     }
     Line {
-      SrcBlock		      "Add"
-      SrcPort		      1
-      Points		      [10, 0]
-      Branch {
-	DstBlock		"Elevation"
-	DstPort			1
-      }
-      Branch {
-	Points			[0, -80]
-	DstBlock		"Mux"
-	DstPort			5
-      }
-    }
-    Line {
       SrcBlock		      "Heli 3D"
       SrcPort		      3
-      Points		      [75, 0]
-      Branch {
-	DstBlock		"Mux"
-	DstPort			3
-      }
-      Branch {
-	Points			[0, -25]
-	DstBlock		"Pitch"
-	DstPort			1
-      }
+      DstBlock		      "Mux"
+      DstPort		      3
     }
     Line {
       SrcBlock		      "Step"
@@ -2338,6 +2227,18 @@ Model {
       Points		      [30, 0; 0, 65]
       DstBlock		      "Pitch-kontroller"
       DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Heli 3D"
+      SrcPort		      5
+      DstBlock		      "Bias"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Bias"
+      SrcPort		      1
+      DstBlock		      "Mux"
+      DstPort		      5
     }
   }
 }
@@ -2348,21 +2249,21 @@ MatData {
     Data		    "  %)30     .    & $   8    (     @         %    \"     $    !     0         %  0 #0    $    G    ;VQD7V"
     "YA;64      &ES7V1E;&5T960   !O8FIE8W1?8FQO8VL   X    X    !@    @    $          4    (     0    4    !         !  "
     "   %    2$E,+3$    .    ,     8    (    \"0(        %    \"     $    !     0         \"  $       X    X    !@    @"
-    "    &          4    (     0    $    !          D    (        @ 3NH$ "
+    "    &          4    (     0    $    !          D    (         &  2D "
   }
   DataRecord {
     Tag			    DataTag1
     Data		    "  %)30     .    & $   8    (     @         %    \"     $    !     0         %  0 #0    $    G    ;VQD7V"
     "YA;64      &ES7V1E;&5T960   !O8FIE8W1?8FQO8VL   X    X    !@    @    $          4    (     0    4    !         !  "
     "   %    2$E,+3$    .    ,     8    (    \"0(        %    \"     $    !     0         \"  $       X    X    !@    @"
-    "    &          4    (     0    $    !          D    (        @ 3NH$ "
+    "    &          4    (     0    $    !          D    (         &  2D "
   }
   DataRecord {
     Tag			    DataTag0
     Data		    "  %)30     .    0#<   8    (     @         %    \"     $    !     0         %  0 $0    $   !F    :7-?=6"
     "YI<75E          !O;&1?8FQO8VL          &]L9%]N86UE            :7-?;6]D96Q?8VQO<VEN9P!S971T:6YG<P           &ES7V1E"
     ";&5T960            .    ,     8    (    \"0(        %    \"     $    !     0         \"  $  0    X    X    !@    @"
-    "    &          4    (     0    $    !          D    (        @ 3NH$ .    .     8    (    !          %    \"     $ "
+    "    &          4    (     0    $    !          D    (         &  2D .    .     8    (    !          %    \"     $ "
     "   %     0         0    !0   $A)3\"TQ    #@   #     &    \"     D\"        !0    @    !     0    $          @ !   "
     "    .    <#4   8    (     @         %    \"     $    !     0         %  0 #P    $    M    ;VQD7V)O87)D7W1Y<&4 <3@ "
     "                <30                     #@   #     &    \"     0         !0    @    !     @    $         $  \" '$T"

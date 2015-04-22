@@ -1,6 +1,6 @@
 close all;
 
-load data
+load closedLoop
 
 wait = 10;
 
