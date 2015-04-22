@@ -1,10 +1,6 @@
 close all;
 
-%load openLoop25
-%load openLoop45
-%load closedLoop25
-%load closedLoopConstrained25
-%load data
+load data
 
 wait = 10;
 
@@ -13,10 +9,7 @@ travel = data(2,floor(wait/h):end) - data(2,floor(wait/h)) - pi;
 pitch = data(3,floor(wait/h):end);
 elevation = data(4,floor(wait/h):end);
 time = (0:length(travel)-1)*h;
-
 time_ = (0:N)*dt;
-
-
 
 figure
 hold on
@@ -26,10 +19,9 @@ plot(time, elevation, 'k');
 plot(time_, pitch_opt, 'O:b');
 plot(time_, travel_opt, 'O:g');
 plot(time_, elevation_opt, 'O:k');
-
-xlim([0 12]);
 xlabel('Time [s]'); ylabel('Angle [rad]');
 legend('p', '\lambda','e','p^*', '\lambda^*', 'e^*', 'Location', 'SouthEast');
+xlim([0 12]);
 hold off
 
 con = 0.2*exp(-20*(travel + 2*pi/3).^2);
@@ -43,5 +35,3 @@ xlabel('Travel [rad]'); ylabel('Elevation [rad]');
 legend('c', 'e', 'e^*');
 xlim([-pi 0.1]);
 hold off
-
-

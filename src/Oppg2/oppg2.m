@@ -19,7 +19,7 @@ xf = [pi 0 0 0]';
 n_x = size(A,2);
 n_u = size(B,2);
 
-%%
+%% Simulatin parameters
 duration = 25;
 N = floor(duration/dt);
 r = .1;
@@ -45,25 +45,25 @@ LB = [LB_x;
 UB = [UB_x;
       UB_u];
 
-%% QP formulation
+%% Quadratic objective function
 
 Q = zeros(n_x);
-Q(1, 1) = 1;
+Q(1,1) = 1;
  
-R = zeros(n_u);
-R(1,1) = r;
+R = r;
 
 G = blkdiag(kron(eye(N), Q), kron(eye(N), R));
 
-%% Solve
-[z,fval,exitflag,output,lambda] = quadprog(G, [], [], [], Aeq, beq, LB, UB);
+%% Solve QP
+%[z,fval,exitflag,output,lambda] = quadprog(G, [], [], [], Aeq, beq, LB, UB);
+load z_opt;
 
 x = reshape(z(1:N*n_x), [n_x, N]);
 travel_opt = [-xf(1), x(1,:)];
 pitch_opt = [-xf(3), x(3,:)];
 u = [reshape(z(N*n_x+1:end), [n_u, N]) , zeros(n_u, 1)];
 
-%% Prep for actual use
+%% Prep input sequence
 padding_time = 10;
 padded_input = [zeros(1,floor(padding_time/dt)) , u]';
 time = [(0:length(padded_input) - 1)*dt]';
