@@ -36,12 +36,14 @@ subject to the system dynamics \eqref{eq:dmodel}, where
 and $P$ is the unique positive definite solution to the discrete time algebraic Riccati equation. \eqref{eq:LQ_gain} is used as the state feedback gain, and the resulting Linear Quadratic controller is implemented, with weigthing matrices $Q$ and $R$ chosen to penalize deviations in states and input for a satisfactory results.
 
 \subsection{Results and discussion}
-Maybe discuss (L)QR (pun intended), tuning...
+
+The state penalty matrix $\tilde{Q}$ and input penalty $\tilde{R}$
 \begin{equation*}
 \tilde{Q} = \begin{bmatrix}4&0&0&0\\0&2&0&0\\0&0&0&0\\0&0&0&0\end{bmatrix}, \quad \tilde{R} = 0.1.
 \end{equation*}
+are chosen with travel accuracy in mind. Deviation in travel as well as travel rate is penalized fairly hard. Input deviation is necessary for corrections in travel and travel rate, and a low penalty is therefore chosen.
 
-Using MATLAB's \texttt{dlqr} we obtain the LQ state feedback gain, and the controller is applied with results shown in figure \ref{fig:lqr}.
+Using MATLAB's \texttt{dlqr} we obtain the LQ state feedback gain $K$, and the controller is applied with results shown in figure \ref{fig:lqr}.
 
 \begin{figure}[hp]
 	\centering
@@ -50,5 +52,18 @@ Using MATLAB's \texttt{dlqr} we obtain the LQ state feedback gain, and the contr
 	\label{fig:lqr}
 \end{figure}
 
+
+The measured trajectories are similar to the ones without feedback, shown in figure \ref{fig:opt_openloop}, except for the removal of travel drift over time. The travel rate model is clearly not perfect as the measured trajectory seemingly wants to deviate from the optimal path, but the discrepancies are small and the state feedback controller deals with them nicely.
+
+
 \subsubsection{MPC discussion}
+
+An alternative approach to optimal trajectories with state feedback would be to use an MPC controller. An MPC controller simply computes the optimal trajectory from the current state to the target state given a finite window of time. Only the first input of the optimal input sequence is used. This is then repeated at the next iteration. Solving an optimization problem at each time iteration is clearly computationally expensive, and even QP problems of this relatively small size would force the iteration period to increase substantially. An MPC controller with a time step on the order of several seconds is unlikely to yield better performance than a predetermined trajectory with short time steps combined with state feedback control, due to the fast dynamics of our system. Deviation from optimal trajectory is also likely to be caused by either an incomplete model or unmodeled external disturbances, and an MPC controller will not withstand either very well. 
+
+
+
+
+
+
+
 
