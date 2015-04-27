@@ -2,7 +2,7 @@
 \label{text:problem1}
 
 \subsection{PID-(re)tuning}
-The pre-tuned PID showed unsatisfactory performance and was re-tuned to better serve as the stable plant for the rest of the assignment. As pitch and elevation isn't very coupled, the two controllers were tuned independent of each other. The tuning was done in a manual fashion.
+The pre-tuned PID showed unsatisfactory performance and was re-tuned to better serve as the stable plant for the rest of the assignment. In particular, the pre-tuned pitch controller was tuned in an aggressive fashion, impacting elevation control significantly. Figure \ref{fig:pid_tuning} shows the coupling of pitch and elevation control before and after tuning. The two controllers were tuned independent of each other, in a manual fashion.
 
 \begin{table}[hp]
 	\centering
@@ -20,17 +20,16 @@ The pre-tuned PID showed unsatisfactory performance and was re-tuned to better s
 	\label{tab:gains}
 \end{table}
 
-TODO: Step responses before and after tuning
-%\begin{figure}[hp]
-%	\centering
-%		\includegraphics[width=0.9\textwidth]{figures/1/step_response.eps}
-%	\caption{Step response.}
-%	\label{fig:step_response}
-%\end{figure}
+\begin{figure}[hp]
+	\centering
+		\includegraphics[width=0.85\textwidth]{figures/1/pid_tuning.eps}
+	\caption{Pitch step response with original and improved pitch and elevation controller tuning.}
+	\label{fig:pid_tuning}
+\end{figure}
 
 
 \subsection{Model parameter estimation}
-The measured parameters used in (\ref{eq:dynamics}) yielded a model with considerably different dynamics than the observed ones. The system identification toolbox in Matlab was therefore used to compute the parameters which fitted the recorded step responses. This was done by estimating the follow three step responses based on known input and recorded system behavior:
+The derived model in \eqref{eq:dynamics} showed considerably different dynamics than the observed ones. The system identification toolbox in Matlab was therefore used to compute the parameters which fitted the recorded step responses. This was done by estimating the follow three step responses based on known input and recorded system behavior:
 
 \begin{itemize}
 	\item{Pitch setpoint to pitch}
@@ -38,13 +37,21 @@ The measured parameters used in (\ref{eq:dynamics}) yielded a model with conside
 	\item{Pitch to travel rate}
 \end{itemize}
 
-TODO: Step responses of both the actual system, and the newly identified awesome model. Possibly also with the bad model. For awesomeness and glory.
+Figure \ref{fig:pitch_model_comparison} shows the pitch step response of the derived model compared with the newly estimated model, and the measured step response. The estimated model is clearly a better match than the derived model.
+
+\begin{figure}[hp]
+	\centering
+		\includegraphics[width=0.85\textwidth]{figures/1/pitch_model_comparison.eps}
+	\caption{Pitch step responses of the derived and estimated model, compared with the measured step response.}
+	\label{fig:pitch_model_comparison}
+\end{figure}
+
 
 \subsection{Results and discussion}
 \label{subsection:part1_results}
 
 
-The following transfer functions were obtained:
+The following transfer functions were estimated from measured step responses:
 
 \begin{equation}
 \label{eq:p_pc}
