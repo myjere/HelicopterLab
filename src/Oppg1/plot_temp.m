@@ -17,10 +17,10 @@ legend('Original', 'Improved', 'Location', 'SouthEast');
 
 subplot(212)
 load elevWhilePitchStep40
-good = data(3,10001:12500)-data(3,10001);
+good = (data(3,10001:12500)-data(3,10001))*pi/180;
 
 load elevWhilePitchStep40_bad
-bad = data(3,10001:12500) - data(3,10001);
+bad = (data(3,10001:12500) - data(3,10001))*pi/180;
 
 plot(time,bad,'--k', time, good, 'k')
 
