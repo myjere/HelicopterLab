@@ -196,7 +196,7 @@ With lower and upper bounds imposed on the pitch state and controller set-point,
 \end{subequations}
 
 \subsection{Results and discussion}
-\eqref{eq:QP_travel} is solved using MATLAB's \texttt{quadprog}. $r = 0.1$ is chosen to achieve a relatively rapid convergence rate in with the effect of maximizing the pitch between the lower and higher bounds. With rapid convergence rate in mind the pitch bounds were set to $\pm\frac{45 \pi}{180}$. The optimal input sequence $u^*$ is applied to the plant in an open loop with results show in figure \ref{fig:opt_openloop}, with the measured trajectory compared to the calculated optimal trajectory $x^*$.
+\eqref{eq:QP_travel} is solved using MATLAB's \texttt{quadprog}. $r = 0.1$ is chosen to achieve a relatively rapid convergence rate in with the effect of maximizing the pitch between the lower and higher bounds. With rapid convergence rate in mind the pitch bounds were set to $\pm\frac{45 \pi}{180}$. The optimal input sequence $u^*$ is applied to the plant in an open loop with results shown in figure \ref{fig:opt_openloop}, with the measured trajectory compared to the calculated optimal trajectory $x^*$.
 
 \begin{figure}[hp]
 	\centering
