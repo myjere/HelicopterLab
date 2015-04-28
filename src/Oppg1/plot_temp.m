@@ -77,3 +77,23 @@ measured = elevStep30deg.signals.values(1:5000) + 16.8*pi/180;
 plot(time,step_bad,'-.k',time,step_good,'--k',time,measured,'k')
 xlabel('Time [s]'); ylabel('Angle [rad]');
 legend('Derived', 'Estimated', 'Measured', 'Location', 'SouthEast');
+
+%% TRAVEL RATE %%
+figure
+
+sys_bad = tf([K_1*K_pp],[1 K_1*K_pd K_1*K_pp])*tf([-K_2],[1 0]);
+step_bad = step(sys_bad,time)*pi*20/180;
+
+sys_good = tf([6.741],[1 3.58 7.132]) * tf([-0.2917],[1 0.05104]);
+step_good = step(sys_good,time)*pi*20/180;
+
+load travelRateStep20deg
+measured = travelRateStep20deg.signals.values(1:5000) - 0.02; % unbias
+
+
+
+plot(time,measured,'k',time,step_bad,'-.g',time,step_good,'--g')
+xlabel('Time [s]'); ylabel('Angle [rad]');
+legend('Measured','Derived', 'Estimated', 'Location', 'SouthEast');
+
+

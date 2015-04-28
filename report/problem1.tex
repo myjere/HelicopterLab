@@ -37,7 +37,7 @@ The derived model in \eqref{eq:dynamics} showed considerably different dynamics 
 	\item{Pitch to travel rate}
 \end{itemize}
 
-Figure \ref{fig:pitch_model_comparison} shows the pitch step response of the derived model compared with the newly estimated model, and the measured step response. The estimated model is clearly a better match than the derived model. Optimal input sequences calculated based on the derived model would need extensive help from feedback in order to yield usable performance. The elevation step responses of the derived and estimated model, shown in figure \ref{fig:elev_model_comparison}, displays similar results.
+Figure \ref{fig:pitch_model_comparison} shows the pitch step response of the derived model compared with the newly estimated model, and the measured step response. The estimated model is clearly a better match than the derived model. Optimal input sequences calculated based on the derived model would need extensive help from feedback in order to yield usable performance. The elevation step responses of the derived and estimated model, shown in figure \ref{fig:elev_model_comparison}, and travel rate response in figure \ref{fig:travelRate_model_comparison}, displays similar results.
 
 \begin{figure}[hp]
 	\centering
@@ -51,6 +51,13 @@ Figure \ref{fig:pitch_model_comparison} shows the pitch step response of the der
 		\includegraphics[width=0.85\textwidth]{figures/1/elev_model_comparison.eps}
 	\caption{Elevation step responses of the derived and estimated model, compared with the measured step response.}
 	\label{fig:elev_model_comparison}
+\end{figure}
+
+\begin{figure}[hp]
+	\centering
+		\includegraphics[width=0.85\textwidth]{figures/1/travelRate_model_comparison.eps}
+	\caption{Travel rate response of commanded step in pitch. Derived and estimated model compared with the measured response.}
+	\label{fig:travelRate_model_comparison}
 \end{figure}
 
 
@@ -76,7 +83,7 @@ The following transfer functions were estimated from measured step responses:
 \end{equation}
 
 
-The calculated step response of the travel rate in figure (something) is almost identical to the recorded step response. The pitch and elevation models are satisfactory, but the dynamics are clearly not matching the actual dynamics to the same degree as with travel rate. This should be expected, as the small angle approximation used is bound to yield errors, especially in the pitch model. Both the off-axis hinged pitch head and the non-linearity of rotor thrust are also unaccounted for when settling on the number of states. A third state for both pitch and elevation might have helped capture some of the dynamics, but as we want to minimize the number of states, the results are found to be well within acceptable levels.
+The calculated response of the travel rate in figure \ref{fig:travelRate_model_comparison} is almost identical to the recorded step response. The pitch and elevation models are satisfactory, but the dynamics are clearly not matching the actual dynamics to the same degree as with travel rate. This should be expected, as the small angle approximation used is bound to yield errors, especially in the pitch model. Both the off-axis hinged pitch head and the non-linearity of rotor thrust are also unaccounted for when settling on the number of states. A third state for both pitch and elevation might have helped capture some of the dynamics, but as we want to minimize the number of states, the results are found to be well within acceptable levels.
 
 
 

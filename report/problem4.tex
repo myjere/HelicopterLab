@@ -47,6 +47,7 @@ We wish to calculate an optimal trajectory in two dimension, adding a constraint
 	\label{eq:ex_sys}
 \end{equation}
 
+\label{text:problem4_state_space}
 The added states are clearly decoupled from the rest of the system. This is due to the fact that the model is linearized around the equilibrium. At small pitch angles this simplification does not cause any large discrepancies. However, when the pitch angle is large, an increase in elevation rate is clearly accompanied by an increase in travel rate. 
 
 \subsection{Discretization}
@@ -138,7 +139,7 @@ Although the calculated input yielded satisfactory performance, the model has sh
 	|\dot{\lambda_k}| &\le 0.5.
 \end{align*}
 \subsection{Results and discussion}
-
+\label{text:problem4_results}
  Because of the non-linearity of \eqref{eq:cons} it is no longer viable to use a QP-solver, and \eqref{eq:NOP} is solved using MATLAB's \texttt{fmincon} which uses an active set method. The pitch bounds are also tightened from $45$ to $25$ degrees in order to lower the effect of elevation rate and travel rate coupling at large pitch angles. 
 
 The optimal input sequence $u^*$ is applied to the plant in an open loop with results shown in figure \ref{fig:openloop25}. The system follows the optimal trajectory except for the usual discrepancy in travel present when using open loop control. We further employ an LQ-controller similar to in \ref{text:LQR} to guide the trajectory to the set-point and eliminate steady state deviations. The result, shown in figure \ref{fig:closedloop25}, is without any large discrepancies between optimal and measured trajectory. However, the constraint bound imposed on elevation is violated, as shown in figure \ref{fig:closedloop25_cons}. The reason for this is probably a combination of issues. The optimal path is calculated with a fairly large time step, in order to lower the computational time required. This leads to an optimal path that when interpolated will violate the constraint. Also, as the increase in elevation will largely happen when the pitch angle is at its maximum, and the resulting increase in elevation will be lower than if the increase were to be commanded at zero pitch. State feedback is also unable to deal with this problem completely, as any aggressive elevation correction is bound to happen at the cost of pitch, and therefore travel rate control. Lastly, the trajectory is corrected with respect to the optimal path in time, while the bound on elevation is defined with respect to travel. This means that a deviation in travel, as visible in figure \ref{fig:closedloop25}, effectively will shift the optimal elevation path with respect to travel. This lag is visible in figure \ref{fig:closedloop25_cons}.

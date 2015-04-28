@@ -1,2 +1,8 @@
 \section{Discussion}\label{sec:discussion}
-A section like this does not have to be long, but write a few short paragraphs that show you understand what you have been doing and how the different results relate to each other.
+
+The optimal paths computed have shown to be quite compatible with the actual system. This is reflected in the displayed data. The reason for discrepancies have also been relatively easy to identify. This is probably due to mainly two related facts. The controllers of pitch and elevation were tuned in a way that gave the least nonlinear coupling between them. This greatly improves the changes of a linear model being sufficient. Secondly, the statistically system identification yields a model with an accuracy far greater than one based on indirect measurements. Optimal paths based on an incomplete system model will probably yield suboptimal performance at best.
+
+As shown in both figure \ref{fig:opt_openloop} and \ref{fig:openloop25} the need for feedback control is present. A linear quadratic controller is a computationally inexpensive way of achieving this. The feedback importance is also reduced by having an accurate system model, and only light corrections were necessary.
+
+The effect of model shortcomings as discussed in \ref{subsection:part1_results}, \ref{text:problem2_state_space}, \ref{text:problem4_state_space}, \ref{text:additionalContraints} and \ref{text:problem4_results} are attempted minimized by adding extra constraints to the optimization problem. This forces the system to operate inside the linear area, yielding slower but more accurate performance.
+
