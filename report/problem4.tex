@@ -128,18 +128,22 @@ In addition to running the optimal input sequence $u^*$ in an open loop, a discr
 \begin{equation}
 Q = \begin{bmatrix}4&0&0&0&0&0\\0&2&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&3&0\\0&0&0&0&0&0\end{bmatrix}, \quad R = \begin{bmatrix}1&0\\0&1\end{bmatrix}.
 \end{equation}
-\subsection{Optional: Additonal constraints}
+\subsection{Optional: Additional constraints}
+\label{text:additionalContraints}
 
-Although the calculated input yielded satisfactory performance, the model has shortcomings. Specifically, when a low decent in elevation is commanded the rotor blades almost come to a complete stop, during which control of pitch is severely reduced. As this is impossible to model with a linear model, additional bounds are imposed on elevation rate. This will reduce the effect of the unmodeled coupling of elevation to the rest of the system. In a further attempt to keep the system within the linear area the travel rate is also bounded.
+Although the calculated input yielded satisfactory performance, the model has shortcomings. Specifically, when a low decent in elevation is commanded the rotor blades almost come to a complete stop, during which control of pitch is severely reduced. As this is impossible to model with a linear model, additional bounds are imposed on elevation rate. This will reduce the effect of the unmodeled coupling of elevation to the rest of the system. In a further attempt to keep the system within the linear area the travel rate is also bounded. The bounds are
 
 \begin{align*}
 	|\dot{e_k}| &\le 0.05, \\
 	|\dot{\lambda_k}| &\le 0.5.
 \end{align*}
 \subsection{Results and discussion}
- Because of the non-linearity of \eqref{eq:cons} it is no longer viable to use a QP-solver, and \eqref{eq:NOP} is solved using MATLAB's \texttt{fmincon}: which algorithm (int. point, sqp, active set, trust region) was used...
 
-The optimal input sequence $u^*$ is applied to the plant in an open loop with results show in fig. X. Explain 25 vs. 45 discrepency. We further employ an LQ-controller similarily to \ref{text:LQR} to guide the trajectory to the set-point and elminiate steady state deviations.
+ Because of the non-linearity of \eqref{eq:cons} it is no longer viable to use a QP-solver, and \eqref{eq:NOP} is solved using MATLAB's \texttt{fmincon} which uses an active set method. The pitch bounds are also tightened from $45$ to $25$ degrees in order to lower the effect of elevation rate and travel rate coupling at large pitch angles. 
+
+The optimal input sequence $u^*$ is applied to the plant in an open loop with results shown in figure \ref{fig:openloop25}. The system follows the optimal trajectory except for the usual discrepancy in travel present when using open loop control. We further employ an LQ-controller similar to in \ref{text:LQR} to guide the trajectory to the set-point and eliminate steady state deviations. The result, shown in figure \ref{fig:closedloop25}, is without any large discrepancies between optimal and measured trajectory. However, the constraint bound imposed on elevation is violated, as shown in figure \ref{fig:closedloop25_cons}. The reason for this is probably a combination of issues. The optimal path is calculated with a fairly large time step, in order to lower the computational time required. This leads to an optimal path that when interpolated will violate the constraint. Also, as the increase in elevation will largely happen when the pitch angle is at its maximum, and the resulting increase in elevation will be lower than if the increase were to be commanded at zero pitch. State feedback is also unable to deal with this problem completely, as any aggressive elevation correction is bound to happen at the cost of pitch, and therefore travel rate control. Lastly, the trajectory is corrected with respect to the optimal path in time, while the bound on elevation is defined with respect to travel. This means that a deviation in travel, as visible in figure \ref{fig:closedloop25}, effectively will shift the optimal elevation path with respect to travel. This lag is visible in figure \ref{fig:closedloop25_cons}.
+
+The mentioned effects contributing to constraint violation are attempted minimized by the addition of extra constraints on elevation rate and travel rate, as mentioned in \ref{text:additionalContraints}. The resulting optimal path reflects this, and the slope of the optimal elevation path is significantly reduced. This yields an overall less aggressive system, with decreased violation of the elevation constraint. The added constraint on travel rate also means that the system uses the entire time slot to reach the desired end state.
 
 \begin{figure}[hp]
 	\centering
@@ -147,30 +151,28 @@ The optimal input sequence $u^*$ is applied to the plant in an open loop with re
 	\caption{Open Loop 25.}
 	\label{fig:openloop25}
 \end{figure}
-\begin{figure}[hp]
-	\centering
-		\includegraphics[width=0.85\textwidth]{figures/4/openloop45.eps}
-	\caption{Open Loop 45.}
-	\label{fig:openloop45}
-\end{figure}
+
 \begin{figure}[hp]
 	\centering
 		\includegraphics[width=0.85\textwidth]{figures/4/closedloop25.eps}
 	\caption{Closed Loop 25.}
 	\label{fig:closedloop25}
 \end{figure}
+
 \begin{figure}[hp]
 	\centering
 		\includegraphics[width=0.85\textwidth]{figures/4/closedloopConstrained25.eps}
 	\caption{Closed Loop 25, extra constraints.}
 	\label{fig:closedloopConstrained25}
 \end{figure}
+
 \begin{figure}[hp]
 	\centering
 		\includegraphics[width=0.85\textwidth]{figures/4/closedloop25_cons.eps}
 	\caption{Closed Loop 25 - contraint hill.}
 	\label{fig:closedloop25_cons}
 \end{figure}
+
 \begin{figure}[hp]
 	\centering
 		\includegraphics[width=0.85\textwidth]{figures/4/closedloopConstrained25_cons.eps}
