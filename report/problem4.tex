@@ -1,10 +1,10 @@
 \section{Optimal Control of Pitch/Travel and Elevation with and without Feedback}\label{sec:prob4}
 \label{text:problem4}
 
-Refer to system id TF for elevation, and we get the following extended continuous state space model:
+The 
 
 \subsection{State space model}
-We wish to calculate an optimal trajectory in two dimension, adding a constraint to the elevation. Adding $e$ and $\dot{e}$ to the previous state space model \eqref{eq:sys}, we get
+We wish to calculate an optimal trajectory in two dimension, adding a constraint to the elevation. Adding $e$ and $\dot{e}$ to the previous state space model \eqref{eq:sys} and using \eqref{eq:e_ec}, we get
 \begin{equation}
 	\begin{bmatrix}
 		\dot{\lambda}\\
@@ -21,7 +21,7 @@ We wish to calculate an optimal trajectory in two dimension, adding a constraint
 		0 & 0 & 0 & 1 & 0 & 0 \\
 		0 & 0 & -7.13 & -3.6 & 0 & 0 \\
 		0 & 0 & 0 & 0 & 0 & 1 \\
-		0 & 0 & 0 & 1 & -3.03 & -2.44 \\
+		0 & 0 & 0 & 0 & -3.03 & -2.44 \\
 	\end{bmatrix}}_{A_c}
 	\begin{bmatrix}
 		\lambda	\\
@@ -47,7 +47,7 @@ We wish to calculate an optimal trajectory in two dimension, adding a constraint
 	\label{eq:ex_sys}
 \end{equation}
 
-Discuss decoupling...?
+The added states are clearly decoupled from the rest of the system. This is due to the fact that the model is linearized around the equilibrium. At small pitch angles this simplification does not cause any large discrepancies. However, when the pitch angle is large, an increase in elevation rate is clearly accompanied by an increase in travel rate. 
 
 \subsection{Discretization}
 Now let $x = \begin{bmatrix}\lambda&\dot{\lambda}&p&\dot{p}&e&\dot{e}\end{bmatrix}^\top$, $u = \begin{bmatrix}p_c&e_c\end{bmatrix}^\top$. Again, using approximate discretization via Euler we obtain a discrete state space model
@@ -130,7 +130,7 @@ Q = \begin{bmatrix}4&0&0&0&0&0\\0&2&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&0&0\\0&0&0&0&3
 \end{equation}
 \subsection{Optional: Additonal constraints}
 
-For some clever reason or another we impose additional lower and upper bounds on the elevation rate and travel rate with favourable results...
+Although the calculated input yielded satisfactory performance, the model has shortcomings. Specifically, when a low decent in elevation is commanded the rotor blades almost come to a complete stop, during which control of pitch is severely reduced. As this is impossible to model with a linear model, additional bounds are imposed on elevation rate. This will reduce the effect of the unmodeled coupling of elevation to the rest of the system. In a further attempt to keep the system within the linear area the travel rate is also bounded.
 
 \begin{align*}
 	|\dot{e_k}| &\le 0.05, \\
