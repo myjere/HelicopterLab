@@ -48,7 +48,7 @@
 \end{table}
 The lab setup consists of a movable arm equipped with two rotors. The movable arm is hinged to a fixed point, allowing for both lateral and longitudinal motion. The arm is also fitted with a counterweight which effectively slows the dynamics down considerably, as well as lower the amount of rotor thrust needed. The two rotors are fixed to a pitch head assembly hinged to the movable arm. This allows the rotor thrust direction to be indirectly controlled by the differential thrust applied.
 
-From first principles analysis we can derive simple differential equations to describe the system dynamics about the equilibrium, with symbols declared in table \ref{tab:parameters} and \ref{tab:variables}:
+From first principles analysis we can derive simple differential equations to describe the system dynamics about the equilibrium:
 
 \begin{subequations}
 	\label{eq:dynamics}
@@ -87,7 +87,7 @@ yields the model equations
 	\ddot{\lambda} &= -K_{2} p, \label{eq:model_se_al_r} 
 \end{align}
 \end{subequations}
-where it is assumed the elevation integral term counteracts the constant disturbance $-\frac{T_g}{J_e}$ and cancel out.
+where it is assumed the elevation integral term counteracts the constant disturbance $-\frac{T_g}{J_e}$ and cancels out.
 
 However, in order to achieve a more accurate model we can utilize statistical procedures to best identify the parameters of the first and second order systems. This eliminates errors present in the measurement of the lab setup, and gives us the best model with the given number of states. This gray-box system identification also allows us to verify that the proposed number of states, derived by first principles, yields a model whose performance matches that of the actual system.
 
