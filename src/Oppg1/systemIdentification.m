@@ -1,8 +1,6 @@
+clear all; close all; clc
 
-clc
-close all
-
-%%%% Pitch %%%%
+%% Pitch
 % h = pitch/pitch_ref
 
 load pitchStep40deg
@@ -15,15 +13,7 @@ pitch_time = 0.001:0.001:3;
 opt = tfestOptions('InitialCondition', 'zero');
 pitch_sys = tfest(pitch_data, 2, 0,opt); % poles, zeroes
 
-subplot(131);
-plot(pitch_time, y_pitch/(40*pi/180), 'r'); % scale for easy comparison with step()
-hold on
-step(pitch_sys);
-hold off
-title('Pitch');
-
-
-%%%% Elevation %%%%
+%% Elevation
 % h = elevation/elevation_ref
 
 load elevStep30deg
@@ -36,16 +26,7 @@ elev_time = 0.001:0.001:7;
 opt = tfestOptions('InitialCondition', 'zero');
 elev_sys = tfest(elev_data, 2, 0,opt); % poles, zeroes
 
-subplot(132);
-plot(elev_time, y_elev/(30*pi/180), 'r'); % scale for easy comparison with step()
-hold on
-step(elev_sys);
-hold off
-title('Elevation');
-
-
-
-%%%% TravelRate %%%%
+%% TravelRate
 % h = travelRate/pitch
 
 load travelRateStep20deg
@@ -56,10 +37,3 @@ travelRate_data = iddata(y_travelRate, u_travelRate, 0.001);
 
 opt = tfestOptions('InitMethod','iv','InitialCondition', 'zero');
 travelRate_sys = tfest(travelRate_data, 1, 0, opt); % poles, zeroes
-
-subplot(133);
-plot(travelRate_time, y_travelRate/(20*pi/180), 'r'); % scale for easy comparison with step()
-hold on
-step(travelRate_sys*pitch_sys, travelRate_time);
-hold off
-title('Travel rate');

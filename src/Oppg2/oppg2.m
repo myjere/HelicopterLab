@@ -46,7 +46,6 @@ UB = [UB_x;
       UB_u];
 
 %% Quadratic objective function
-
 Q = zeros(n_x);
 Q(1,1) = 1;
  
@@ -55,8 +54,7 @@ R = r;
 G = blkdiag(kron(eye(N), Q), kron(eye(N), R));
 
 %% Solve QP
-%[z,fval,exitflag,output,lambda] = quadprog(G, [], [], [], Aeq, beq, LB, UB);
-load z_opt;
+[z,fval,exitflag,output,lambda] = quadprog(G, [], [], [], Aeq, beq, LB, UB);
 
 x = reshape(z(1:N*n_x), [n_x, N]);
 travel_opt = [-xf(1), x(1,:)];

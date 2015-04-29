@@ -45,8 +45,8 @@ Beq = [-A*xf;
        zeros(n_x*(N-1),1)];
    
 %% Bounds
-LB_x = repmat([-Inf -travel_rate_lim -pitch_lim*pi/180 -Inf -elev_lim*pi/180 -elev_rate_lim ]', N, 1);
-UB_x = repmat([Inf travel_rate_lim pitch_lim*pi/180 Inf elev_lim*pi/180 elev_rate_lim]', N, 1);
+LB_x=repmat([-Inf -travel_rate_lim -pitch_lim*pi/180 -Inf -elev_lim*pi/180 -elev_rate_lim ]',N,1);
+UB_x=repmat([Inf travel_rate_lim pitch_lim*pi/180 Inf elev_lim*pi/180 elev_rate_lim]',N,1);
 
 LB_u = repmat([-pitch_lim*pi/180 -elev_lim*pi/180]', N, 1);
 UB_u = repmat([pitch_lim*pi/180 elev_lim*pi/180]', N, 1);

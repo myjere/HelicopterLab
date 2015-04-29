@@ -29,10 +29,10 @@ From the model equations in \eqref{eq:model} we get the continuous state space e
 		0 \\
 		K_1K_{pp} \\
 	\end{bmatrix}
-	p_c
+	p_c,
 \end{equation*}
 
-or, alternatively
+or alternatively
 \begin{equation*}
 	\begin{bmatrix}
 		\dot{\lambda}\\
@@ -58,7 +58,7 @@ or, alternatively
 		0 \\
 		5.3095 \\
 	\end{bmatrix}
-	p_c
+	p_c.
 \end{equation*}
 
 However, in an effort to achieve a more accurate model, alternative state space equations are developed from estimated transfer functions based on measured step responses as discussed in \ref{subsection:part1_results}. The model
@@ -90,29 +90,27 @@ However, in an effort to achieve a more accurate model, alternative state space 
 		0 \\
 		6.74 \\
 	\end{bmatrix}}_{B_c}
-	p_c
+	p_c,
 	\label{eq:sys}
 \end{equation}
 
-is constructed from \eqref{eq:p_pc} and \eqref{eq:e_ec}, as well as some preliminary testing. The latter lead to a slight increase in the amount of change in travel rate as a function of pitch.
+is constructed from \eqref{eq:tf} as well as some preliminary testing. The latter lead to a slight increase in the amount of change in travel rate as a function of pitch.
 
-The reason for the increase in pitch's effect on travel rate is due to the fact that the pitch step response was run with a step size of $20$ degrees. The usual operating range (when aiming for somewhat aggressive maneuvers) is round $30$ to $45$ degrees. This amount of pitch angle will lead to a significant loss of downwards thrust and sequentially elevation. The elevation controller will in turn attempt to compensate by increasing the overall thrust by a large amount, but since the pitch head is far from equilibrium, a substantial amount of that thrust will be affecting the travel rate. This effect overshadows that of the small angle approximation.
+The reason for the increase in pitch's effect on travel rate is due to the fact that the pitch step response was run with a step size of $20\degree$. The usual operating range, when aiming for somewhat aggressive maneuvers is around $30\degree$ to $45\degree$. This amount of pitch angle will lead to a significant loss of downwards thrust and sequentially elevation. The elevation controller will in turn attempt to compensate by increasing the overall thrust by a large amount, but since the pitch head is far from equilibrium, a substantial amount of that thrust will be affecting the travel rate. This effect overshadows that of the small angle approximation.
 
 
 \subsection{Discretization}
-Let $x = \begin{bmatrix}\lambda&\dot{\lambda}&p&\dot{p}\end{bmatrix}^\top$, $u = p_c$. Using forward Euler with a time step $\Delta t = 0.25$ we are able to obtain an approximate discretization of \eqref{eq:sys}:
-\begin{subequations}
+Let $x = \begin{bmatrix}\lambda&\dot{\lambda}&p&\dot{p}\end{bmatrix}^\top$, $u = p_c$. Using the forward Euler method with a time step $\Delta t = 0.25\second$ we are able to obtain an approximate discretization of \eqref{eq:sys}:
 \label{eq:dmodel}
 \begin{align}
-	x_{k+1} &= x_k + \Delta t \dot{x_k} \\
-			&= x_k + \Delta t (A_c x_k + B_c u_k)\\
-			&= (I + \Delta t A_c) x_k + (\Delta t B_c) u_k \\
-			&= A x_k + B u_k
+	x_{k+1} &= x_k + \Delta t \dot{x_k}\nonumber \\
+			&= x_k + \Delta t (A_c x_k + B_c u_k)\nonumber\\
+			&= (I + \Delta t A_c) x_k + (\Delta t B_c) u_k\nonumber \\
+			&= A x_k + B u_k,
 \end{align}
-\end{subequations}
 
 where $x_k = x(k\Delta t) \in \mathbb{R}^{n_x}$, $u_k = u(k\Delta t)\in \mathbb{R}^{n_u}$, and
-\begin{equation}
+\begin{equation*}
 	A = 
 	\begin{bmatrix}
 		1 & 0.25 & 0 & 0 \\
@@ -127,16 +125,16 @@ where $x_k = x(k\Delta t) \in \mathbb{R}^{n_x}$, $u_k = u(k\Delta t)\in \mathbb{
 		0 \\
 		1.685 \\
 	\end{bmatrix}.
-\end{equation}
+\end{equation*}
 
 \subsection{Optimal trajectory}
 
 We calculate the trajectory from $x_0 = \begin{bmatrix}\lambda_0&0&0&0\end{bmatrix}^\top$ to $x_f = \begin{bmatrix}\lambda_f&0&0&0\end{bmatrix}^\top$ minimizing the objective function 
 \begin{equation}
 \label{eq:QC_p}
-	\phi = \sum_{i=1}^{N}(\lambda_i - \lambda_f)^2 + rp^2_{c_i}, \quad r \ge 0,
+	\phi = \sum_{i=1}^{N}(\lambda_i - \lambda_f)^2 + rp^2_{c_{i-1}}, \quad r \ge 0,
 \end{equation}
-where we let $\lambda_0 = 0$, $\lambda_f = \pi$.
+where $\lambda_0 = 0$, $\lambda_f = \pi$.
 
 The parameter $r$ weights the relative importance of low input expendature, in this case set-point for the pitch angle, versus a rapid convergence of the travel trajectory to $\lambda_f$.  Equivalently we can define \eqref{eq:QC_p} in terms of the full state and input variables.
 
@@ -192,7 +190,7 @@ With lower and upper bounds imposed on the pitch state and controller set-point,
 	subject to
 \begin{align}
 	A_{eq} z &= B_{eq}, \\
-	p^{\textrm{low}} &\le p_k \le p^{\textrm{high}}, \quad k \in \{1, \dots, N\}.
+	p^{\textrm{low}} &\le p_k,p_{c_{k-1}} \le p^{\textrm{high}}, \quad k \in \{1, \dots, N\}.
 \end{align}
 \end{subequations}
 
@@ -202,7 +200,7 @@ With lower and upper bounds imposed on the pitch state and controller set-point,
 \begin{figure}[hp]
 	\centering
 		\includegraphics[width=0.85\textwidth]{figures/2/openloop.eps}
-	\caption{Optimal vs. measured trajectory and input sequence.}
+	\caption{Optimal pitch and travel trajectories compared with measured trajectories with optimal input sequence applied in an open loop.}
 	\label{fig:opt_openloop}
 \end{figure}
 

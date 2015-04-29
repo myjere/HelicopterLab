@@ -1,8 +1,8 @@
-\section{Controller tuning and system identification}\label{sec:prob1}
+\section{Controller Tuning and System Identification}\label{sec:prob1}
 \label{text:problem1}
 
-\subsection{PID-(re)tuning}
-The pre-tuned PID showed unsatisfactory performance and was re-tuned to better serve as the stable plant for the rest of the assignment. In particular, the pre-tuned pitch controller was tuned in an aggressive fashion, impacting elevation control significantly. Figure \ref{fig:pid_tuning} shows the coupling of pitch and elevation control before and after tuning. The two controllers were tuned independent of each other, in a manual fashion.
+\subsection{PID-tuning}
+The pre-tuned PID controllers showed unsatisfactory performance and was re-tuned to better serve as the stable plant for the rest of the assignment. In particular, the pre-tuned pitch controller was tuned in an aggressive fashion, impacting elevation control significantly. Figure \ref{fig:pid_tuning} shows the coupling of pitch and elevation control before and after tuning. The two controllers were tuned independently of each other, in a manual fashion.
 
 \begin{table}[hp]
 	\centering
@@ -29,7 +29,7 @@ The pre-tuned PID showed unsatisfactory performance and was re-tuned to better s
 
 
 \subsection{Model parameter estimation}
-The derived model in \eqref{eq:dynamics} showed considerably different dynamics than the observed ones. The system identification toolbox in Matlab was therefore used to compute the parameters which fitted the recorded step responses. This was done by estimating the follow three step responses based on known input and recorded system behavior:
+The derived model in \eqref{eq:dynamics} showed considerably different dynamics than the observed ones. The system identification toolbox in MATLAB was therefore used to compute the parameters which fitted the recorded step responses. This was done by estimating the following three step responses based on known input and recorded system behavior:
 
 \begin{itemize}
 	\item{Pitch setpoint to pitch}
@@ -67,20 +67,14 @@ Figure \ref{fig:pitch_model_comparison} shows the pitch step response of the der
 
 The following transfer functions were estimated from measured step responses:
 
-\begin{equation}
-\label{eq:p_pc}
-	\frac{p}{p_c}(s) = \frac{6.74}{s^2 + 3.60 s + 7.13}
-\end{equation}
-
-\begin{equation}
-\label{eq:e_ec}
-	\frac{e}{e_c}(s) = \frac{3.13}{s^2 + 2.45 s + 3.03}
-\end{equation}
-
-\begin{equation}
-\label{eq:travelRate_p}
-	\frac{\lambda}{p}(s) = \frac{-0.29}{s + 0.05}
-\end{equation}
+\begin{subequations}
+\label{eq:tf}
+\begin{align}
+	\frac{p}{p_c}(s) &= \frac{6.74}{s^2 + 3.60 s + 7.13},\label{eq:p_pc}\\
+	\frac{e}{e_c}(s) &= \frac{3.13}{s^2 + 2.45 s + 3.03},\label{eq:e_ec}\\
+	\frac{\lambda}{p}(s) &= \frac{-0.29}{s + 0.05}.\label{eq:travelRate_p}
+\end{align}
+\end{subequations}
 
 
 The calculated response of the travel rate in figure \ref{fig:travelRate_model_comparison} is almost identical to the recorded step response. The pitch and elevation models are satisfactory, but the dynamics are clearly not matching the actual dynamics to the same degree as with travel rate. This should be expected, as the small angle approximation used is bound to yield errors, especially in the pitch model. Both the off-axis hinged pitch head and the non-linearity of rotor thrust are also unaccounted for when settling on the number of states. A third state for both pitch and elevation might have helped capture some of the dynamics, but as we want to minimize the number of states, the results are found to be well within acceptable levels.

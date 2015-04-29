@@ -47,15 +47,14 @@
 \end{table}
 The lab setup consists of a movable arm equipped with two rotors. The movable arm is hinged to a fixed point, allowing for both lateral and longitudinal motion. The arm is also fitted with a counterweight which effectively slows the dynamics down considerably, as well as lower the amount of rotor thrust needed. The two rotors are fixed to a pitch head assembly hinged to the movable arm. This allows the rotor thrust direction to be indirectly controlled by the differential thrust applied.
 
-\paragraph{}
-From first principles analysis we can derive simple differential equations to describe the system dynamics about the equilibrium:
+From first principles analysis we can derive simple differential equations to describe the system dynamics about the equilibrium, with symbols declared in table \ref{tab:parameters} and \ref{tab:variables}:
 
 \begin{subequations}
 	\label{eq:dynamics}
 	\begin{align}
-		\ddot{p} &= K_1 V_d, &K_1 = \frac{K_f l_h}{J_p},\\
-		\ddot{\lambda} &= -K_2 p, &K_3 = \frac{K_f l_a}{J_e}\\
-		\ddot{e} &= K_3 V_s - \frac{T_g}{J_e}, &K_2 = \frac{K_p l_a}{J_t}
+		\ddot{p} &= K_1 V_d, \quad K_1 = \frac{K_f l_h}{J_p},\\
+		\ddot{\lambda} &= -K_2 p, \quad K_2 = \frac{K_p l_a}{J_t},\\
+		\ddot{e} &= K_3 V_s - \frac{T_g}{J_e}, \quad K_3 = \frac{K_f l_a}{J_e},
 	\end{align}
 \end{subequations}
 \begin{equation*}
@@ -63,28 +62,28 @@ From first principles analysis we can derive simple differential equations to de
 
 Note simplifications and limitations:
 \begin{itemize}
-	\item{The time derivative of travel rate is a linear function of pitch only. This small angle approximation does not really hold, as the intended operating range of pitch is as much as $40$ degrees.}
+	\item{The time derivative of travel rate is a linear function of pitch only. This small angle approximation does not really hold, as the intended operating range of pitch is as much as $40\degree$.}
 	\item{By simple inspection of the lab setup it is clear that the pitch head assembly is hinged slightly above its center of mass. The resulting restoring force, as well as the hinge joint dampening, is not directly included in this model.}
 	\item{The rotor thrust is assumed to be proportional to the voltage applied to the motor. This is a simplification. Generally, rotor angular velocity is proportional to the voltage applied, and thrust is proportional to the square of the angular velocity.}
 \end{itemize}
 
-To stabilize the plant, adding the pitch PD controller
+To stabilize the plant, adding to \eqref{eq:dynamics} the pitch PD controller
 \begin{equation*}
-	V_d = K_{pp} (p_c - p) - K_{pd} \dot{p}, \quad K_{pp}, K_{pd} > 0
+	V_d = K_{pp} (p_c - p) - K_{pd} \dot{p}, \quad K_{pp}, K_{pd} > 0,
 \end{equation*}
 
 and the elevation PID controller
 \begin{equation*}
-	V_s = K_{ei} \int (e_c - e) \ dt +  K_{ep} (e_c - e) - K_{ed} \dot{e}, \quad K_{ei}, K_{ep}, K_{ed} > 0
+	V_s = K_{ei} \int (e_c - e) \ dt +  K_{ep} (e_c - e) - K_{ed} \dot{e}, \quad K_{ei}, K_{ep}, K_{ed} > 0,
 \end{equation*}
 
 yields the model equations
 \begin{subequations}
 \label{eq:model}
 \begin{align}
-	\ddot{e} + K_{3} K_{ed} \dot{e} + K_{3} K_{ep} e &= K_{3} K_{ep} e_{c} \label{eq:model_se_al_elev} \\
-	\ddot{p} + K_{1} K_{pd} \dot{p} + K_{1} K_{pp} p &= K_{1} K_{pp} p_{c} \label{eq:model_se_al_pitch} \\
-	\ddot{\lambda} &= -K_{2} p \label{eq:model_se_al_r} 
+	\ddot{e} + K_{3} K_{ed} \dot{e} + K_{3} K_{ep} e &= K_{3} K_{ep} e_{c}, \label{eq:model_se_al_elev} \\
+	\ddot{p} + K_{1} K_{pd} \dot{p} + K_{1} K_{pp} p &= K_{1} K_{pp} p_{c}, \label{eq:model_se_al_pitch} \\
+	\ddot{\lambda} &= -K_{2} p, \label{eq:model_se_al_r} 
 \end{align}
 \end{subequations}
 where it is assumed the elevation integral term counteracts the constant disturbance $-\frac{T_g}{J_e}$ and cancel out.
