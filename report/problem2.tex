@@ -100,9 +100,9 @@ The reason for the increase in pitch's effect on travel rate is due to the fact 
 
 
 \subsection{Discretization}
-Let $x = \begin{bmatrix}\lambda&\dot{\lambda}&p&\dot{p}\end{bmatrix}^\top$, $u = p_c$. Using the forward Euler method with a time step $\Delta t = 0.25\second$ we are able to obtain an approximate discretization of \eqref{eq:sys}:
-\label{eq:dmodel}
+Let $x = \begin{bmatrix}\lambda&\dot{\lambda}&p&\dot{p}\end{bmatrix}^\top$, $u = p_c$. Using the Euler method\footnote{As described in \cite{Gravdahl2003}.} with a time step $\Delta t = 0.25\second$ we are able to obtain an approximate discretization of \eqref{eq:sys}:
 \begin{align}
+\label{eq:dmodel}
 	x_{k+1} &= x_k + \Delta t \dot{x_k}\nonumber \\
 			&= x_k + \Delta t (A_c x_k + B_c u_k)\nonumber\\
 			&= (I + \Delta t A_c) x_k + (\Delta t B_c) u_k\nonumber \\
